@@ -90,15 +90,23 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="core\OpenGL\OpenGLContext.cpp" />
+    <ClCompile Include="core\Windows\WindowsWindow.cpp" />
     <ClCompile Include="glad.c" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="core\Core.h" />
     <ClInclude Include="core\Events\ApplicationEvent.h" />
     <ClInclude Include="core\Events\Event.h" />
     <ClInclude Include="core\Events\KeyEvent.h" />
     <ClInclude Include="core\Events\MouseEvent.h" />
+    <ClInclude Include="core\OpenGL\OpenGLContext.h" />
+    <ClInclude Include="core\Renderer\GraphicsContext.h" />
+    <ClInclude Include="core\Input.h" />
     <ClInclude Include="core\KeyCodes.h" />
+    <ClInclude Include="core\Window.h" />
+    <ClInclude Include="core\Windows\WindowsWindow.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
