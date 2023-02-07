@@ -2,6 +2,8 @@
 #include "Core.h"
 
 #include "Events/Event.h"
+#include "Timestep.h"
+#include <memory>
 
 #include "Window.h"
 #include <Events/ApplicationEvent.h>
@@ -33,6 +35,4 @@ namespace sas {
 		static Application* s_Instance;
 	};
 
-	// Define in app
-	Application* CreateApplication();
 }

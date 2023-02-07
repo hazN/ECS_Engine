@@ -63,6 +63,7 @@
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile>
       </PrecompiledHeaderFile>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -90,12 +91,15 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="core\Application.cpp" />
     <ClCompile Include="core\OpenGL\OpenGLContext.cpp" />
+    <ClCompile Include="core\Windows\WindowsInput.cpp" />
     <ClCompile Include="core\Windows\WindowsWindow.cpp" />
     <ClCompile Include="glad.c" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="core\Application.h" />
     <ClInclude Include="core\Core.h" />
     <ClInclude Include="core\Events\ApplicationEvent.h" />
     <ClInclude Include="core\Events\Event.h" />
@@ -105,7 +109,9 @@
     <ClInclude Include="core\Renderer\GraphicsContext.h" />
     <ClInclude Include="core\Input.h" />
     <ClInclude Include="core\KeyCodes.h" />
+    <ClInclude Include="core\Timestep.h" />
     <ClInclude Include="core\Window.h" />
+    <ClInclude Include="core\Windows\WindowsInput.h" />
     <ClInclude Include="core\Windows\WindowsWindow.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

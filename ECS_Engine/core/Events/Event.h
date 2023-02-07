@@ -1,5 +1,7 @@
 #pragma once
 #include "Core.h"
+#include <string>
+#include <functional>
 namespace sas
 {
 	enum class EventType
