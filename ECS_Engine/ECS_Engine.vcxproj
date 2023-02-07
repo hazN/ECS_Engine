@@ -97,6 +97,7 @@
     <ClInclude Include="core\Events\ApplicationEvent.h" />
     <ClInclude Include="core\Events\Event.h" />
     <ClInclude Include="core\Events\KeyEvent.h" />
+    <ClInclude Include="core\Events\MouseEvent.h" />
     <ClInclude Include="core\KeyCodes.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
