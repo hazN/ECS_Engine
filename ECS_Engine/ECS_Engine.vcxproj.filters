@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="core\Application.cpp" />
+    <ClCompile Include="core\OpenGL\OpenGLContext.cpp" />
+    <ClCompile Include="core\Windows\WindowsInput.cpp" />
+    <ClCompile Include="core\Windows\WindowsWindow.cpp" />
+    <ClCompile Include="glad.c" />
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="savedata\JSONPersitence.cpp">
+      <Filter>savedata</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="core\Application.h" />
+    <ClInclude Include="core\Core.h" />
+    <ClInclude Include="core\Events\ApplicationEvent.h" />
+    <ClInclude Include="core\Events\Event.h" />
+    <ClInclude Include="core\Events\KeyEvent.h" />
+    <ClInclude Include="core\Events\MouseEvent.h" />
+    <ClInclude Include="core\OpenGL\OpenGLContext.h" />
+    <ClInclude Include="core\Renderer\GraphicsContext.h" />
+    <ClInclude Include="core\Input.h" />
+    <ClInclude Include="core\KeyCodes.h" />
+    <ClInclude Include="core\Timestep.h" />
+    <ClInclude Include="core\Window.h" />
+    <ClInclude Include="core\Windows\WindowsInput.h" />
+    <ClInclude Include="core\Windows\WindowsWindow.h" />
+    <ClInclude Include="savedata\JSONPersitence.h">
+      <Filter>savedata</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="savedata">
+      <UniqueIdentifier>{8346db9e-9079-4dd4-9da2-d2106f9b6a98}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>
