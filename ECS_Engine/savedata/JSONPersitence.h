@@ -14,21 +14,22 @@ using json = nlohmann::json;
 struct cMeshObject
 {
 	int id;
-	std::string meshName;
-	std::string friendlyName;
-	glm::vec3 position;
-	glm::quat qRotation;
-	glm::vec3 scaleXYZ;
-	bool isWireframe;
-	glm::vec4 RGBA_colour;
-	bool bUse_RGBA_colour;
-	glm::vec4 specular_colour_and_power;
-	bool bDoNotLight;
-	bool bIsVisible;
-	std::string textures[8];
-	float textureRatios[8];
+
+	std::string MeshName;
+	glm::vec4 RGBA;
+	glm::vec4 SPEC;
+	bool bWireframe;
+	bool bUseRGBA;
+	bool bUseLight;
+	bool bVisible;
+
+	std::string Textures[8];
+	float TextureRatios[8];
 };
-struct cLight{};
+struct cLight{
+
+
+};
 
 namespace sas {
 	namespace persistence

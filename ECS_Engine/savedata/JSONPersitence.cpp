@@ -68,6 +68,7 @@ namespace sas {
 			}
 			for (json header : f)
 			{
+
 				for (json m : header)
 				{
 					cMeshObject* model = new cMeshObject();

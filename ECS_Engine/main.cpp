@@ -1,6 +1,5 @@
 ﻿// ECS ENGINE
-#include <GLFW/glfw3.h>
-#include <glad/glad.h>
+
 #include <Application.h>
 
 int main(int argc, char* argv[])

@@ -3,6 +3,7 @@
 #include "Input.h"
 #include <GLFW/glfw3.h>
 #include <iostream>
+#include <Events/KeyEvent.h>
 
 namespace sas {
 
@@ -10,12 +11,12 @@ namespace sas {
 
 	Application::Application()
 	{
-		/*if (s_Instance)
+		if (s_Instance)
 		{
 			std::cout << "Application already exists!" << std::endl;
 			return;
-		}*/
-
+		}
+		
 		s_Instance = this;
 		m_Window = std::unique_ptr<Window>(Window::Create());
 		m_Window->SetEventCallback(VEL_BIND_EVENT_FN(Application::OnEvent));
@@ -30,7 +31,10 @@ namespace sas {
 	{
 		EventDispatcher dispatcher(e);
 		std::cout << e << std::endl;
-		dispatcher.Dispatch<WindowCloseEvent>(VEL_BIND_EVENT_FN(Application::OnWindowClosed));
+		if (dispatcher.Dispatch<WindowCloseEvent>(VEL_BIND_EVENT_FN(Application::OnWindowClosed)))
+		{
+			std::cout << "Window Closed called!!";
+		}
 	}
 
 	void Application::Run()
@@ -41,7 +45,10 @@ namespace sas {
 			Timestep timestep = time - m_LastFrameTime;
 			m_LastFrameTime = time;
 
-			
+			if (Input::IsKeyPressed(KeyCode::Escape))
+			{
+				m_Running = false;
+			}
 
 			m_Window->OnUpdate();
 		}
