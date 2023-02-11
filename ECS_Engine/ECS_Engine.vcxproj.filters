@@ -7,6 +7,9 @@
     <ClCompile Include="core\Windows\WindowsWindow.cpp" />
     <ClCompile Include="glad.c" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="savedata\JSONPersitence.cpp">
+      <Filter>savedata</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="core\Application.h" />
@@ -27,6 +30,12 @@
     <ClInclude Include="ECS\Component.h" />
     <ClInclude Include="ECS\System.h" />
     <ClInclude Include="ECS\Transform.h" />
+    <ClInclude Include="ECS\GameObject.h" />
+    <ClInclude Include="ECS\Light.h" />
+    <ClInclude Include="ECS\MeshRenderer.h" />
+    <ClInclude Include="savedata\JSONPersitence.h">
+      <Filter>savedata</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="savedata">

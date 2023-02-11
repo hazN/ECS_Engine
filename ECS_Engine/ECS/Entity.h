@@ -2,13 +2,19 @@
 #include <vector>
 #include "Component.h"
 #include "Transform.h"
+#include "Light.h"
+#include "MeshRenderer.h"
 
 namespace sas
 {
 	class Entity
 	{
 	public:
+		// Added this here but I assume later will just iterate through the components
+		std::string name;
 		Transform transform;
+		Light light;
+		MeshRenderer mesh;
 
 		inline unsigned int GetID() const { return m_ID; }
 
@@ -48,21 +54,21 @@ namespace sas
 			return true;
 		}
 
-		template<class T>
-		T* RemoveComponent()
-		{
-			for (std::vector<Component*>::iterator it = m_Components.begin();
-				it != m_Components.size(); it++)
-			{
-				T* component = dynamic_cast<T*>(*it);
-				if (component != nullptr)
-				{
-					m_Components.erase(it);
-					return *it;
-				}
-			}
-			return nullptr;
-		}
+		//template<class T>
+		//T* RemoveComponent()
+		//{
+		//	for (std::vector<Component*>::iterator it = m_Components.begin();
+		//		it != m_Components.size(); it++)
+		//	{
+		//		T* component = dynamic_cast<T*>(*it);
+		//		if (component != nullptr)
+		//		{
+		//			m_Components.erase(it);
+		//			return *it;
+		//		}
+		//	}
+		//	return nullptr;
+		//}
 
 		inline std::vector<Component*> GetAllComponents() const { return m_Components; }
 
