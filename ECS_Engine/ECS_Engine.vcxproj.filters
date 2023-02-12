@@ -18,6 +18,7 @@
     <ClCompile Include="core\OpenGL\OpenGLShader.cpp" />
     <ClCompile Include="core\OpenGL\OpenGLRendererAPI.cpp" />
     <ClCompile Include="core\Renderer\RenderCommand.cpp" />
+    <ClCompile Include="ECS\components\MeshRenderer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="core\Application.h" />

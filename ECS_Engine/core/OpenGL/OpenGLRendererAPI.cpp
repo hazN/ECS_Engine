@@ -63,7 +63,7 @@ namespace sas
 	void OpenGLRendererAPI::SetCullFace()
 	{
 		glCullFace(GL_BACK);
-		glEnable(GL_CULL_FACE);
+		//glEnable(GL_CULL_FACE);
 	}
 
 	void OpenGLRendererAPI::EnableDepth()

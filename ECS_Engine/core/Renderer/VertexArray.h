@@ -49,6 +49,7 @@ namespace sas
 		virtual ~VertexArray() = default;
 		virtual bool LoadModelIntoVAO(std::string filename, sModelDrawInfo& drawInfo, unsigned int shaderProgramID) = 0;
 		virtual bool FindDrawInfoByModelName(std::string filename, sModelDrawInfo& drawinfo) = 0;
+		virtual bool LoadPlyFiles(std::string filename, sModelDrawInfo& drawinfo) = 0;
 		static std::shared_ptr<VertexArray> Create();
 	};
 

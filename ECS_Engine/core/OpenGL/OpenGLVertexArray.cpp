@@ -1,6 +1,8 @@
-#include "OpenGLVertexArray.h"
+﻿#include "OpenGLVertexArray.h"
 #include <GLFW/glfw3.h>
 #include <glad/glad.h>
+#include <fstream>
+#include <iostream>
 namespace sas
 {
 	OpenGLVertexArray::OpenGLVertexArray()
@@ -61,13 +63,16 @@ namespace sas
 		//                                              |___/                 
 
 			// in vec4 vColour;
+		unsigned int index = 0;
 		GLint vColour_location = glGetAttribLocation(shaderProgramID, "vColour");
+		//glBindAttribLocation(shaderProgramID, index, "vColour");
 		glEnableVertexAttribArray(vColour_location);
-		glVertexAttribPointer(vColour_location,
+		glVertexAttribPointer(index,
 			4, GL_FLOAT,
 			GL_FALSE,
 			sizeof(sVertex_RGBA_XYZ_N_UV_T_BiN_Bones),						// Stride	(number of bytes)
 			(void*)offsetof(sVertex_RGBA_XYZ_N_UV_T_BiN_Bones, r));		// Offset the member variable
+		index++;
 
 		//in vec4 vPosition;			
 		GLint vPosition_location = glGetAttribLocation(shaderProgramID, "vPosition");
@@ -163,5 +168,170 @@ namespace sas
 
 		drawInfo = itDrawInfo->second;
 		return true;;
+	}
+	bool OpenGLVertexArray::LoadPlyFiles(std::string fileName, sModelDrawInfo& modelDrawInfo)
+	{
+		struct sVertex_XYZ_N_RGBA_UV
+		{
+			float x, y, z;
+			float nx, ny, nz;
+
+			float red, green, blue, alpha;
+			float texture_u, texture_v;
+		};
+
+		struct sTrianglePLY
+		{
+			unsigned int vertexIndices[3];
+		};
+
+		sVertex_XYZ_N_RGBA_UV* pTheModelArray = NULL;
+		sTrianglePLY* pTheModelTriangleArray = NULL;
+
+		std::ifstream theFile(fileName);
+		if (!theFile.is_open())
+		{
+			std::cout << "Couldn\'t open the model file";
+			return false;
+		}
+
+		char buffer[10000];
+		theFile.getline(buffer, 10000);
+
+		std::string theNextToken;
+
+		while (theFile >> theNextToken)
+			if (theNextToken == "vertex")
+				break;
+
+		theFile >> modelDrawInfo.numberOfVertices;
+
+		bool hasColours = false;
+		while (theFile >> theNextToken)
+		{
+			if (theNextToken == "red")
+				hasColours = true;
+			if (theNextToken == "face")
+				break;
+		}
+
+		theFile >> modelDrawInfo.numberOfTriangles;
+
+		while (theFile >> theNextToken)
+			if (theNextToken == "end_header")
+				break;
+
+		pTheModelArray = new sVertex_XYZ_N_RGBA_UV[modelDrawInfo.numberOfVertices];
+
+		std::cout << "Loading";
+		for (unsigned int count = 0; count != modelDrawInfo.numberOfVertices; count++)
+		{
+			theFile >> pTheModelArray[count].x;
+			theFile >> pTheModelArray[count].y;
+			theFile >> pTheModelArray[count].z;
+
+			theFile >> pTheModelArray[count].nx;
+			theFile >> pTheModelArray[count].ny;
+			theFile >> pTheModelArray[count].nz;
+
+			if (hasColours)
+			{
+				theFile >> pTheModelArray[count].red;
+				theFile >> pTheModelArray[count].green;
+				theFile >> pTheModelArray[count].blue;
+				theFile >> pTheModelArray[count].alpha;
+			}
+
+
+			theFile >> pTheModelArray[count].texture_u;
+			theFile >> pTheModelArray[count].texture_v;
+
+			if (count % 10000 == 0)
+				std::cout << ".";
+
+		}
+
+		std::cout << " done" << std::endl;
+
+		pTheModelTriangleArray = new sTrianglePLY[modelDrawInfo.numberOfTriangles];
+
+		for (unsigned int count = 0; count != modelDrawInfo.numberOfTriangles; count++)
+		{
+			// to discard first value
+			unsigned int discard = 0;
+			theFile >> discard;
+
+			theFile >> pTheModelTriangleArray[count].vertexIndices[0];
+			theFile >> pTheModelTriangleArray[count].vertexIndices[1];
+			theFile >> pTheModelTriangleArray[count].vertexIndices[2];
+
+		}
+
+		theFile.close();
+
+		modelDrawInfo.pVertices = new sVertex_RGBA_XYZ_N_UV_T_BiN_Bones[modelDrawInfo.numberOfVertices];
+		glm::vec3 minPoints = glm::vec3(FLT_MAX, FLT_MAX, FLT_MAX);
+		glm::vec3 maxPoints = glm::vec3(FLT_MIN, FLT_MIN, FLT_MIN);
+		for (unsigned int index = 0; index != modelDrawInfo.numberOfVertices; index++)
+		{
+			// To shader								from File
+			modelDrawInfo.pVertices[index].x = pTheModelArray[index].x;
+			modelDrawInfo.pVertices[index].y = pTheModelArray[index].y;
+			modelDrawInfo.pVertices[index].z = pTheModelArray[index].z;
+
+
+			if (minPoints.x > pTheModelArray[index].x)
+				minPoints.x = pTheModelArray[index].x;
+
+			if (minPoints.y > pTheModelArray[index].y)
+				minPoints.y = pTheModelArray[index].y;
+
+			if (minPoints.z > pTheModelArray[index].z)
+				minPoints.z = pTheModelArray[index].z;
+
+			if (maxPoints.x < pTheModelArray[index].x)
+				maxPoints.x = pTheModelArray[index].x;
+
+			if (maxPoints.y < pTheModelArray[index].y)
+				maxPoints.y = pTheModelArray[index].y;
+
+			if (maxPoints.z < pTheModelArray[index].z)
+				maxPoints.z = pTheModelArray[index].z;
+
+			modelDrawInfo.pVertices[index].r = pTheModelArray[index].red;
+			modelDrawInfo.pVertices[index].g = pTheModelArray[index].green;
+			modelDrawInfo.pVertices[index].b = pTheModelArray[index].blue;
+
+			modelDrawInfo.pVertices[index].nx = pTheModelArray[index].nx;
+			modelDrawInfo.pVertices[index].ny = pTheModelArray[index].ny;
+			modelDrawInfo.pVertices[index].nz = pTheModelArray[index].nz;
+
+			// Copy the texture coordinates we loaded
+			modelDrawInfo.pVertices[index].u0 = pTheModelArray[index].texture_u;
+			modelDrawInfo.pVertices[index].v0 = pTheModelArray[index].texture_v;
+		}
+		std::cout << fileName << " Min values: " << minPoints.x << ", "
+			<< minPoints.y << ", " << minPoints.z << "\nMax values: " << maxPoints.x << ", "
+			<< maxPoints.y << ", " << maxPoints.z << std::endl;
+		modelDrawInfo.numberOfIndices = modelDrawInfo.numberOfTriangles * 3;
+		modelDrawInfo.minValues = minPoints;
+		modelDrawInfo.maxValues = maxPoints;
+
+		modelDrawInfo.pIndices = new unsigned int[modelDrawInfo.numberOfIndices];
+
+		unsigned int vertex_element_index_index = 0;
+
+		for (unsigned int triangleIndex = 0; triangleIndex != modelDrawInfo.numberOfTriangles; triangleIndex++)
+		{
+			modelDrawInfo.pIndices[vertex_element_index_index + 0] = pTheModelTriangleArray[triangleIndex].vertexIndices[0];
+			modelDrawInfo.pIndices[vertex_element_index_index + 1] = pTheModelTriangleArray[triangleIndex].vertexIndices[1];
+			modelDrawInfo.pIndices[vertex_element_index_index + 2] = pTheModelTriangleArray[triangleIndex].vertexIndices[2];
+
+			vertex_element_index_index += 3;
+		}
+
+		delete[] pTheModelArray;
+		delete[] pTheModelTriangleArray;
+		return true;
 	}
 }

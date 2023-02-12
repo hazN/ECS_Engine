@@ -21,13 +21,18 @@ namespace sas {
 		m_Window = std::unique_ptr<Window>(Window::Create());
 		m_Window->SetEventCallback(VEL_BIND_EVENT_FN(Application::OnEvent));
 
-		std::vector<Entity*>* entities = new std::vector<Entity*>();
+		entities = new std::vector<Entity*>();
 		Entity* entity = new Entity();
-
+		Material* material = new Material();
+		MeshRenderer* meshRenderer = new MeshRenderer();
+		meshRenderer->material = material;
+		meshRenderer->Path = "assets/models/terrain.ply";
+		meshRenderer->Mesh = "terrain";
+		entity->AddComponent(meshRenderer);
 		entities->push_back(entity);
 		std::string vertex = "assets/shaders/vertexShader01.glsl";
 		std::string fragment = "assets/shaders/fragmentShader01.glsl";
-		m_Renderer->Init(entities, vertex, fragment);
+		m_Renderer.Init(entities, vertex, fragment);
 		//m_Window->SetVSync(false);
 	}
 
@@ -52,7 +57,7 @@ namespace sas {
 			float time = (float)glfwGetTime();
 			Timestep timestep = time - m_LastFrameTime;
 			m_LastFrameTime = time;
-			m_Renderer->Process(nullptr, timestep);
+			m_Renderer.Process(entities, timestep);
 			if (Input::IsKeyPressed(KeyCode::Escape))
 			{
 				m_Running = false;
