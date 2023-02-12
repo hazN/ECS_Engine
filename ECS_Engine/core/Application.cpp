@@ -26,8 +26,8 @@ namespace sas {
 		Material* material = new Material();
 		MeshRenderer* meshRenderer = new MeshRenderer();
 		meshRenderer->material = material;
-		meshRenderer->Path = "assets/models/terrain.ply";
-		meshRenderer->Mesh = "terrain";
+		meshRenderer->Path = "assets/models/cube.ply";
+		meshRenderer->Mesh = "cube";
 		entity->AddComponent(meshRenderer);
 		entities->push_back(entity);
 		std::string vertex = "assets/shaders/vertexShader01.glsl";

@@ -6,14 +6,14 @@
 //in vec3 vPos;
 //in vec3 vNormal;
 // New one (which we aren't going to change again! Hazzah!)
-in vec4 vColour;			// Was vec3
-in vec4 vPosition;			// Was vec3
-in vec4 vNormal;			// Vertex normal
-in vec4 vUVx2;				// 2 x Texture coords
-in vec4 vTangent;			// For bump mapping
-in vec4 vBiNormal;			// For bump mapping
-in vec4 vBoneID;			// For skinned mesh (FBX)
-in vec4 vBoneWeight;		// For skinned mesh (FBX)
+layout(location = 0)in vec4 vColour;			// Was vec3
+layout(location = 1)in vec4 vPosition;			// Was vec3
+layout(location = 2)in vec4 vNormal;			// Vertex normal
+layout(location = 3)in vec4 vUVx2;				// 2 x Texture coords
+layout(location = 4)in vec4 vTangent;			// For bump mapping
+layout(location = 5)in vec4 vBiNormal;			// For bump mapping
+layout(location = 6)in vec4 vBoneID;			// For skinned mesh (FBX)
+layout(location = 7)in vec4 vBoneWeight;		// For skinned mesh (FBX)
 
 // Going "out" to the fragment shader
 out vec4 fColour;		// colour;			
@@ -37,11 +37,12 @@ void main()
 	// Output is in screen space 
 	// x & y are in (normalized) screen space, z is the depth from the camera
 	mat4 mMVP = mProjection * mView * mModel;
-	
-	gl_Position = mMVP * vec4(vertPosition, 1.0f);
+	gl_Position = vPosition;
+	//gl_Position = mMVP * vec4(vertPosition, 1.0f);
 	
 	// The location of the vertex in WORLD SPACE 
 	// for the lighting
+	//fVertWorldLocation = vPosistion;
 	fVertWorldLocation.xyz = (mModel * vec4(vertPosition, 1.0f)).xyz;
 	fVertWorldLocation.w = 1.0f;
 	

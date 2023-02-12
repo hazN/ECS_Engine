@@ -2,11 +2,15 @@
 #include "../../core/Renderer/RenderCommand.h"
 #include <OpenGL/OpenGLShader.h>
 #include "../../core/Application.h"
+#include <glm/ext/matrix_transform.hpp>
+#include <glm/gtc/quaternion.hpp>
+#include <glm/gtc/type_ptr.hpp>
 
 namespace sas
 {
 	namespace Systems
 	{
+		Entity* Renderer::EDITOR_CAMERA = new Entity();
 		Renderer::Renderer()
 		{
 			m_VertexArray = VertexArray::Create();
@@ -30,9 +34,10 @@ namespace sas
 					sModelDrawInfo drawInfo;
 					RenderCommand::SetCullFace();
 					m_VertexArray->FindDrawInfoByModelName(meshRenderer->Mesh, drawInfo);
-
+					
 					// Bind the shader
 					m_Shader->Bind();
+					std::dynamic_pointer_cast<OpenGLShader>(m_Shader)->UploadUniformMat4("mModel", glm::mat4(1.f));
 					RenderCommand::SetPolygonMode(meshRenderer->material->bWireframe);
 					// Draw the vertices
 					RenderCommand::DrawIndexed(drawInfo);
@@ -49,7 +54,7 @@ namespace sas
 		void Renderer::Init(std::vector<Entity*>* entityList, std::string& vertexSourceFile, std::string& fragmentSourcFile)
 		{
 			CompileShaders(vertexSourceFile, fragmentSourcFile);
-			m_Shader->Bind();
+			//m_Shader->Bind();
 			std::shared_ptr<OpenGLShader> openGLShader = std::dynamic_pointer_cast<OpenGLShader>(m_Shader);
 			for (std::vector<Entity*>::iterator it = entityList->begin();
 				it != entityList->end();

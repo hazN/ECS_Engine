@@ -22,6 +22,10 @@ namespace sas
 			void CompileShaders(std::string& vertexSourceFile, std::string& fragmentSourcFile);
 			std::shared_ptr<Shader> m_Shader;
 			std::shared_ptr<VertexArray> m_VertexArray;
+
+			// Temporary
+
+			static Entity* EDITOR_CAMERA;
 		};
 	}
 }
