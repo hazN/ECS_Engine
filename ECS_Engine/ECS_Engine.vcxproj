@@ -93,8 +93,12 @@
   <ItemGroup>
     <ClCompile Include="core\Application.cpp" />
     <ClCompile Include="core\OpenGL\OpenGLContext.cpp" />
+    <ClCompile Include="core\OpenGL\OpenGLRendererAPI.cpp" />
+    <ClCompile Include="core\OpenGL\OpenGLShader.cpp" />
     <ClCompile Include="core\OpenGL\OpenGLVertexArray.cpp" />
+    <ClCompile Include="core\Renderer\RenderCommand.cpp" />
     <ClCompile Include="core\Renderer\RendererAPI.cpp" />
+    <ClCompile Include="core\Renderer\Shader.cpp" />
     <ClCompile Include="core\Renderer\VertexArray.cpp" />
     <ClCompile Include="core\Windows\WindowsInput.cpp" />
     <ClCompile Include="core\Windows\WindowsWindow.cpp" />
@@ -111,12 +115,16 @@
     <ClInclude Include="core\Events\KeyEvent.h" />
     <ClInclude Include="core\Events\MouseEvent.h" />
     <ClInclude Include="core\OpenGL\OpenGLContext.h" />
+    <ClInclude Include="core\OpenGL\OpenGLRendererAPI.h" />
+    <ClInclude Include="core\OpenGL\OpenGLShader.h" />
     <ClInclude Include="core\OpenGL\OpenGLVertexArray.h" />
     <ClInclude Include="core\Renderer\GraphicsContext.h" />
     <ClInclude Include="core\Input.h" />
     <ClInclude Include="core\KeyCodes.h" />
     <ClInclude Include="core\Renderer\Material.h" />
+    <ClInclude Include="core\Renderer\RenderCommand.h" />
     <ClInclude Include="core\Renderer\RendererAPI.h" />
+    <ClInclude Include="core\Renderer\Shader.h" />
     <ClInclude Include="core\Renderer\VertexArray.h" />
     <ClInclude Include="core\Timestep.h" />
     <ClInclude Include="core\Window.h" />

@@ -2,7 +2,7 @@
 #include <vector>
 #include "../Entity.h"
 #include "../System.h"
-#include "../../core/Renderer/VertexArray.h"
+#include "../core/Renderer/VertexArray.h"
 #include <memory>
 
 namespace sas

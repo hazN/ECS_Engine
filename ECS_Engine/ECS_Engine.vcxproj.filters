@@ -14,6 +14,10 @@
     <ClCompile Include="core\Renderer\RendererAPI.cpp" />
     <ClCompile Include="core\Renderer\VertexArray.cpp" />
     <ClCompile Include="ECS\systems\Renderer.cpp" />
+    <ClCompile Include="core\Renderer\Shader.cpp" />
+    <ClCompile Include="core\OpenGL\OpenGLShader.cpp" />
+    <ClCompile Include="core\OpenGL\OpenGLRendererAPI.cpp" />
+    <ClCompile Include="core\Renderer\RenderCommand.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="core\Application.h" />
@@ -44,6 +48,10 @@
     <ClInclude Include="core\OpenGL\OpenGLVertexArray.h" />
     <ClInclude Include="core\Renderer\RendererAPI.h" />
     <ClInclude Include="ECS\systems\Renderer.h" />
+    <ClInclude Include="core\Renderer\Shader.h" />
+    <ClInclude Include="core\OpenGL\OpenGLShader.h" />
+    <ClInclude Include="core\OpenGL\OpenGLRendererAPI.h" />
+    <ClInclude Include="core\Renderer\RenderCommand.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="savedata">
