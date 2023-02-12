@@ -7,6 +7,7 @@ namespace sas
 	class Transform
 	{
 	public:
+		bool Enabled;
 		glm::vec3 Position;
 		glm::quat Rotation;
 		glm::vec3 Scale;

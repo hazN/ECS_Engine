@@ -116,6 +116,9 @@
     <ClInclude Include="core\Windows\WindowsWindow.h" />
     <ClInclude Include="ECS\Component.h" />
     <ClInclude Include="ECS\Entity.h" />
+    <ClInclude Include="ECS\GameObject.h" />
+    <ClInclude Include="ECS\Light.h" />
+    <ClInclude Include="ECS\MeshRenderer.h" />
     <ClInclude Include="ECS\System.h" />
     <ClInclude Include="ECS\Transform.h" />
     <ClInclude Include="savedata\JSONPersitence.h" />
