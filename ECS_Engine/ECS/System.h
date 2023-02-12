@@ -5,10 +5,13 @@
 #include "Entity.h"
 
 namespace sas{
-	class System
+	namespace Systems
 	{
-	public:
-		virtual void Process(const std::vector < Entity* > entites, float dt) = 0;
-		virtual ~System() {}
-	};
+		class System
+		{
+		public:
+			virtual void Process(const std::vector < Entity* > entites, float dt) = 0;
+			virtual ~System() {}
+		};
+	}
 }

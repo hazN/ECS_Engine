@@ -111,13 +111,13 @@ namespace sas {
 			mesh.Enabled = true;
 			mesh.Mesh = "Zombie";
 			mesh.Path = "assets/models/Zombie.ply";
-			mesh.RGBA = glm::vec4(1, 0, 0, 1);
+			/*mesh.RGBA = glm::vec4(1, 0, 0, 1);
 			mesh.SPEC = glm::vec4(0, 1, 1, 1);
 			mesh.bUseRGBA = true;
 			mesh.bUseLight = true;
 			mesh.bVisible = true;
 			mesh.Textures[0] = "ZombieTexture";
-			mesh.TextureRatios[0] = 1.f;
+			mesh.TextureRatios[0] = 1.f;*/
 			gameObject->mesh = mesh;
 			gameObjectsToSave.push_back(gameObject);
 			std::ofstream saveFile;
@@ -139,7 +139,7 @@ namespace sas {
 					jGameObject.push_back(json{ {"Transform", jTransform} });
 				}
 				// Check if it has a Mesh component, will be fixed later using hasComponent
-				if (1)
+				/*if (1)
 				{
 					json jMesh = json{ {"Enabled", go->mesh.Enabled},
 						{"Mesh", go->mesh.Mesh}, {"Path", go->mesh.Path }, 
@@ -152,7 +152,7 @@ namespace sas {
 							go->mesh.TextureRatios[4], go->mesh.TextureRatios[5], go->mesh.TextureRatios[6],go->mesh.TextureRatios[7]})},
 					};
 					jGameObject.push_back(json{ { "MeshRenderer", jMesh } });
-				}
+				}*/
 				// Check if it has a Light component, will be fixed later using hasComponent
 				if (1)
 				{

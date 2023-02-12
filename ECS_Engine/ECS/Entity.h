@@ -2,8 +2,8 @@
 #include <vector>
 #include "Component.h"
 #include "Transform.h"
-#include "Light.h"
-#include "MeshRenderer.h"
+#include "components/MeshRenderer.h"
+#include "components/Light.h"
 
 namespace sas
 {
@@ -52,23 +52,23 @@ namespace sas
 
 			m_Components.push_back(newComponent);
 			return true;
-		}
+		}	
 
-		//template<class T>
-		//T* RemoveComponent()
-		//{
-		//	for (std::vector<Component*>::iterator it = m_Components.begin();
-		//		it != m_Components.size(); it++)
-		//	{
-		//		T* component = dynamic_cast<T*>(*it);
-		//		if (component != nullptr)
-		//		{
-		//			m_Components.erase(it);
-		//			return *it;
-		//		}
-		//	}
-		//	return nullptr;
-		//}
+		template<class T>
+		T* RemoveComponent()
+		{
+			for (std::vector<Component*>::iterator it = m_Components.begin();
+				it != m_Components.end(); it++)
+			{
+				T* component = dynamic_cast<T*>(*it);
+				if (component != nullptr)
+				{
+					m_Components.erase(it);
+					return *it;
+				}
+			}
+			return nullptr;
+		}
 
 		inline std::vector<Component*> GetAllComponents() const { return m_Components; }
 

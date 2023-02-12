@@ -93,8 +93,12 @@
   <ItemGroup>
     <ClCompile Include="core\Application.cpp" />
     <ClCompile Include="core\OpenGL\OpenGLContext.cpp" />
+    <ClCompile Include="core\OpenGL\OpenGLVertexArray.cpp" />
+    <ClCompile Include="core\Renderer\RendererAPI.cpp" />
+    <ClCompile Include="core\Renderer\VertexArray.cpp" />
     <ClCompile Include="core\Windows\WindowsInput.cpp" />
     <ClCompile Include="core\Windows\WindowsWindow.cpp" />
+    <ClCompile Include="ECS\systems\Renderer.cpp" />
     <ClCompile Include="glad.c" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="savedata\JSONPersitence.cpp" />
@@ -107,19 +111,23 @@
     <ClInclude Include="core\Events\KeyEvent.h" />
     <ClInclude Include="core\Events\MouseEvent.h" />
     <ClInclude Include="core\OpenGL\OpenGLContext.h" />
+    <ClInclude Include="core\OpenGL\OpenGLVertexArray.h" />
     <ClInclude Include="core\Renderer\GraphicsContext.h" />
     <ClInclude Include="core\Input.h" />
     <ClInclude Include="core\KeyCodes.h" />
+    <ClInclude Include="core\Renderer\Material.h" />
+    <ClInclude Include="core\Renderer\RendererAPI.h" />
+    <ClInclude Include="core\Renderer\VertexArray.h" />
     <ClInclude Include="core\Timestep.h" />
     <ClInclude Include="core\Window.h" />
     <ClInclude Include="core\Windows\WindowsInput.h" />
     <ClInclude Include="core\Windows\WindowsWindow.h" />
     <ClInclude Include="ECS\Component.h" />
     <ClInclude Include="ECS\Entity.h" />
-    <ClInclude Include="ECS\GameObject.h" />
-    <ClInclude Include="ECS\Light.h" />
-    <ClInclude Include="ECS\MeshRenderer.h" />
+    <ClInclude Include="ECS\components\Light.h" />
+    <ClInclude Include="ECS\components\MeshRenderer.h" />
     <ClInclude Include="ECS\System.h" />
+    <ClInclude Include="ECS\systems\Renderer.h" />
     <ClInclude Include="ECS\Transform.h" />
     <ClInclude Include="savedata\JSONPersitence.h" />
   </ItemGroup>
