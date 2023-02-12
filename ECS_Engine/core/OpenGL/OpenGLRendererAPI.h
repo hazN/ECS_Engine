@@ -10,7 +10,7 @@ namespace sas
 		virtual void SetClearColor(const glm::vec4& color) override;
 		virtual void Clear() override;
 
-		virtual void DrawIndexed(const uint32_t& vaID, unsigned int numberOfIndices) override;
+		virtual void DrawIndexed(const sModelDrawInfo& drawInfo) override;
 		virtual void SetViewport(int x, int y, int width, int height) override;
 
 		virtual void SetCullFace() override;

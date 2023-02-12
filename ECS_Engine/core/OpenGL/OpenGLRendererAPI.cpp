@@ -40,10 +40,10 @@ namespace sas
 		return errorCode;
 	}
 
-	void OpenGLRendererAPI::DrawIndexed(const uint32_t& vaID, unsigned int numberOfIndices)
+	void OpenGLRendererAPI::DrawIndexed(const sModelDrawInfo& drawInfo)
 	{
-		glBindVertexArray(vaID);
-		glDrawElements(GL_TRIANGLES, numberOfIndices, GL_UNSIGNED_INT, nullptr);
+		glBindVertexArray(drawInfo.VAO_ID);
+		glDrawElements(GL_TRIANGLES, drawInfo.numberOfIndices, GL_UNSIGNED_INT, nullptr);
 
 		GLenum error = glCheckError_();
 

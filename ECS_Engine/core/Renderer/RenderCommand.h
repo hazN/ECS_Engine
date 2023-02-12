@@ -1,5 +1,6 @@
 #pragma once
 #include "RendererAPI.h"
+#include "VertexArray.h"
 
 namespace sas
 {
@@ -14,9 +15,9 @@ namespace sas
 		{
 			s_RendererAPI->Clear();
 		}
-		inline static void DrawIndexed(const uint32_t& vaID, unsigned int numberOfIndices)
+		inline static void DrawIndexed(const sModelDrawInfo& drawInfo)
 		{
-			s_RendererAPI->DrawIndexed(vaID, numberOfIndices);
+			s_RendererAPI->DrawIndexed(drawInfo);
 		}
 		inline static void SetViewport(int x, int y, int width, int height)
 		{
