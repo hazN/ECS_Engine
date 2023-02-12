@@ -5,7 +5,7 @@
 
 namespace sas
 {
-	Shader* Shader::Create(const std::string& vertexShaderFile, const std::string& fragmentShaderFile)
+	std::shared_ptr<Shader> Shader::Create(const std::string& vertexShaderFile, const std::string& fragmentShaderFile)
 	{
 		switch (RendererAPI::GetAPI())
 		{
@@ -13,7 +13,7 @@ namespace sas
 			std::cout << "Renderer API None is not supported" << std::endl;
 			return nullptr;
 
-		case RendererAPI::API::OpenGL: return new OpenGLShader(vertexShaderFile, fragmentShaderFile);
+		case RendererAPI::API::OpenGL: return std::make_shared<OpenGLShader>(vertexShaderFile, fragmentShaderFile);
 		}
 		std::cout << "Unknown Renderer API" << std::endl;
 		return nullptr;

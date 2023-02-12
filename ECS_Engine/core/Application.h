@@ -7,6 +7,7 @@
 
 #include "Window.h"
 #include <Events/ApplicationEvent.h>
+#include "../ECS/systems/Renderer.h"
 
 
 namespace sas {
@@ -26,6 +27,7 @@ namespace sas {
 	private:
 
 		std::unique_ptr<Window> m_Window;
+		std::unique_ptr<Systems::Renderer> m_Renderer;
 		bool m_Running = true;
 
 		float m_LastFrameTime = 0.f;

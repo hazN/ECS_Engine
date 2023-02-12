@@ -1,5 +1,6 @@
 #pragma once
 #include <string>
+#include <memory>
 
 namespace sas
 {
@@ -11,6 +12,6 @@ namespace sas
 		virtual void Bind() const = 0;
 		virtual void UnBind() const = 0;
 
-		static Shader* Create(const std::string& vertexShaderFile, const std::string& fragmentShaderFile);
+		static std::shared_ptr<Shader> Create(const std::string& vertexShaderFile, const std::string& fragmentShaderFile);
 	};
 }

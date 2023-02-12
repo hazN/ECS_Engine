@@ -52,6 +52,7 @@
     <ClInclude Include="core\OpenGL\OpenGLShader.h" />
     <ClInclude Include="core\OpenGL\OpenGLRendererAPI.h" />
     <ClInclude Include="core\Renderer\RenderCommand.h" />
+    <ClInclude Include="ECS\EntityManager.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="savedata">

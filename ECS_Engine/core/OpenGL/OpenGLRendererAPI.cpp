@@ -52,6 +52,7 @@ namespace sas
 
 			std::cout <<  "OpenGL error!!" << std::endl;
 		}
+		glBindVertexArray(0);
 	}
 
 	void OpenGLRendererAPI::SetViewport(int x, int y, int width, int height)
