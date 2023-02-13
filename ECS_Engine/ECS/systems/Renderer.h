@@ -26,6 +26,25 @@ namespace sas
 			// Temporary
 
 			static Entity* EDITOR_CAMERA;
+			bool mouseHoldDown = false;
+			bool mouseClicked = false; 
+			glm::vec3 cameraFront = glm::vec3(0.0f, 0.0f, -1.0f);
+			glm::vec3 cameraUp = glm::vec3(0.0f, 1.0f, 0.0f);
+			glm::vec3 WorldUp = glm::vec3(0.0f, 1.0f, 0.0f);
+			glm::vec3 cameraRight = glm::vec3(0.0f, 0.0f, 0.0f);
+			void ProcessMouseMovement(float xoffset, float yoffset);
+
+			int SCR_WIDTH = 1200;
+			int SCR_HEIGHT = 800;
+			float lastX = SCR_WIDTH / 2.0f;
+			float lastY = SCR_HEIGHT / 2.0f;
+			bool firstMouse = true;
+
+			float YAW = 90.0f;
+			float PITCH = 0.0f;
+			float SENSITIVITY = 0.1f;
+			float xpos;
+			float ypos;
 		};
 	}
 }

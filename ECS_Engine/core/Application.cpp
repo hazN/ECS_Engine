@@ -22,16 +22,50 @@ namespace sas {
 		m_Window->SetEventCallback(VEL_BIND_EVENT_FN(Application::OnEvent));
 
 		entities = new std::vector<Entity*>();
-		Entity* entity = new Entity();
-		Material* material = new Material();
-		MeshRenderer* meshRenderer = new MeshRenderer();
-		meshRenderer->material = material;
-		meshRenderer->Path = "assets/models/cube.ply";
-		meshRenderer->Mesh = "cube";
-		entity->AddComponent(meshRenderer);
-		entities->push_back(entity);
-		std::string vertex = "assets/shaders/vertexShader01.glsl";
-		std::string fragment = "assets/shaders/fragmentShader01.glsl";
+		{
+			Entity* entity = new Entity();
+			entity->transform.Position = glm::vec3(0.f, 0.f, -1.f);
+			Material* material = new Material();
+			MeshRenderer* meshRenderer = new MeshRenderer();
+			material->RGBA = glm::vec4(0.1f, 0.1f, 0.8f, 1.f);
+			meshRenderer->material = material;
+			material->bUseLight = false;
+			meshRenderer->Path = "assets/models/cube.ply";
+			meshRenderer->Mesh = "cube";
+			entity->AddComponent(meshRenderer);
+			entities->push_back(entity);
+		}
+		{
+			Entity* entity = new Entity();
+			entity->transform.Position = glm::vec3(0.f, 0.f, 10.f);
+			Material* material = new Material();
+			MeshRenderer* meshRenderer = new MeshRenderer();
+			material->RGBA = glm::vec4(0.8f, 0.3f, 0.3f, 1.f);
+			meshRenderer->material = material;
+			material->bUseLight = false;
+			meshRenderer->material->bWireframe = false;
+			meshRenderer->Path = "assets/models/femaleKnight.ply";
+			meshRenderer->Mesh = "femaleKnight";
+			entity->AddComponent(meshRenderer);
+			entities->push_back(entity);
+		}
+		{
+			Entity* entity = new Entity();
+			entity->transform.Position = glm::vec3(0, -0.5f, 0);
+			entity->transform.Scale = glm::vec3(10, 2, 10);
+			entity->transform.Rotation = glm::rotate(entity->transform.Rotation, glm::vec3(-1.57f, 0.f, 0.f));
+			Material* material = new Material();
+			MeshRenderer* meshRenderer = new MeshRenderer();
+			material->RGBA = glm::vec4(0.3f, 0.7f, 0.3f, 1.f);
+			meshRenderer->material = material;
+			material->bUseLight = false;
+			meshRenderer->Path = "assets/models/plane.ply";
+			meshRenderer->Mesh = "plane";
+			entity->AddComponent(meshRenderer);
+			entities->push_back(entity);
+		}
+		std::string vertex = "assets/shaders/vertexShader03.glsl";
+		std::string fragment = "assets/shaders/fragmentShader03.glsl";
 		m_Renderer.Init(entities, vertex, fragment);
 		//m_Window->SetVSync(false);
 	}
@@ -43,7 +77,7 @@ namespace sas {
 	void Application::OnEvent(Event& e)
 	{
 		EventDispatcher dispatcher(e);
-		std::cout << e << std::endl;
+		//std::cout << e << std::endl;
 		if (dispatcher.Dispatch<WindowCloseEvent>(VEL_BIND_EVENT_FN(Application::OnWindowClosed)))
 		{
 			std::cout << "Window Closed called!!";

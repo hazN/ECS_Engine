@@ -37,12 +37,11 @@ void main()
 	// Output is in screen space 
 	// x & y are in (normalized) screen space, z is the depth from the camera
 	mat4 mMVP = mProjection * mView * mModel;
-	gl_Position = vPosition;
-	//gl_Position = mMVP * vec4(vertPosition, 1.0f);
+	
+	gl_Position = mMVP * vec4(vertPosition, 1.0f);
 	
 	// The location of the vertex in WORLD SPACE 
 	// for the lighting
-	//fVertWorldLocation = vPosistion;
 	fVertWorldLocation.xyz = (mModel * vec4(vertPosition, 1.0f)).xyz;
 	fVertWorldLocation.w = 1.0f;
 	

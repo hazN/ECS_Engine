@@ -65,6 +65,9 @@ uniform bool bIsSkyboxObject;
 
 // HACK: colour the island
 uniform bool bIsIlandModel;
+uniform bool bUseTextureNormal;
+uniform bool bUseTextureSpecular;
+uniform bool bUseTextureOpacity;
 
 
 struct sLight
@@ -94,76 +97,26 @@ vec4 calculateLightContrib( vec3 vertexMaterialColour, vec3 vertexNormal,
 void main()
 {
 	
-	if (bIsSkyboxObject)
-	{
-		vec3 cubeMapColour = texture( skyboxTexture, fNormal.xyz ).rgb;
-		pixelOutputColour.rgb = cubeMapColour.rgb;
-		pixelOutputColour.a = 1.0f;
-		return;
-	}
-
-
-	if ( bIsIlandModel )
-	{
-	
-		if ( fVertWorldLocation.y < -25.0f )
-		{	// Water
-			pixelOutputColour.rgb = vec3(0.0f, 0.0f, 1.0f);
-		}
-		else if ( fVertWorldLocation.y < -15.0f )
-		{	// Sand ( 89.8% red, 66.67% green and 43.92% )
-			pixelOutputColour.rgb = vec3(0.898f, 0.6667f, 0.4392f);
-		}
-		else if ( fVertWorldLocation.y < 30.0f )
-		{	// Grass
-			pixelOutputColour.rgb = vec3(0.0f, 1.0f, 0.0f);
-		}
-		else
-		{	// Snow
-			pixelOutputColour.rgb = vec3(1.0f, 1.0f, 1.0f);
-		}
-		pixelOutputColour.a = 1.0f;
-	
-	
-		return;
-	}
-
 	vec3 materialColour = fColour.rgb;
+	vec3 normalValue = fNormal.xyz;
 //	finalColour.r = 1.0f;
 
 	float alphaTransparency = RGBA_Colour.w;
-
-	// For the exhaust of the drop ship
-	if (bIsFlameObject)
-	{
-		// DON'T light. Apply the texture. Use colour as alpha
-		vec3 flameColour = texture( texture0, fUVx2.st ).rgb;	
-		
-		pixelOutputColour.rgb = flameColour;
-		
-		// Set the alpha transparency based on the colour.
-		float RGBcolourSum = pixelOutputColour.r + pixelOutputColour.g + pixelOutputColour.b;
-		pixelOutputColour.a = max( ((RGBcolourSum - 0.1f) / 3.0f), 0.0f);
 	
-	
-		// Exit early so bypasses lighting
-		return;
-	}
-	
-	if ( bUseDiscardTexture )
-	{	
-		// Compare the colour in the texture07 black and white texture
-		// If it's 'black enough' then don't draw the pixel
-		// NOTE: I'm only sampling from the red 
-		// (since it's black and white, all channels would be the same)
-		float greyscalevalue = texture( texture7, fUVx2.st ).r;
-		
-		// Here, 0.5 is "black enough" 
-		if ( greyscalevalue < 0.5f )
-		{
-			discard;
-		}
-	}
+	//if ( bUseDiscardTexture )
+	//{	
+	//	// Compare the colour in the texture07 black and white texture
+	//	// If it's 'black enough' then don't draw the pixel
+	//	// NOTE: I'm only sampling from the red 
+	//	// (since it's black and white, all channels would be the same)
+	//	float greyscalevalue = texture( texture7, fUVx2.st ).r;
+	//	
+	//	// Here, 0.5 is "black enough" 
+	//	if ( greyscalevalue < 0.5f )
+	//	{
+	//		discard;
+	//	}
+	//}
 	
 	
 
@@ -173,26 +126,40 @@ void main()
 	{
 		materialColour = RGBA_Colour.rgb;
 	}
-	else
-	{
-		//gl_FragColor = vec4(finalColour, 1.0f);
-	//	pixelOutputColour = vec4(finalColour, 1.0f);	
-	//	pixelOutputColour = vec4(fNormal.xyz, 1.0f);
+	//else
+	//{
+	//	//gl_FragColor = vec4(finalColour, 1.0f);
+	////	pixelOutputColour = vec4(finalColour, 1.0f);	
+	////	pixelOutputColour = vec4(fNormal.xyz, 1.0f);
 
-		// Sample from a texture 
-		vec3 textColour0 = texture( texture0, fUVx2.st ).rgb;		
-		vec3 textColour1 = texture( texture1, fUVx2.st ).rgb;	
-		vec3 textColour2 = texture( texture2, fUVx2.st ).rgb;	
-		vec3 textColour3 = texture( texture3, fUVx2.st ).rgb;	
-		
-		
-		materialColour =   (textColour0.rgb * texRatio_0_3.x) 
-						 + (textColour1.rgb * texRatio_0_3.y) 
-						 + (textColour2.rgb * texRatio_0_3.z) 
-						 + (textColour3.rgb * texRatio_0_3.w);
-	}//if ( bUseRGBA_Colour )
+	//	// Sample from a texture 
+	//	vec3 textColour0 = texture( texture0, fUVx2.st ).rgb;		
+	//	vec3 textColour1 = texture( texture1, fUVx2.st ).rgb;	
+	//	vec3 textColour2 = texture( texture2, fUVx2.st ).rgb;	
+	//	vec3 textColour3 = texture( texture3, fUVx2.st ).rgb;	
+	//	
+	//	
+	//	if (bUseTextureNormal)
+	//	{
+	//		materialColour = (textColour0.rgb * texRatio_0_3.x)
+	//			+ (textColour1.rgb * texRatio_0_3.y);
+	//		normalValue.xyz = textColour2.rgb * texRatio_0_3.z;
+	//	}
+	//	else {
+	//		materialColour = (textColour0.rgb * texRatio_0_3.x)
+	//			+ (textColour1.rgb * texRatio_0_3.y)
+	//			+ (textColour2.rgb * texRatio_0_3.z)
+	//			+ (textColour3.rgb * texRatio_0_3.w);
+	//	}
+	//	if (bUseTextureOpacity)
+	//	{
+	//		// Set the alpha transparency based on the colour.
+	//		float RGBcolourSum = textColour3.r + textColour3.g + textColour3.b;
+	//		alphaTransparency = max((RGBcolourSum / 3.0f), 0.0f);
+	//	}
+	//}//if ( bUseRGBA_Colour )
 
-	if ( bDoNotLight )
+	if ( true )
 	{
 		// Set the output colour and exit early
 		// (Don't apply the lighting to this)
@@ -200,14 +167,14 @@ void main()
 		return;
 	}
 
-	vec4 outColour = calculateLightContrib( materialColour.rgb, fNormal.xyz, 
+	vec4 outColour = calculateLightContrib( materialColour.rgb, normalValue.xyz,
 	                                        fVertWorldLocation.xyz, specularColour );
 										
 	// If my blend function is (GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA) 
 	// then it's reading whatever the 4th value of the output is:
 	pixelOutputColour = vec4(outColour.rgb, alphaTransparency);
 	
-	float amountOfAmbientLight = 0.1f;
+	float amountOfAmbientLight = 0.08f;
 	pixelOutputColour.rgb += (materialColour.rgb * amountOfAmbientLight);
 	
 	

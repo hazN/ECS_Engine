@@ -37,7 +37,7 @@ namespace sas
 	void OpenGLShader::UploadUniformFloat(const std::string& uniformName, float value)
 	{
 		GLint location = glGetUniformLocation(m_RendererID, uniformName.c_str());
-		glUniform1f(location, value);
+		glUniform1f(location,(GLfloat) value);
 	}
 
 	void OpenGLShader::UploadUniformFloat2(const std::string& uniformName, const glm::vec2& values)
@@ -66,7 +66,7 @@ namespace sas
 
 	void OpenGLShader::UploadUniformMat4(const std::string& uniformName, const glm::mat4& matrix)
 	{
-		glUseProgram(m_RendererID);
+		//glUseProgram(m_RendererID);
 		GLint location = glGetUniformLocation(m_RendererID, uniformName.c_str());
 		glUniformMatrix4fv(location, 1, false, glm::value_ptr(matrix));
 	}
@@ -85,6 +85,7 @@ namespace sas
 		if (!this->m_compileShaderFromSource(verSource, vertexShaderID, errorText))
 		{
 			this->m_LastError = errorText;
+			std::cout << errorText << std::endl;
 			return false;
 		}
 
@@ -99,6 +100,7 @@ namespace sas
 		if (!this->m_compileShaderFromSource(fraSource, fragmentShaderID, errorText))
 		{
 			this->m_LastError = errorText;
+			std::cout << errorText << std::endl;
 			return false;
 		}
 
@@ -116,6 +118,7 @@ namespace sas
 			ssError << "Shader program link error";
 			ssError << errorText;
 			this->m_LastError = ssError.str();
+			std::cout << ssError.str() << std::endl;
 			return false;
 		}
 		delete verSource;

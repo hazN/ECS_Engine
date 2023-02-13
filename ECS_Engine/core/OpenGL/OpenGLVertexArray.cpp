@@ -65,7 +65,7 @@ namespace sas
 			// in vec4 vColour;
 		unsigned int index = 0;
 		//GLint vColour_location = glGetAttribLocation(shaderProgramID, "vColour");
-		glBindAttribLocation(shaderProgramID, index, "vColour");
+		//glBindAttribLocation(shaderProgramID, index, "vColour");
 		glEnableVertexAttribArray(index);
 		glVertexAttribPointer(index,
 			4, GL_FLOAT,
@@ -76,8 +76,8 @@ namespace sas
 
 		//in vec4 vPosition;			
 		//GLint vPosition_location = glGetAttribLocation(shaderProgramID, "vPosition");
-		glBindAttribLocation(shaderProgramID, index, "vPosition");
-		//glEnableVertexAttribArray(index);
+		//glBindAttribLocation(shaderProgramID, index, "vPosition");
+		glEnableVertexAttribArray(index);
 		glVertexAttribPointer(index,
 			4, GL_FLOAT,
 			GL_FALSE,
@@ -87,8 +87,8 @@ namespace sas
 
 		//in vec4 vNormal;			
 		//GLint vNormal_location = glGetAttribLocation(shaderProgramID, "vNormal");
-		glBindAttribLocation(shaderProgramID, index, "vNormal");
-		//glEnableVertexAttribArray(index);
+		//glBindAttribLocation(shaderProgramID, index, "vNormal");
+		glEnableVertexAttribArray(index);
 		glVertexAttribPointer(index,
 			4, GL_FLOAT,
 			GL_FALSE,
@@ -98,8 +98,8 @@ namespace sas
 
 		//in vec4 vUVx2;			
 		//GLint vUVx2_location = glGetAttribLocation(shaderProgramID, "vUVx2");
-		glBindAttribLocation(shaderProgramID, index, "vUVx2");
-		//glEnableVertexAttribArray(index);
+		//glBindAttribLocation(shaderProgramID, index, "vUVx2");
+		glEnableVertexAttribArray(index);
 		glVertexAttribPointer(index,
 			4, GL_FLOAT,
 			GL_FALSE,
@@ -109,8 +109,8 @@ namespace sas
 
 		//in vec4 vTangent;			
 		//GLint vTangent_location = glGetAttribLocation(shaderProgramID, "vTangent");
-		glBindAttribLocation(shaderProgramID, index, "vTangent");
-		//glEnableVertexAttribArray(index);
+		//glBindAttribLocation(shaderProgramID, index, "vTangent");
+		glEnableVertexAttribArray(index);
 		glVertexAttribPointer(index,
 			4, GL_FLOAT,
 			GL_FALSE,
@@ -120,8 +120,8 @@ namespace sas
 
 		//in vec4 vBiNormal;		
 		//GLint vBiNormal_location = glGetAttribLocation(shaderProgramID, "vBiNormal");
-		glBindAttribLocation(shaderProgramID, index, "vBiNormal");
-		//glEnableVertexAttribArray(index);
+		//glBindAttribLocation(shaderProgramID, index, "vBiNormal");
+		glEnableVertexAttribArray(index);
 		glVertexAttribPointer(index,
 			4, GL_FLOAT,
 			GL_FALSE,
@@ -131,8 +131,8 @@ namespace sas
 
 		//in vec4 vBoneID;			
 		//GLint vBoneID_location = glGetAttribLocation(shaderProgramID, "vBoneID");
-		glBindAttribLocation(shaderProgramID, index, "vBoneID");
-		//glEnableVertexAttribArray(index);
+		//glBindAttribLocation(shaderProgramID, index, "vBoneID");
+		glEnableVertexAttribArray(index);
 		glVertexAttribPointer(index,
 			4, GL_FLOAT,
 			GL_FALSE,
@@ -142,8 +142,8 @@ namespace sas
 
 		//in vec4 vBoneWeight;		
 		//GLint vBoneWeight_location = glGetAttribLocation(shaderProgramID, "vBoneWeight");
-		glBindAttribLocation(shaderProgramID, index, "vBoneWeight");
-		//glEnableVertexAttribArray(index);
+		//glBindAttribLocation(shaderProgramID, index, "vBoneWeight");
+		glEnableVertexAttribArray(index);
 		glVertexAttribPointer(index,
 			4, GL_FLOAT,
 			GL_FALSE,
@@ -154,12 +154,12 @@ namespace sas
 
 
 		// Now that all the parts are set up, set the VAO to zero
-		//glBindVertexArray(0);
+		/*glBindVertexArray(0);
 
-		/*glBindBuffer(GL_ARRAY_BUFFER, 0);
-		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);*/
+		glBindBuffer(GL_ARRAY_BUFFER, 0);
+		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 
-		/*glDisableVertexAttribArray(0);
+		glDisableVertexAttribArray(0);
 		glDisableVertexAttribArray(1);
 		glDisableVertexAttribArray(2);
 		glDisableVertexAttribArray(3);
