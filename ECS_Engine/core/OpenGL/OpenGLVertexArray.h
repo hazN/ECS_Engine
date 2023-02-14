@@ -12,8 +12,13 @@ namespace sas
 		OpenGLVertexArray();
 		virtual ~OpenGLVertexArray();
 
+		// Load models into API specific Vertex Array
 		virtual bool LoadModelIntoVAO(std::string filename, sModelDrawInfo& drawInfo, unsigned int shaderProgramID) override;
+		
+		// Find drawing information using mesh name [TEMPORARY]
 		virtual bool FindDrawInfoByModelName(std::string filename, sModelDrawInfo& drawinfo) override;
+
+		// Read 3D files with .ply extension and store information in drawinfo
 		virtual bool LoadPlyFiles(std::string filename, sModelDrawInfo& drawinfo) override;
 
 	private:

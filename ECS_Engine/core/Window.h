@@ -20,6 +20,7 @@ namespace sas
 		{}
 	};
 
+	// Game Window
 	class Window
 	{
 	public:
