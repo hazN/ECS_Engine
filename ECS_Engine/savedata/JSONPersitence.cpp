@@ -88,89 +88,200 @@ namespace sas {
 		//	}
 		//	file.close();
 		//}
+		// Save all game objects from entity vector
 		void SaveGameObjects(std::vector<Entity*> gameObjectsToSave)
 		{
-			//TESTING 
-			Entity* gameObject = new Entity;
-			gameObject->name = "testObject";
-			Light light;
-			light.Attenuation = glm::vec4(0.11, 0.54, 0.3, 1);
-			light.Diffuse = glm::vec4(0.41, 0.14, 0.5, 1);
-			light.Specular = glm::vec4(0.01, 0.04, 0.03, 1);
-			light.Enabled = true;
-			light.InnerAngle = 10;
-			light.OuterAngle = 30;
-			gameObject->light = light;
-			Transform transform;
-			transform.Enabled = true;
-			transform.Position = glm::vec3(50, 90, 20);
-			transform.Rotation = glm::quat(glm::vec3(90, 0, 0));
-			transform.Scale = glm::vec3(5, 5, 5);
-			gameObject->transform = transform;
-			MeshRenderer mesh;
-			mesh.Enabled = true;
-			mesh.Mesh = "Zombie";
-			mesh.Path = "assets/models/Zombie.ply";
-			/*mesh.RGBA = glm::vec4(1, 0, 0, 1);
-			mesh.SPEC = glm::vec4(0, 1, 1, 1);
-			mesh.bUseRGBA = true;
-			mesh.bUseLight = true;
-			mesh.bVisible = true;
-			mesh.Textures[0] = "ZombieTexture";
-			mesh.TextureRatios[0] = 1.f;*/
-			gameObject->mesh = mesh;
-			gameObjectsToSave.push_back(gameObject);
+			// Open file
 			std::ofstream saveFile;
-			saveFile.open("./savedata/gameObjectData.json");
+			saveFile.open(SAVE_LOCATION);
+
+			// Parent JSON Object
 			json gameObjects;
+			// Loop through each gameObject inside the entity vector
 			for (Entity* go : gameObjectsToSave)
 			{
+				// GameObject JSON object that will be later added to the parent
 				json jGameObject;
-				jGameObject.push_back(json{ {"ID", go->GetID()} });
-				jGameObject.push_back(json{ {"Name", go->name} });
-				// Check if it has a Transform component, will be fixed later using hasComponent
-				if (1)
+
+				// Save basic gameObject info such as id, name, more can be added later
+				jGameObject.push_back(json{ {"ID", go->GetID()}, {"Name", go->name } });
+
+				// Check if it has a Transform component
+				if (go->HasComponent<Transform>())
 				{
-					json jTransform = json{ {"Enabled", go->transform.Enabled},
-						{"Position", json::array({go->transform.Position.x, go->transform.Position.y, go->transform.Position.z})},
-						{"Rotation", json::array({go->transform.Rotation.w, go->transform.Rotation.x, go->transform.Rotation.y, go->transform.Rotation.z})},
-						{"Scale", json::array({go->transform.Scale.x, go->transform.Scale.y, go->transform.Scale.z})}
+					Transform* goTransform = go->GetComponentByType<Transform>();
+					json jTransform = json{ {"Enabled", goTransform->Enabled},
+						{"Position", json::array({goTransform->Position.x, goTransform->Position.y, goTransform->Position.z})},
+						{"Rotation", json::array({goTransform->Rotation.w, goTransform->Rotation.x, goTransform->Rotation.y, goTransform->Rotation.z})},
+						{"Scale", json::array({goTransform->Scale.x, goTransform->Scale.y, goTransform->Scale.z})}
 				};
 					jGameObject.push_back(json{ {"Transform", jTransform} });
 				}
-				// Check if it has a Mesh component, will be fixed later using hasComponent
-				/*if (1)
+				// Check if it has a Mesh component
+				if (go->HasComponent<MeshRenderer>())
 				{
-					json jMesh = json{ {"Enabled", go->mesh.Enabled},
-						{"Mesh", go->mesh.Mesh}, {"Path", go->mesh.Path }, 
-						{"RGBA", json::array( {go->mesh.RGBA.x, go->mesh.RGBA.y, go->mesh.RGBA.z, go->mesh.RGBA.w} )},
-						{"SPEC", json::array( {go->mesh.SPEC.x, go->mesh.SPEC.y, go->mesh.SPEC.z, go->mesh.SPEC.w} )},
-						{"bWireFrame", go->mesh.bWireframe}, {"bUseRGBA", go->mesh.bUseRGBA}, {"bUseLight", go->mesh.bUseLight},
-						{"bVisible", go->mesh.bVisible}, {"Textures", json::array({go->mesh.Textures[0], go->mesh.Textures[1], go->mesh.Textures[2],
-							go->mesh.Textures[3], go->mesh.Textures[4], go->mesh.Textures[5], go->mesh.Textures[6],go->mesh.Textures[7]})},
-						{"TextureRatios", json::array({go->mesh.TextureRatios[0], go->mesh.TextureRatios[1], go->mesh.TextureRatios[2], go->mesh.TextureRatios[3],
-							go->mesh.TextureRatios[4], go->mesh.TextureRatios[5], go->mesh.TextureRatios[6],go->mesh.TextureRatios[7]})},
+					MeshRenderer* goMesh = go->GetComponentByType<MeshRenderer>();
+					json jMesh = json{ {"Enabled", goMesh->Enabled},
+						{"Mesh", goMesh->Mesh}, {"Path", goMesh->Path }, {"MaterialPath", goMesh->MaterialPath}
 					};
 					jGameObject.push_back(json{ { "MeshRenderer", jMesh } });
-				}*/
-				// Check if it has a Light component, will be fixed later using hasComponent
-				if (1)
+					if (goMesh->MaterialPath != "")
+					{
+						std::ofstream Material;
+						Material.open(goMesh->MaterialPath);
+						json jMaterial = json{ {"RGBA", json::array({goMesh->material->RGBA.x, goMesh->material->RGBA.y, goMesh->material->RGBA.z, goMesh->material->RGBA.w})},
+							{"SPEC", json::array({goMesh->material->SPEC.x, goMesh->material->SPEC.y, goMesh->material->SPEC.z, goMesh->material->SPEC.w})},
+							{"bWireframe", goMesh->material->bWireframe}, {"bUseRGBA", goMesh->material->bUseRGBA}, {"bUseLight", goMesh->material->bUseRGBA},
+							{"bUseLight", goMesh->material->bUseLight}, {"bVisible", goMesh->material->bVisible},
+							{"Textures", json::array({goMesh->material->Textures[0], goMesh->material->Textures[1],goMesh->material->Textures[2], goMesh->material->Textures[3],
+								goMesh->material->Textures[4], goMesh->material->Textures[5], goMesh->material->Textures[6], goMesh->material->Textures[7]})},
+							{"TextureRatios", json::array({goMesh->material->TextureRatios[0], goMesh->material->TextureRatios[1],goMesh->material->TextureRatios[2], goMesh->material->TextureRatios[3],
+								goMesh->material->TextureRatios[4], goMesh->material->TextureRatios[5], goMesh->material->TextureRatios[6], goMesh->material->TextureRatios[7]})}
+						};
+						Material << jMaterial;
+						Material.close();
+					}
+				}
+				// Check if it has a Light component
+				if (go->HasComponent<Light>())
 				{
-					json jLight = json{ {"Enabled", go->light.Enabled}, { "LightType", go->light.LightType},
-						{"Diffuse", json::array({go->light.Diffuse.x, go->light.Diffuse.y, go->light.Diffuse.z, go->light.Diffuse.w })},
-						{"Specular", json::array({go->light.Specular.x, go->light.Specular.y, go->light.Specular.z, go->light.Specular.w })},
-						{"Attenuation", json::array({go->light.Attenuation.x, go->light.Attenuation.y, go->light.Attenuation.z, go->light.Attenuation.w })},
-						{"OuterAngle", go->light.OuterAngle}, {"InnerAngle", go->light.InnerAngle}
+					Light* goLight = go->GetComponentByType<Light>();
+					json jLight = json{ {"Enabled", goLight->Enabled}, { "LightType", goLight->LightType},
+						{"Diffuse", json::array({goLight->Diffuse.x, goLight->Diffuse.y, goLight->Diffuse.z, goLight->Diffuse.w })},
+						{"Specular", json::array({goLight->Specular.x, goLight->Specular.y, goLight->Specular.z, goLight->Specular.w })},
+						{"Attenuation", json::array({goLight->Attenuation.x, goLight->Attenuation.y, goLight->Attenuation.z, goLight->Attenuation.w })},
+						{"OuterAngle", goLight->OuterAngle}, {"InnerAngle", goLight->InnerAngle}
 				};
 					jGameObject.push_back(json{ {"Light", jLight} });
 				}
-				gameObjects.push_back(json{ { "Name", jGameObject} });
+				gameObjects.push_back(json{ { go->name, jGameObject} });
 			}
 			saveFile << gameObjects;
 			saveFile.close();
 		}
+		// Load all the gameobjects into entity vector
 		void LoadGameObjects(std::vector<Entity*>& gameObjectsToLoad)
 		{
+			std::ifstream file(SAVE_LOCATION, std::ifstream::in);
+			json f;
+
+			// Handle any exceptions
+			try
+			{
+				file >> f;
+			}
+			catch (json::exception& e)
+			{
+				std::cout << e.what() << std::endl;
+			}
+			if (f == nlohmann::detail::value_t::null)
+			{
+				std::cout << "Error loading "<<SAVE_LOCATION<<".json, save file may be corrupted." << std::endl;
+				return;
+			}
+			for (json header : f)
+			{
+				for (json header2 : header)
+				{
+					Entity* gameObject = new Entity();
+					for (json jGO : header2)
+					{
+						// Check for INFO Field
+						if (jGO.contains("ID"))
+						{
+							gameObject->SetID(jGO.at("ID"));
+							gameObject->name = jGO.at("Name");
+						}
+						// Check for Transform Field
+						if (jGO.contains("Transform"))
+						{
+							Transform* transform = new Transform();
+							transform->Enabled = jGO.at("Transform").at("Enabled");
+							transform->Position.x = jGO.at("Transform").at("Position")[0];
+							transform->Position.y = jGO.at("Transform").at("Position")[1];
+							transform->Position.z = jGO.at("Transform").at("Position")[2];
+							transform->Rotation.w = jGO.at("Transform").at("Rotation")[0];
+							transform->Rotation.x = jGO.at("Transform").at("Rotation")[1];
+							transform->Rotation.y = jGO.at("Transform").at("Rotation")[2];
+							transform->Rotation.z = jGO.at("Transform").at("Rotation")[3];
+							transform->Scale.x = jGO.at("Transform").at("Scale")[0];
+							transform->Scale.y = jGO.at("Transform").at("Scale")[1];
+							transform->Scale.z = jGO.at("Transform").at("Scale")[2];
+							gameObject->AddComponent(transform);
+						}
+						// Check for MeshRenderer Field
+						if (jGO.contains("MeshRenderer"))
+						{
+							MeshRenderer* meshRenderer = new MeshRenderer();
+							meshRenderer->Enabled = jGO.at("MeshRenderer").at("Enabled");
+							meshRenderer->Mesh = jGO.at("MeshRenderer").at("Mesh");
+							meshRenderer->Path = jGO.at("MeshRenderer").at("Path");
+							meshRenderer->MaterialPath = jGO.at("MeshRenderer").at("MaterialPath");
+							// Check if there is a material to get aswell
+							Material* material = new Material();
+							if (meshRenderer->MaterialPath != "")
+							{
+								LoadMaterial(material, meshRenderer->MaterialPath);
+								meshRenderer->material = material;
+							}
+							gameObject->AddComponent(meshRenderer);
+						}
+						// Check for Light field
+						//tba
+					}
+					gameObjectsToLoad.push_back(gameObject);
+				}
+			}
+		}
+		// Load a material from the given path
+		void LoadMaterial(Material* materialToLoad, std::string path)
+		{
+			std::ifstream file(path, std::ifstream::in);
+			json jMaterial;
+
+			// Handle any exceptions
+			try
+			{
+				file >> jMaterial;
+			}
+			catch (json::exception& e)
+			{
+				std::cout << e.what() << std::endl;
+			}
+			if (jMaterial == nlohmann::detail::value_t::null)
+			{
+				std::cout << "Error loading "<<path<<".json, save file may be corrupted." << std::endl;
+				return;
+			}
+			// Load in the material
+			materialToLoad->RGBA.x = jMaterial.at("RGBA")[0];
+			materialToLoad->RGBA.y = jMaterial.at("RGBA")[1];
+			materialToLoad->RGBA.z = jMaterial.at("RGBA")[2];
+			materialToLoad->RGBA.w = jMaterial.at("RGBA")[3];
+			materialToLoad->SPEC.x = jMaterial.at("SPEC")[0];
+			materialToLoad->SPEC.y = jMaterial.at("SPEC")[1];
+			materialToLoad->SPEC.z = jMaterial.at("SPEC")[2];
+			materialToLoad->SPEC.w = jMaterial.at("SPEC")[3];
+			materialToLoad->bUseLight = jMaterial.at("bUseLight");
+			materialToLoad->bUseRGBA = jMaterial.at("bUseRGBA");
+			materialToLoad->bVisible = jMaterial.at("bVisible");
+			materialToLoad->bWireframe = jMaterial.at("bWireframe");
+			materialToLoad->Textures[0] = jMaterial.at("Textures")[0];
+			materialToLoad->Textures[1] = jMaterial.at("Textures")[1];
+			materialToLoad->Textures[2] = jMaterial.at("Textures")[2];
+			materialToLoad->Textures[3] = jMaterial.at("Textures")[3];
+			materialToLoad->Textures[4] = jMaterial.at("Textures")[4];
+			materialToLoad->Textures[5] = jMaterial.at("Textures")[5];
+			materialToLoad->Textures[6] = jMaterial.at("Textures")[6];
+			materialToLoad->Textures[7] = jMaterial.at("Textures")[7];
+			materialToLoad->TextureRatios[0] = jMaterial.at("TextureRatios")[0];
+			materialToLoad->TextureRatios[1] = jMaterial.at("TextureRatios")[1];
+			materialToLoad->TextureRatios[2] = jMaterial.at("TextureRatios")[2];
+			materialToLoad->TextureRatios[3] = jMaterial.at("TextureRatios")[3];
+			materialToLoad->TextureRatios[4] = jMaterial.at("TextureRatios")[4];
+			materialToLoad->TextureRatios[5] = jMaterial.at("TextureRatios")[5];
+			materialToLoad->TextureRatios[6] = jMaterial.at("TextureRatios")[6];
+			materialToLoad->TextureRatios[7] = jMaterial.at("TextureRatios")[7];
 		}
 }
 }

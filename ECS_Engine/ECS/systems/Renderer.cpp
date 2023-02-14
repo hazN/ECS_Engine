@@ -119,11 +119,13 @@ namespace sas
 					openGLShader->UploadUniformFloat("bIsFlameObject", 0);
 					openGLShader->UploadUniformFloat("bUseDiscardTexture", 0);
 
+					Transform* entityTransform = entity->GetComponentByType<Transform>();
+
 					glm::mat4 matTranslation = glm::translate(glm::mat4(1.0f),
-						entity->transform.Position);
-					glm::mat4 matQRotation = glm::mat4(entity->transform.Rotation);
+						entityTransform->Position);
+					glm::mat4 matQRotation = glm::mat4(entityTransform->Rotation);
 					glm::mat4 matScale = glm::scale(glm::mat4(1.0f),
-						entity->transform.Scale);
+						entityTransform->Scale);
 
 					matModel = matModel * matTranslation;
 					matModel = matModel * matQRotation;

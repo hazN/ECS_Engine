@@ -71,7 +71,7 @@ namespace sas
 		}
 
 		inline std::vector<Component*> GetAllComponents() const { return m_Components; }
-
+		inline void SetID(int id) { m_ID = id; };
 	private:
 		unsigned int m_ID;
 		std::vector<Component*> m_Components;

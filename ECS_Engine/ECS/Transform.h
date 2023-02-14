@@ -4,7 +4,7 @@
 
 namespace sas
 {
-	class Transform
+	class Transform : public Component
 	{
 	public:
 		bool Enabled;

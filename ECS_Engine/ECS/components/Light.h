@@ -5,7 +5,7 @@ namespace sas
 {
 	enum LightType { Point, Spot, Directional };
 	
-	class Light 
+	class Light : public Component
 	{
 	public:
 		bool Enabled;

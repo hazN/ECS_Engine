@@ -6,8 +6,6 @@ namespace sas
 	{
 	public: 
 		virtual ~Component() {}
-
-
 	protected:
 		Component() {}
 	};
