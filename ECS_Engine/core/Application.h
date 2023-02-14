@@ -8,6 +8,7 @@
 #include "Window.h"
 #include <Events/ApplicationEvent.h>
 #include "../ECS/systems/Renderer.h"
+#include "../ECS/systems/Movement.h"
 
 
 namespace sas {
@@ -28,8 +29,11 @@ namespace sas {
 
 		std::unique_ptr<Window> m_Window;
 		Systems::Renderer m_Renderer;
-		std::vector<Entity*>* entities;
+		std::vector<Entity*>* m_Entities;
 		bool m_Running = true;
+
+		// temporary control script
+		Systems::Movement m_MovmentScript;
 
 		float m_LastFrameTime = 0.f;
 

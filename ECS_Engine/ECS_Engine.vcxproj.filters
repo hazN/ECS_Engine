@@ -19,6 +19,7 @@
     <ClCompile Include="core\OpenGL\OpenGLRendererAPI.cpp" />
     <ClCompile Include="core\Renderer\RenderCommand.cpp" />
     <ClCompile Include="ECS\components\MeshRenderer.cpp" />
+    <ClCompile Include="ECS\systems\Movement.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="core\Application.h" />
@@ -54,6 +55,7 @@
     <ClInclude Include="core\OpenGL\OpenGLRendererAPI.h" />
     <ClInclude Include="core\Renderer\RenderCommand.h" />
     <ClInclude Include="ECS\EntityManager.h" />
+    <ClInclude Include="ECS\systems\Movement.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="savedata">

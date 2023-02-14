@@ -28,7 +28,7 @@ namespace sas
 			static Entity* EDITOR_CAMERA;
 			bool mouseHoldDown = false;
 			bool mouseClicked = false; 
-			glm::vec3 cameraFront = glm::vec3(0.0f, 0.0f, -1.0f);
+			glm::vec3 cameraFront = glm::vec3(0.0f, 0.0f, 1.0f);
 			glm::vec3 cameraUp = glm::vec3(0.0f, 1.0f, 0.0f);
 			glm::vec3 WorldUp = glm::vec3(0.0f, 1.0f, 0.0f);
 			glm::vec3 cameraRight = glm::vec3(0.0f, 0.0f, 0.0f);

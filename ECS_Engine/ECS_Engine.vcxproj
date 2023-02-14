@@ -103,6 +103,7 @@
     <ClCompile Include="core\Windows\WindowsInput.cpp" />
     <ClCompile Include="core\Windows\WindowsWindow.cpp" />
     <ClCompile Include="ECS\components\MeshRenderer.cpp" />
+    <ClCompile Include="ECS\systems\Movement.cpp" />
     <ClCompile Include="ECS\systems\Renderer.cpp" />
     <ClCompile Include="glad.c" />
     <ClCompile Include="main.cpp" />
@@ -137,6 +138,7 @@
     <ClInclude Include="ECS\components\MeshRenderer.h" />
     <ClInclude Include="ECS\EntityManager.h" />
     <ClInclude Include="ECS\System.h" />
+    <ClInclude Include="ECS\systems\Movement.h" />
     <ClInclude Include="ECS\systems\Renderer.h" />
     <ClInclude Include="ECS\Transform.h" />
     <ClInclude Include="savedata\JSONPersitence.h" />

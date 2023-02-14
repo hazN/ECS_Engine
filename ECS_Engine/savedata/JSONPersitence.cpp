@@ -107,9 +107,9 @@ namespace sas {
 				jGameObject.push_back(json{ {"ID", go->GetID()}, {"Name", go->name } });
 
 				// Check if it has a Transform component
-				if (go->HasComponent<Transform>())
+				// Transform block
 				{
-					Transform* goTransform = go->GetComponentByType<Transform>();
+					Transform* goTransform = &go->transform;
 					json jTransform = json{ {"Enabled", goTransform->Enabled},
 						{"Position", json::array({goTransform->Position.x, goTransform->Position.y, goTransform->Position.z})},
 						{"Rotation", json::array({goTransform->Rotation.w, goTransform->Rotation.x, goTransform->Rotation.y, goTransform->Rotation.z})},
@@ -195,19 +195,17 @@ namespace sas {
 						// Check for Transform Field
 						if (jGO.contains("Transform"))
 						{
-							Transform* transform = new Transform();
-							transform->Enabled = jGO.at("Transform").at("Enabled");
-							transform->Position.x = jGO.at("Transform").at("Position")[0];
-							transform->Position.y = jGO.at("Transform").at("Position")[1];
-							transform->Position.z = jGO.at("Transform").at("Position")[2];
-							transform->Rotation.w = jGO.at("Transform").at("Rotation")[0];
-							transform->Rotation.x = jGO.at("Transform").at("Rotation")[1];
-							transform->Rotation.y = jGO.at("Transform").at("Rotation")[2];
-							transform->Rotation.z = jGO.at("Transform").at("Rotation")[3];
-							transform->Scale.x = jGO.at("Transform").at("Scale")[0];
-							transform->Scale.y = jGO.at("Transform").at("Scale")[1];
-							transform->Scale.z = jGO.at("Transform").at("Scale")[2];
-							gameObject->AddComponent(transform);
+							gameObject->transform.Enabled = jGO.at("Transform").at("Enabled");
+							gameObject->transform.Position.x = jGO.at("Transform").at("Position")[0];
+							gameObject->transform.Position.y = jGO.at("Transform").at("Position")[1];
+							gameObject->transform.Position.z = jGO.at("Transform").at("Position")[2];
+							gameObject->transform.Rotation.w = jGO.at("Transform").at("Rotation")[0];
+							gameObject->transform.Rotation.x = jGO.at("Transform").at("Rotation")[1];
+							gameObject->transform.Rotation.y = jGO.at("Transform").at("Rotation")[2];
+							gameObject->transform.Rotation.z = jGO.at("Transform").at("Rotation")[3];
+							gameObject->transform.Scale.x = jGO.at("Transform").at("Scale")[0];
+							gameObject->transform.Scale.y = jGO.at("Transform").at("Scale")[1];
+							gameObject->transform.Scale.z = jGO.at("Transform").at("Scale")[2];
 						}
 						// Check for MeshRenderer Field
 						if (jGO.contains("MeshRenderer"))

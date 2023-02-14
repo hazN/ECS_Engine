@@ -119,13 +119,13 @@ namespace sas
 					openGLShader->UploadUniformFloat("bIsFlameObject", 0);
 					openGLShader->UploadUniformFloat("bUseDiscardTexture", 0);
 
-					Transform* entityTransform = entity->GetComponentByType<Transform>();
+					Transform entityTransform = entity->transform;
 
 					glm::mat4 matTranslation = glm::translate(glm::mat4(1.0f),
-						entityTransform->Position);
-					glm::mat4 matQRotation = glm::mat4(entityTransform->Rotation);
+						entityTransform.Position);
+					glm::mat4 matQRotation = glm::mat4(entityTransform.Rotation);
 					glm::mat4 matScale = glm::scale(glm::mat4(1.0f),
-						entityTransform->Scale);
+						entityTransform.Scale);
 
 					matModel = matModel * matTranslation;
 					matModel = matModel * matQRotation;
@@ -159,6 +159,13 @@ namespace sas
 					RenderCommand::DrawIndexed(drawInfo);
 
 					// Unbind everything later
+					/*if (entity->name == "FemaleKnight")
+					{
+						std::cout << "Position: " << entity->transform.Position.x << ", "
+							<< entity->transform.Position.y << ", "
+							<< entity->transform.Position.z << std::endl;
+						break;
+					}*/
 				}
 			}
 

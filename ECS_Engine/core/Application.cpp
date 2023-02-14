@@ -21,7 +21,7 @@ namespace sas {
 		m_Window = std::unique_ptr<Window>(Window::Create());
 		m_Window->SetEventCallback(VEL_BIND_EVENT_FN(Application::OnEvent));
 
-		entities = new std::vector<Entity*>();
+		m_Entities = new std::vector<Entity*>();
 		//{
 		//	{
 		//		Entity* entity = new Entity();
@@ -81,10 +81,11 @@ namespace sas {
 		//}
 
 		// Loading data straight from the JSON file now
-		sas::persistence::LoadGameObjects(*entities);
+		sas::persistence::LoadGameObjects(*m_Entities);
 		std::string vertex = "assets/shaders/vertexShader03.glsl";
 		std::string fragment = "assets/shaders/fragmentShader03.glsl";
-		m_Renderer.Init(entities, vertex, fragment);
+		m_Renderer.Init(m_Entities, vertex, fragment);
+		m_MovmentScript.Init(m_Entities);
 		//m_Window->SetVSync(false);
 	}
 
@@ -109,10 +110,12 @@ namespace sas {
 			float time = (float)glfwGetTime();
 			Timestep timestep = time - m_LastFrameTime;
 			m_LastFrameTime = time;
-			m_Renderer.Process(entities, timestep);
+			m_Renderer.Process(m_Entities, timestep);
+			m_MovmentScript.Process(m_Entities, timestep);
 			if (Input::IsKeyPressed(KeyCode::Escape))
 			{
-				m_Running = false;
+				std::cout << "Saving objects" << std::endl;
+				sas::persistence::SaveGameObjects(*m_Entities);
 			}
 
 			m_Window->OnUpdate();
