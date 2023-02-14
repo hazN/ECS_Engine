@@ -3,92 +3,9 @@
 namespace sas {
 	namespace persistence
 	{
-
-		// Loads data from modelData file into provided cMeshObject pointer vector
-		//void LoadModels(std::vector<cMeshObject*>& modelsToLoad)
-		//{
-		//	std::ifstream file("./savedata/modelData.json", std::ifstream::in);
-		//	json f;
-
-		//	// Handle any exceptions
-		//	try
-		//	{
-		//		file >> f;
-		//	}
-		//	catch (json::exception& e)
-		//	{
-		//		std::cout << e.what() << std::endl;
-		//	}
-		//	if (f == nlohmann::detail::value_t::null)
-		//	{
-		//		std::cout << "Error loading modelData.json, save file may be corrupted." << std::endl;
-		//		return;
-		//	}
-		//	for (json header : f)
-		//	{
-
-		//		for (json m : header)
-		//		{
-		//			cMeshObject* model = new cMeshObject();
-		//			model->id = m.at("id");
-		//			model->meshName = m.at("meshName");
-		//			model->friendlyName = m.at("friendlyName");
-		//			model->position.x = m.at("position")[0];
-		//			model->position.y = m.at("position")[1];
-		//			model->position.z = m.at("position")[2];
-		//			model->qRotation.w = m.at("qRotation")[0];
-		//			model->qRotation.x = m.at("qRotation")[1];
-		//			model->qRotation.y = m.at("qRotation")[2];
-		//			model->qRotation.z = m.at("qRotation")[3];
-		//			model->scaleXYZ.x = m.at("scaleXYZ")[0];
-		//			model->scaleXYZ.y = m.at("scaleXYZ")[1];
-		//			model->scaleXYZ.z = m.at("scaleXYZ")[2];
-		//			model->isWireframe = m.at("isWireframe");
-		//			model->bUse_RGBA_colour = m.at("bUse_RGBA_colour");
-		//			model->RGBA_colour.x = m.at("RGBA_colour")[0];
-		//			model->RGBA_colour.y = m.at("RGBA_colour")[1];
-		//			model->RGBA_colour.z = m.at("RGBA_colour")[2];
-		//			model->RGBA_colour.w = m.at("RGBA_colour")[3];
-		//			model->specular_colour_and_power.x = m.at("specular_colour_and_power")[0];
-		//			model->specular_colour_and_power.y = m.at("specular_colour_and_power")[1];
-		//			model->specular_colour_and_power.z = m.at("specular_colour_and_power")[2];
-		//			model->specular_colour_and_power.w = m.at("specular_colour_and_power")[3];
-		//			model->bDoNotLight = m.at("bDoNotLight");
-		//			model->bIsVisible = m.at("bIsVisible");
-		//			model->textures[0] = m.at("textures")[0];
-		//			model->textures[1] = m.at("textures")[1];
-		//			model->textures[2] = m.at("textures")[2];
-		//			model->textures[3] = m.at("textures")[3];
-		//			model->textures[4] = m.at("textures")[4];
-		//			model->textures[5] = m.at("textures")[5];
-		//			model->textures[6] = m.at("textures")[6];
-		//			model->textures[7] = m.at("textures")[7];
-		//			model->textureRatios[0] = m.at("textureRatios")[0];
-		//			model->textureRatios[1] = m.at("textureRatios")[1];
-		//			model->textureRatios[2] = m.at("textureRatios")[2];
-		//			model->textureRatios[3] = m.at("textureRatios")[3];
-		//			model->textureRatios[4] = m.at("textureRatios")[4];
-		//			model->textureRatios[5] = m.at("textureRatios")[5];
-		//			model->textureRatios[6] = m.at("textureRatios")[6];
-		//			model->textureRatios[7] = m.at("textureRatios")[7];
-		//			// Check if it already exists in the system and replace if it does
-		//			// If it doesn't then add it to the vector
-		//			bool replaced = false;
-		//			for (int i = 0; i < modelsToLoad.size(); i++)
-		//			{
-		//				if (modelsToLoad[i]->friendlyName == model->friendlyName)
-		//				{
-		//					modelsToLoad[i] = model;
-		//					replaced = true;
-		//				}
-		//			}
-		//			if (!replaced)
-		//				modelsToLoad.push_back(model);
-		//		}
-		//	}
-		//	file.close();
-		//}
-		// Save all game objects from entity vector
+		// Method : SaveEntities
+		// Summary: Saves entities in JSON format to SAVE_LOCATION
+		// Accepts: vector<Entity*> 
 		void SaveEntities(std::vector<Entity*> entitiesToSave)
 		{
 			// Open file
@@ -159,7 +76,10 @@ namespace sas {
 			saveFile << gameObjects;
 			saveFile.close();
 		}
-		// Load all the gameobjects into entity vector
+		
+		// Method : LoadEntities
+		// Summary: Loads entities from JSON to given vector
+		// Accepts: vector<Entity*>&
 		void LoadEntities(std::vector<Entity*>& entitiesToLoad)
 		{
 			std::ifstream file(SAVE_LOCATION, std::ifstream::in);
@@ -231,7 +151,10 @@ namespace sas {
 				}
 			}
 		}
+
+		// LoadMaterial
 		// Load a material from the given path
+		// Accepts: Material*, String
 		void LoadMaterial(Material* materialToLoad, std::string path)
 		{
 			std::ifstream file(path, std::ifstream::in);

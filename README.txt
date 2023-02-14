@@ -1,0 +1,19 @@
+INFO-6024 Sprint #1
+
+Group Members:
+Hassan Assaf : 0929917
+Siraphong Chinsaengchai : 1103475
+Krupesh Parmar : 1124374
+
+Github Repository: https://github.com/hazN/ECS_Engine
+UML Diagram: Open UMLDiagram.txt for the link as it's too long to make a shortcut for.
+
+Build and run as normal.
+
+Controls:
+CTRL-S -> Save
+WASD -> Camera Movement
+ARROW KEYS -> Entity Movement
+
+Entity save data is located at savedata/entityData.json
+Materials are saved at assets/materials/...
