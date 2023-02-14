@@ -45,16 +45,6 @@ namespace sas
 				{
 					controlEntity = entity;
 				}
-				/*if (entity->name == "Ground")
-				{
-					entity->transform.Rotation = glm::quat(glm::vec3(-1.57f, 0.f, 0.f));
-					std::cout << "New Rotation for Ground:" << std::endl;
-					std::cout << "\t{ " 
-						<< entity->transform.Rotation.w << ","
-						<< entity->transform.Rotation.x << ","
-						<< entity->transform.Rotation.y << ","
-						<< entity->transform.Rotation.z << " ]" << std::endl;
-				}*/
 			}
 		}
 	}

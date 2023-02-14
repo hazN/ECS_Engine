@@ -76,18 +76,18 @@ namespace sas
 				it != entityList->end();
 				it++)
 			{
-				{	//.................TEMPORARY.................\\
+				//{	//.................TEMPORARY.................\\
 
-					GLFWwindow* m_Window = (GLFWwindow*)Application::Get().GetWindow().GetNativeWindow();
-					std::stringstream title;
-					title << "CAMERA: " << EDITOR_CAMERA->transform.Position.x << ", "
-						<< EDITOR_CAMERA->transform.Position.y << ", "
-						<< EDITOR_CAMERA->transform.Position.z;
-					glfwSetWindowTitle(m_Window, title.str().c_str());
+				//	GLFWwindow* m_Window = (GLFWwindow*)Application::Get().GetWindow().GetNativeWindow();
+				//	std::stringstream title;
+				//	title << "CAMERA: " << EDITOR_CAMERA->transform.Position.x << ", "
+				//		<< EDITOR_CAMERA->transform.Position.y << ", "
+				//		<< EDITOR_CAMERA->transform.Position.z;
+				//	glfwSetWindowTitle(m_Window, title.str().c_str());
 
-					//...........................................\\
+				//	//...........................................\\
 
-				}
+				//}
 				Entity* entity = *it;
 				if (entity->HasComponent<MeshRenderer>())
 				{
@@ -159,13 +159,6 @@ namespace sas
 					RenderCommand::DrawIndexed(drawInfo);
 
 					// Unbind everything later
-					/*if (entity->name == "FemaleKnight")
-					{
-						std::cout << "Position: " << entity->transform.Position.x << ", "
-							<< entity->transform.Position.y << ", "
-							<< entity->transform.Position.z << std::endl;
-						break;
-					}*/
 				}
 			}
 

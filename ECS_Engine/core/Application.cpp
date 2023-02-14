@@ -81,7 +81,7 @@ namespace sas {
 		//}
 
 		// Loading data straight from the JSON file now
-		sas::persistence::LoadGameObjects(*m_Entities);
+		sas::persistence::LoadEntities(*m_Entities);
 		std::string vertex = "assets/shaders/vertexShader03.glsl";
 		std::string fragment = "assets/shaders/fragmentShader03.glsl";
 		m_Renderer.Init(m_Entities, vertex, fragment);
@@ -115,7 +115,7 @@ namespace sas {
 			if (Input::IsKeyPressed(KeyCode::Escape))
 			{
 				std::cout << "Saving objects" << std::endl;
-				sas::persistence::SaveGameObjects(*m_Entities);
+				sas::persistence::SaveEntities(*m_Entities);
 			}
 
 			m_Window->OnUpdate();

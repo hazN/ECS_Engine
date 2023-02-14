@@ -89,7 +89,7 @@ namespace sas {
 		//	file.close();
 		//}
 		// Save all game objects from entity vector
-		void SaveGameObjects(std::vector<Entity*> gameObjectsToSave)
+		void SaveEntities(std::vector<Entity*> entitiesToSave)
 		{
 			// Open file
 			std::ofstream saveFile;
@@ -98,13 +98,13 @@ namespace sas {
 			// Parent JSON Object
 			json gameObjects;
 			// Loop through each gameObject inside the entity vector
-			for (Entity* go : gameObjectsToSave)
+			for (Entity* go : entitiesToSave)
 			{
 				// GameObject JSON object that will be later added to the parent
-				json jGameObject;
+				json jEntity;
 
 				// Save basic gameObject info such as id, name, more can be added later
-				jGameObject.push_back(json{ {"ID", go->GetID()}, {"Name", go->name } });
+				jEntity.push_back(json{ {"ID", go->GetID()}, {"Name", go->name } });
 
 				// Check if it has a Transform component
 				// Transform block
@@ -115,7 +115,7 @@ namespace sas {
 						{"Rotation", json::array({goTransform->Rotation.w, goTransform->Rotation.x, goTransform->Rotation.y, goTransform->Rotation.z})},
 						{"Scale", json::array({goTransform->Scale.x, goTransform->Scale.y, goTransform->Scale.z})}
 				};
-					jGameObject.push_back(json{ {"Transform", jTransform} });
+					jEntity.push_back(json{ {"Transform", jTransform} });
 				}
 				// Check if it has a Mesh component
 				if (go->HasComponent<MeshRenderer>())
@@ -124,7 +124,7 @@ namespace sas {
 					json jMesh = json{ {"Enabled", goMesh->Enabled},
 						{"Mesh", goMesh->Mesh}, {"Path", goMesh->Path }, {"MaterialPath", goMesh->MaterialPath}
 					};
-					jGameObject.push_back(json{ { "MeshRenderer", jMesh } });
+					jEntity.push_back(json{ { "MeshRenderer", jMesh } });
 					if (goMesh->MaterialPath != "")
 					{
 						std::ofstream Material;
@@ -152,15 +152,15 @@ namespace sas {
 						{"Attenuation", json::array({goLight->Attenuation.x, goLight->Attenuation.y, goLight->Attenuation.z, goLight->Attenuation.w })},
 						{"OuterAngle", goLight->OuterAngle}, {"InnerAngle", goLight->InnerAngle}
 				};
-					jGameObject.push_back(json{ {"Light", jLight} });
+					jEntity.push_back(json{ {"Light", jLight} });
 				}
-				gameObjects.push_back(json{ { go->name, jGameObject} });
+				gameObjects.push_back(json{ { go->name, jEntity} });
 			}
 			saveFile << gameObjects;
 			saveFile.close();
 		}
 		// Load all the gameobjects into entity vector
-		void LoadGameObjects(std::vector<Entity*>& gameObjectsToLoad)
+		void LoadEntities(std::vector<Entity*>& entitiesToLoad)
 		{
 			std::ifstream file(SAVE_LOCATION, std::ifstream::in);
 			json f;
@@ -183,29 +183,29 @@ namespace sas {
 			{
 				for (json header2 : header)
 				{
-					Entity* gameObject = new Entity();
+					Entity* entity = new Entity();
 					for (json jGO : header2)
 					{
 						// Check for INFO Field
 						if (jGO.contains("ID"))
 						{
-							gameObject->SetID(jGO.at("ID"));
-							gameObject->name = jGO.at("Name");
+							entity->SetID(jGO.at("ID"));
+							entity->name = jGO.at("Name");
 						}
 						// Check for Transform Field
 						if (jGO.contains("Transform"))
 						{
-							gameObject->transform.Enabled = jGO.at("Transform").at("Enabled");
-							gameObject->transform.Position.x = jGO.at("Transform").at("Position")[0];
-							gameObject->transform.Position.y = jGO.at("Transform").at("Position")[1];
-							gameObject->transform.Position.z = jGO.at("Transform").at("Position")[2];
-							gameObject->transform.Rotation.w = jGO.at("Transform").at("Rotation")[0];
-							gameObject->transform.Rotation.x = jGO.at("Transform").at("Rotation")[1];
-							gameObject->transform.Rotation.y = jGO.at("Transform").at("Rotation")[2];
-							gameObject->transform.Rotation.z = jGO.at("Transform").at("Rotation")[3];
-							gameObject->transform.Scale.x = jGO.at("Transform").at("Scale")[0];
-							gameObject->transform.Scale.y = jGO.at("Transform").at("Scale")[1];
-							gameObject->transform.Scale.z = jGO.at("Transform").at("Scale")[2];
+							entity->transform.Enabled = jGO.at("Transform").at("Enabled");
+							entity->transform.Position.x = jGO.at("Transform").at("Position")[0];
+							entity->transform.Position.y = jGO.at("Transform").at("Position")[1];
+							entity->transform.Position.z = jGO.at("Transform").at("Position")[2];
+							entity->transform.Rotation.w = jGO.at("Transform").at("Rotation")[0];
+							entity->transform.Rotation.x = jGO.at("Transform").at("Rotation")[1];
+							entity->transform.Rotation.y = jGO.at("Transform").at("Rotation")[2];
+							entity->transform.Rotation.z = jGO.at("Transform").at("Rotation")[3];
+							entity->transform.Scale.x = jGO.at("Transform").at("Scale")[0];
+							entity->transform.Scale.y = jGO.at("Transform").at("Scale")[1];
+							entity->transform.Scale.z = jGO.at("Transform").at("Scale")[2];
 						}
 						// Check for MeshRenderer Field
 						if (jGO.contains("MeshRenderer"))
@@ -222,12 +222,12 @@ namespace sas {
 								LoadMaterial(material, meshRenderer->MaterialPath);
 								meshRenderer->material = material;
 							}
-							gameObject->AddComponent(meshRenderer);
+							entity->AddComponent(meshRenderer);
 						}
 						// Check for Light field
 						//tba
 					}
-					gameObjectsToLoad.push_back(gameObject);
+					entitiesToLoad.push_back(entity);
 				}
 			}
 		}
