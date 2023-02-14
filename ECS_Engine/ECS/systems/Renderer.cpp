@@ -23,47 +23,52 @@ namespace sas
 		}
 		void Renderer::Process(const std::vector<Entity*>* entityList, float dt)
 		{
-			glm::vec3 defFront = cameraFront;
-
-			float cameraSpeed;
-			if (Input::IsKeyPressed(KeyCode::LeftShift))
-				cameraSpeed = 10.5f * dt;
-			else  cameraSpeed = 2.5f * dt;
-			if (Input::IsKeyPressed(KeyCode::W))
-				EDITOR_CAMERA->transform.Position += cameraSpeed * defFront;
-			if (Input::IsKeyPressed(KeyCode::S))
-				EDITOR_CAMERA->transform.Position -= cameraSpeed * defFront;
-			if (Input::IsKeyPressed(KeyCode::A))
-				EDITOR_CAMERA->transform.Position -= cameraRight * cameraSpeed;
-			if (Input::IsKeyPressed(KeyCode::D))
-				EDITOR_CAMERA->transform.Position += cameraRight * cameraSpeed;
-
-			if (Input::IsKeyPressed(KeyCode::Q))     // Down
+			// TEMPORARY
+			// Free roam mouse
+			// Will be moved to it's own class soon
 			{
-				EDITOR_CAMERA->transform.Position.y -= cameraSpeed;
-			}
-			if (Input::IsKeyPressed(KeyCode::E))      // Up
-			{
-				EDITOR_CAMERA->transform.Position.y += cameraSpeed;
-			}
-			xpos = Input::GetMouseX();
-			ypos = Input::GetMouseY();
+				glm::vec3 defFront = cameraFront;
 
-			if (firstMouse)
-			{
+				float cameraSpeed;
+				if (Input::IsKeyPressed(KeyCode::LeftShift))
+					cameraSpeed = 10.5f * dt;
+				else  cameraSpeed = 2.5f * dt;
+				if (Input::IsKeyPressed(KeyCode::W))
+					EDITOR_CAMERA->transform.Position += cameraSpeed * defFront;
+				if (Input::IsKeyPressed(KeyCode::S))
+					EDITOR_CAMERA->transform.Position -= cameraSpeed * defFront;
+				if (Input::IsKeyPressed(KeyCode::A))
+					EDITOR_CAMERA->transform.Position -= cameraRight * cameraSpeed;
+				if (Input::IsKeyPressed(KeyCode::D))
+					EDITOR_CAMERA->transform.Position += cameraRight * cameraSpeed;
+
+				if (Input::IsKeyPressed(KeyCode::Q))     // Down
+				{
+					EDITOR_CAMERA->transform.Position.y -= cameraSpeed;
+				}
+				if (Input::IsKeyPressed(KeyCode::E))      // Up
+				{
+					EDITOR_CAMERA->transform.Position.y += cameraSpeed;
+				}
+				xpos = Input::GetMouseX();
+				ypos = Input::GetMouseY();
+
+				if (firstMouse)
+				{
+					lastX = xpos;
+					lastY = ypos;
+					firstMouse = false;
+				}
+
+				float xoffset = xpos - lastX;
+				float yoffset = lastY - ypos; // reversed since y-coordinates go from bottom to top
+
 				lastX = xpos;
 				lastY = ypos;
-				firstMouse = false;
-			}
-
-			float xoffset = xpos - lastX;
-			float yoffset = lastY - ypos; // reversed since y-coordinates go from bottom to top
-
-			lastX = xpos;
-			lastY = ypos;
-			if (Input::IsMouseButtonPressed(MouseButton::Button1))
-			{
-				ProcessMouseMovement(xoffset, yoffset);
+				if (Input::IsMouseButtonPressed(MouseButton::Button1))
+				{
+					ProcessMouseMovement(xoffset, yoffset);
+				}
 			}
 			int width = Application::Get().GetWindow().GetWidth();
 			int height = Application::Get().GetWindow().GetHeight();
@@ -76,18 +81,6 @@ namespace sas
 				it != entityList->end();
 				it++)
 			{
-				//{	//.................TEMPORARY.................\\
-
-				//	GLFWwindow* m_Window = (GLFWwindow*)Application::Get().GetWindow().GetNativeWindow();
-				//	std::stringstream title;
-				//	title << "CAMERA: " << EDITOR_CAMERA->transform.Position.x << ", "
-				//		<< EDITOR_CAMERA->transform.Position.y << ", "
-				//		<< EDITOR_CAMERA->transform.Position.z;
-				//	glfwSetWindowTitle(m_Window, title.str().c_str());
-
-				//	//...........................................\\
-
-				//}
 				Entity* entity = *it;
 				if (entity->HasComponent<MeshRenderer>())
 				{

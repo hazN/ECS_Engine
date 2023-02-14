@@ -2,6 +2,8 @@
 
 namespace sas
 {
+	// Graphics context
+	// Parent class
 	class GraphicsContext
 	{
 	public:

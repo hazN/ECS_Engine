@@ -4,6 +4,7 @@
 
 namespace sas
 {
+	// Vertex Array Manager, OpenGL specific
 	class OpenGLVertexArray : public VertexArray
 	{
 	public:
@@ -16,6 +17,8 @@ namespace sas
 		virtual bool LoadPlyFiles(std::string filename, sModelDrawInfo& drawinfo) override;
 
 	private:
+		// Store model info with mesh name
+		// TEMPORARY
 		std::map<std::string, sModelDrawInfo> m_Map_Model_to_VAOID;
 	};
 }

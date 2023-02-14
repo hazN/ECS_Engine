@@ -12,18 +12,28 @@
 
 
 namespace sas {
+
+	// Main Application
 	class Application
 	{
 	public:
 		Application();
 		virtual ~Application();
+
+		// Game Loop
 		void Run();
 
+		// Event observer
 		void OnEvent(Event& e);
 
+		// Get Window
 		inline Window& GetWindow() { return *m_Window; }
+
+		// Get singleton instance
 		inline static Application& Get() { return *s_Instance; }
 	private:
+
+		// When a window is closed
 		bool OnWindowClosed(WindowCloseEvent& e);
 	private:
 

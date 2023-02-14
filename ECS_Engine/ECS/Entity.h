@@ -7,6 +7,7 @@
 
 namespace sas
 {
+	// Holds list of components
 	class Entity
 	{
 	public:
@@ -18,6 +19,7 @@ namespace sas
 
 		inline unsigned int GetID() const { return m_ID; }
 
+		// Has <T> component
 		template<class T>
 		bool HasComponent()
 		{
@@ -30,6 +32,7 @@ namespace sas
 			return false;
 		}
 
+		// Get <T> component
 		template<class T>
 		T* GetComponentByType()
 		{
@@ -42,6 +45,7 @@ namespace sas
 			return nullptr;
 		}
 
+		// Add <T> component
 		template<class T>
 		bool AddComponent(T* newComponent)
 		{
@@ -54,6 +58,7 @@ namespace sas
 			return true;
 		}	
 
+		// Remove <T> component
 		template<class T>
 		T* RemoveComponent()
 		{
@@ -70,7 +75,10 @@ namespace sas
 			return nullptr;
 		}
 
+		// Get all the components
 		inline std::vector<Component*> GetAllComponents() const { return m_Components; }
+
+		// Set entity ID
 		inline void SetID(int id) { m_ID = id; };
 	private:
 		unsigned int m_ID;

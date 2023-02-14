@@ -4,6 +4,7 @@
 
 namespace sas
 {
+	// Holds Position, rotation and scale of an entity
 	class Transform : public Component
 	{
 	public:

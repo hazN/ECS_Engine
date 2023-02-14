@@ -3,8 +3,10 @@
 #include <glm/gtx/quaternion.hpp>
 namespace sas
 {
+	// Types of light
 	enum LightType { Point, Spot, Directional };
 	
+	// Light component
 	class Light : public Component
 	{
 	public:

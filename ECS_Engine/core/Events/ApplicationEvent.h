@@ -7,6 +7,8 @@
 
 namespace sas
 {
+	// When the window is resized
+	// Return the new width and height
 	class WindowResizeEvent : public Event
 	{
 	public:
@@ -30,6 +32,7 @@ namespace sas
 		unsigned int m_Width, m_Height;
 	};
 
+	// When the window is closed
 	class WindowCloseEvent : public Event
 	{
 	public:
@@ -47,6 +50,7 @@ namespace sas
 
 	};
 
+	// Not used, TBD
 	class AppTickEvent : public Event
 	{
 	public:
@@ -57,6 +61,7 @@ namespace sas
 
 	};
 
+	// Not used, TBD
 	class AppUpdateEvent : public Event
 	{
 	public:
@@ -67,6 +72,7 @@ namespace sas
 
 	};
 
+	// Not used, TBD
 	class AppRenderEvent : public Event
 	{
 	public:

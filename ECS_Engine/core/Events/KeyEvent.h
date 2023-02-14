@@ -7,6 +7,8 @@
 
 namespace sas
 {
+	// KeyEvents
+	// This will be the parent class to all the Key related events
 	class KeyEvent : public Event
 	{
 	public:
@@ -18,14 +20,17 @@ namespace sas
 		KeyCode m_KeyCode;
 	};
 
+	// When a key is pressed
 	class KeyPressedEvent : public KeyEvent
 	{
 	public:
 		KeyPressedEvent(KeyCode keycode, int repeatCount)
 			: KeyEvent(keycode), m_RepeatCount(repeatCount) {}
 
+		// Get how many times the Key was Repeated
 		inline int GetRepeatCount() const { return m_RepeatCount; }
 
+		// To be used in printing statements
 		std::string ToString() const override
 		{
 			std::stringstream ss;
@@ -39,6 +44,7 @@ namespace sas
 		int m_RepeatCount;
 	};
 
+	// When a key is released
 	class KeyReleasedEvent : public KeyEvent
 	{
 	public:
@@ -55,7 +61,9 @@ namespace sas
 		EVENT_CLASS_TYPE(KeyReleased)
 	};
 
-
+	// When a character is typed
+	// This is different from key pressed as 
+	// it checks the key to be lowerscale or upperscale
 	class KeyTypedEvent : public KeyEvent
 	{
 	public:

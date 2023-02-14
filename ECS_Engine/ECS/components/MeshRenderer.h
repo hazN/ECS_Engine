@@ -6,6 +6,7 @@
 
 namespace sas
 {
+	// Mesh data
 	class MeshRenderer : public Component
 	{
 	public:

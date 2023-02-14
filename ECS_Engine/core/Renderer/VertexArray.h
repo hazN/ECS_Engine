@@ -6,6 +6,7 @@
 
 namespace sas
 {
+	// Stride layout
 	struct sVertex_RGBA_XYZ_N_UV_T_BiN_Bones
 	{
 		float r, g, b, a;		//	in vec4 vColour;			// Was vec3
@@ -18,6 +19,7 @@ namespace sas
 		float vBoneWeight[4];	//	in vec4 vBoneWeight;		// For skinned mesh (FBX)
 	};
 
+	// Drawing information
 	struct sModelDrawInfo
 	{
 		sModelDrawInfo();
@@ -43,13 +45,22 @@ namespace sas
 		glm::vec3 minValues;
 	};
 
+	// Parent Vertex Array
 	class VertexArray
 	{
 	public:
 		virtual ~VertexArray() = default;
+
+		// Load models into API specific Vertex Array
 		virtual bool LoadModelIntoVAO(std::string filename, sModelDrawInfo& drawInfo, unsigned int shaderProgramID) = 0;
+		
+		// Find drawing information using mesh name [TEMPORARY]
 		virtual bool FindDrawInfoByModelName(std::string filename, sModelDrawInfo& drawinfo) = 0;
+		
+		// Read 3D files with .ply extension and store information in drawinfo
 		virtual bool LoadPlyFiles(std::string filename, sModelDrawInfo& drawinfo) = 0;
+
+		// Create API specific vertex array
 		static std::shared_ptr<VertexArray> Create();
 	};
 

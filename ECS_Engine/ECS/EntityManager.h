@@ -3,6 +3,8 @@
 
 namespace sas
 {
+	// Manage all the entities
+	// Still in progress
 	class EntityManager
 	{
 	public:

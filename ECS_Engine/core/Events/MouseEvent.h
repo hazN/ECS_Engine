@@ -9,6 +9,8 @@
 
 namespace sas
 {
+	// When a mouse is moved
+	// It will give the position of the mouse on the screen
 	class MouseMovedEvent : public Event
 	{
 	public:
@@ -26,12 +28,14 @@ namespace sas
 		}
 
 		EVENT_CLASS_TYPE(MouseMoved)
-			EVENT_CLASS_CATEGORY(EventCategoryMouse | EventCategoryInput)
+		EVENT_CLASS_CATEGORY(EventCategoryMouse | EventCategoryInput)
 
 	private:
 		float m_MouseX, m_MouseY;
 	};
 
+	// When a mouse is scrolled
+	// It will give the scroll offset
 	class MouseScrolledEvent : public Event
 	{
 	public:
@@ -56,6 +60,7 @@ namespace sas
 		float m_XOffset, m_YOffset;
 	};
 
+	// Parent class for all mouse button related event
 	class MouseButtonEvent : public Event
 	{
 	public:
@@ -69,6 +74,8 @@ namespace sas
 		MouseButton m_Button;
 	};
 
+	// When a mouse button is pressed
+	// Returns the button id
 	class MouseButtonPressedEvent : public MouseButtonEvent
 	{
 	public:
@@ -85,6 +92,8 @@ namespace sas
 		EVENT_CLASS_TYPE(MouseButtonPressed)
 	};
 
+	// When a button is released
+	// Returns the button id
 	class MouseButtonReleasedEvent : public MouseButtonEvent
 	{
 	public:

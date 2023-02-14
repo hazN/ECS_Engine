@@ -2,6 +2,7 @@
 
 namespace sas
 {
+	// hold the time flow of the game
 	class Timestep
 	{
 	public:
@@ -11,9 +12,13 @@ namespace sas
 
 		}
 
+		// Get time in seconds
 		float GetSeconds() const { return m_Time; }
+
+		// Get time in milliseconds
 		float GetMilliseconds() const { return m_Time * 1000.f; }
 
+		// to use the object directly in float's operation
 		operator float() { return m_Time; }
 
 	private:

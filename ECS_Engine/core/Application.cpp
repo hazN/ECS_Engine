@@ -19,7 +19,7 @@ namespace sas {
 		
 		s_Instance = this;
 		m_Window = std::unique_ptr<Window>(Window::Create());
-		m_Window->SetEventCallback(VEL_BIND_EVENT_FN(Application::OnEvent));
+		m_Window->SetEventCallback(SAS_BIND_EVENT_FN(Application::OnEvent));
 
 		m_Entities = new std::vector<Entity*>();
 		//{
@@ -97,7 +97,7 @@ namespace sas {
 	{
 		EventDispatcher dispatcher(e);
 		//std::cout << e << std::endl;
-		if (dispatcher.Dispatch<WindowCloseEvent>(VEL_BIND_EVENT_FN(Application::OnWindowClosed)))
+		if (dispatcher.Dispatch<WindowCloseEvent>(SAS_BIND_EVENT_FN(Application::OnWindowClosed)))
 		{
 			std::cout << "Window Closed called!!";
 		}
@@ -112,7 +112,7 @@ namespace sas {
 			m_LastFrameTime = time;
 			m_Renderer.Process(m_Entities, timestep);
 			m_MovmentScript.Process(m_Entities, timestep);
-			if (Input::IsKeyPressed(KeyCode::Escape))
+			if (Input::IsKeyPressed(KeyCode::S) && Input::IsKeyPressed(KeyCode::LeftControl))
 			{
 				std::cout << "Saving objects" << std::endl;
 				sas::persistence::SaveEntities(*m_Entities);

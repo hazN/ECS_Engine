@@ -1,5 +1,8 @@
 #pragma once
 #include <stdint.h>
+
+// Keycodes
+// Stolen form glfw3
 typedef enum class KeyCode : uint16_t
 {
 	// From glfw3.h

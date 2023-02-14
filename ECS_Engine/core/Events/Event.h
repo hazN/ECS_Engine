@@ -2,8 +2,10 @@
 #include "Core.h"
 #include <string>
 #include <functional>
+
 namespace sas
 {
+	// Types of event we would like to support
 	enum class EventType
 	{
 		None = 0,
@@ -13,6 +15,7 @@ namespace sas
 		MouseButtonPressed, MouseButtonReleased, MouseMoved, MouseScrolled
 	};
 
+	// Event types merged into respective categories
 	enum EventCategory
 	{
 		None = 0,
@@ -24,12 +27,16 @@ namespace sas
 	};
 
 
+	// Hack to save the time in typing
+	// So this all stuff will be needed in all Event class so
+	// to save ourselves some time we created these defines
 #define EVENT_CLASS_TYPE(type) static EventType GetStaticType() { return EventType::##type; } \
 								virtual EventType GetEventType() const override { return GetStaticType(); } \
 								virtual const char* GetName() const override { return #type; }
 
 #define EVENT_CLASS_CATEGORY(category) virtual int GetCategoryFlags() const override { return category; }
 
+	// Event parent class
 	class Event
 	{
 		friend class EventDispatcher;
@@ -46,6 +53,8 @@ namespace sas
 		}
 	};
 
+	// Event dispatcher
+	// calls the binded function when the specific event occurs
 	class EventDispatcher
 	{
 		template<typename T>
@@ -70,6 +79,7 @@ namespace sas
 		Event& m_Event;
 	};
 
+	// To print out events name by just their objects
 	inline std::ostream& operator<<(std::ostream& os, const Event& e)
 	{
 		return os << e.ToString();
