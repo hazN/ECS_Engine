@@ -13,7 +13,7 @@ Build and run as normal.
 
 Controls:
 CTRL-S -> Save
-WASD -> Camera Movement
+WASD + QE -> Camera Movement
 ARROW KEYS -> Entity Movement
 
 Entity save data is located at savedata/entityData.json
