@@ -5,6 +5,7 @@ Hassan Assaf : 0929917
 Siraphong Chinsaengchai : 1103475
 Krupesh Parmar : 1124374
 
+Video Demos(YT Playlist): https://www.youtube.com/playlist?list=PLCEEJiUX54tfTwan0zgzKwE0LPJ22tnDk
 Github Repository: https://github.com/hazN/ECS_Engine
 UML Diagram: Open UMLDiagram.txt for the link as it's too long to make a shortcut for.
 
