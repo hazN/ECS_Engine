@@ -47,12 +47,12 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
     <IncludePath>$(ProjectDir)include;$(ProjectDir)core;$(IncludePath)</IncludePath>
-    <LibraryPath>$(ProjectDir)lib/Debug_x64;$(LibraryPath)</LibraryPath>
+    <LibraryPath>$(ProjectDir)lib\$(Configuration)_$(Platform);$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
     <IncludePath>$(ProjectDir)include;$(ProjectDir)core;$(IncludePath)</IncludePath>
-    <LibraryPath>$(ProjectDir)lib/Release_x64;$(LibraryPath)</LibraryPath>
+    <LibraryPath>$(ProjectDir)lib\$(Configuration)_$(Platform);$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -79,8 +79,9 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>VEL_PLATFORM_WINDOWS;GLFW_INCLUDE_NONE;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile>saspch.h</PrecompiledHeaderFile>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
