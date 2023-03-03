@@ -7,7 +7,7 @@ namespace sas
 	namespace Systems
 	{
 		Movement::Movement()
-			:controlEntity(nullptr), phyic_movement(nullptr)
+			:controlEntity(nullptr), physic_movement(nullptr)
 		{
 		}
 		Movement::~Movement()
@@ -22,22 +22,22 @@ namespace sas
 			float speed = 10.f;
 			if (Input::IsKeyPressed(KeyCode::Up))
 			{
-				phyic_movement->UserForce(Vec3(0.f, 0.f, 1.f));
+				physic_movement->UserForce(Vec3(0.f, 0.f, 1.f));
 				//controlEntity->transform.Position.z += speed * dt;
 			}
 			if (Input::IsKeyPressed(KeyCode::Down))
 			{
-				phyic_movement->UserForce(Vec3(0.f, 0.f, -1.f));
+				physic_movement->UserForce(Vec3(0.f, 0.f, -1.f));
 				//controlEntity->transform.Position.z -= speed * dt;
 			}
 			if (Input::IsKeyPressed(KeyCode::Left))
 			{
-				phyic_movement->UserForce(Vec3(1.f, 0.f, 0.f));
+				physic_movement->UserForce(Vec3(1.f, 0.f, 0.f));
 				//controlEntity->transform.Position.x += speed * dt;
 			}
 			if (Input::IsKeyPressed(KeyCode::Right))
 			{
-				phyic_movement->UserForce(Vec3(-1.f, 0.f, 0.f));
+				physic_movement->UserForce(Vec3(-1.f, 0.f, 0.f));
 				//controlEntity->transform.Position.x -= speed * dt;
 			}
 		}
@@ -50,7 +50,7 @@ namespace sas
 					controlEntity = entity;
 				}
 			}
-			phyic_movement = phy_movement;
+			physic_movement = phy_movement;
 		}
 	}
 }

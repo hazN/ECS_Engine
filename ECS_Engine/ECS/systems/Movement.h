@@ -20,7 +20,7 @@ namespace sas
 			void Init(std::vector<Entity*>* entities, Physic::Physic* phy_movement);
 		private:
 			Entity* controlEntity;
-			Physic::Physic* phyic_movement;
+			Physic::Physic* physic_movement;
 		};
 	}
 }

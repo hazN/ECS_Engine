@@ -104,6 +104,7 @@
     <ClCompile Include="core\Windows\WindowsInput.cpp" />
     <ClCompile Include="core\Windows\WindowsWindow.cpp" />
     <ClCompile Include="ECS\components\MeshRenderer.cpp" />
+    <ClCompile Include="ECS\Physic\CollisionListener.cpp" />
     <ClCompile Include="ECS\Physic\Physic.cpp" />
     <ClCompile Include="ECS\systems\Movement.cpp" />
     <ClCompile Include="ECS\systems\Renderer.cpp" />
@@ -139,6 +140,7 @@
     <ClInclude Include="ECS\components\Light.h" />
     <ClInclude Include="ECS\components\MeshRenderer.h" />
     <ClInclude Include="ECS\EntityManager.h" />
+    <ClInclude Include="ECS\Physic\CollisionListener.h" />
     <ClInclude Include="ECS\Physic\Physic.h" />
     <ClInclude Include="ECS\System.h" />
     <ClInclude Include="ECS\systems\Movement.h" />

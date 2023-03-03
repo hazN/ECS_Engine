@@ -13,7 +13,9 @@ void Physic::Physic::init()
 	Factory = new PhysicFactory();
 	World = Factory->createWorld();
 
+	collisionListener = new CollisionListener();
 	World->setGravity(glm::vec3(0, -9.8f, 0));
+	World->addToCollisionListener(collisionListener);
 }
 
 void Physic::Physic::destroy()

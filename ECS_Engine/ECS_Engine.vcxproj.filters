@@ -21,6 +21,7 @@
     <ClCompile Include="ECS\components\MeshRenderer.cpp" />
     <ClCompile Include="ECS\systems\Movement.cpp" />
     <ClCompile Include="ECS\Physic\Physic.cpp" />
+    <ClCompile Include="ECS\Physic\CollisionListener.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="core\Application.h" />
@@ -58,6 +59,7 @@
     <ClInclude Include="ECS\EntityManager.h" />
     <ClInclude Include="ECS\systems\Movement.h" />
     <ClInclude Include="ECS\Physic\Physic.h" />
+    <ClInclude Include="ECS\Physic\CollisionListener.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="savedata">
