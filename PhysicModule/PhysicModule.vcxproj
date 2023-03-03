@@ -73,10 +73,12 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <IncludePath>$(SolutionDir)ECS_Engine\include;$(SolutionDir)PhysicInterface\src;$(IncludePath)</IncludePath>
     <SourcePath>$(SolutionDir)PhysicInterface\src;$(SourcePath)</SourcePath>
+    <OutDir>$(SolutionDir)ECS_Engine\lib\$(Configuration)_$(Platform)\</OutDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <IncludePath>$(SolutionDir)ECS_Engine\include;$(SolutionDir)PhysicInterface\src;$(IncludePath)</IncludePath>
     <SourcePath>$(SolutionDir)PhysicInterface\src;$(SourcePath)</SourcePath>
+    <OutDir>$(SolutionDir)ECS_Engine\lib\$(Configuration)_$(Platform)\</OutDir>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
