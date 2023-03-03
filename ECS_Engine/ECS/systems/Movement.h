@@ -1,5 +1,6 @@
 #pragma once
 #include "../System.h"
+#include "../Physic/Physic.h"
 
 namespace sas
 {
@@ -16,9 +17,10 @@ namespace sas
 			virtual void Process(const std::vector < Entity* >* entites, float dt) override;
 
 			// Get the object
-			void Init(std::vector<Entity*>* entities);
+			void Init(std::vector<Entity*>* entities, Physic::Physic* phy_movement);
 		private:
 			Entity* controlEntity;
+			Physic::Physic* physic_movement;
 		};
 	}
 }
