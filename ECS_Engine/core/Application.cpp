@@ -116,7 +116,7 @@ namespace sas {
 			m_LastFrameTime = time;
 			m_Renderer.Process(m_Entities, timestep);
 			m_MovmentScript.Process(m_Entities, timestep);
-			//m_Physic->update(timestep);
+			m_Physic->update(timestep);
 			if (Input::IsKeyPressed(KeyCode::S) && Input::IsKeyPressed(KeyCode::LeftControl))
 			{
 				std::cout << "Saving objects" << std::endl;

@@ -64,11 +64,11 @@ void Physic::Physic::createWorldObj(std::vector<sas::Entity*>* entityList)
 		}
 		if (entity->name == "TestCube")
 		{
-			//todo
+			createBox(entity);
 		}
 		if (entity->name == "FemaleKnight")
 		{
-			//todo
+			createAgent(entity);
 		}
 	}
 }
@@ -83,4 +83,33 @@ void Physic::Physic::createPlane(sas::Entity* mGround)
 	groundDesc.velocity = glm::vec3(0.f);
 	mGround->transform.p_physicBody = Factory->createRigidBody(groundDesc, groundShape);
 	World->addBody(mGround->transform.p_physicBody);
+	mGround->bControl = false;
+}
+
+void Physic::Physic::createBox(sas::Entity* box)
+{
+	iShape* boxShape = new iSphereShape(1); //todo -> change to iboxshape
+	iRigidBodyDesc desc;
+	desc.bStatic = false;
+	desc.mass = 1; // todo change mass
+	desc.position = box->transform.Position;
+	desc.velocity = glm::vec3(0.f);
+	box->transform.p_physicBody = Factory->createRigidBody(desc, boxShape);
+	World->addBody(box->transform.p_physicBody);
+	this->entityList.push_back(box);
+	box->bControl = false;
+}
+
+void Physic::Physic::createAgent(sas::Entity* agent)
+{
+	iShape* boxShape = new iSphereShape(1); //todo -> change to iboxshape
+	iRigidBodyDesc desc;
+	desc.bStatic = false;
+	desc.mass = 40; // todo change mass
+	desc.position = agent->transform.Position;
+	desc.velocity = glm::vec3(0.f);
+	agent->transform.p_physicBody = Factory->createRigidBody(desc, boxShape);
+	World->addBody(agent->transform.p_physicBody);
+	this->entityList.push_back(agent);
+	agent->bControl = true;
 }

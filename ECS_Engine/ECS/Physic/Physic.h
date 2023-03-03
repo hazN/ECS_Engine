@@ -25,7 +25,8 @@ namespace Physic
 
 		void createWorldObj(std::vector<sas::Entity*>* entityList);
 		void createPlane(sas::Entity* mGround);
-
+		void createBox(sas::Entity* box);
+		void createAgent(sas::Entity* agent);
 		//void createBall(cMeshObj* mOBJ, float size);
 
 
