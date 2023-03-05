@@ -9,6 +9,7 @@
 #include <Events/ApplicationEvent.h>
 #include "../ECS/systems/Renderer.h"
 #include "../ECS/systems/Movement.h"
+#include "../ECS/Physic/Physic.h"
 
 
 namespace sas {
@@ -46,6 +47,10 @@ namespace sas {
 		Systems::Movement m_MovmentScript;
 
 		float m_LastFrameTime = 0.f;
+
+		//physic factory
+		
+		Physic::Physic* m_Physic;
 
 
 	private:

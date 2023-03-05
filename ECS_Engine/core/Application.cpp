@@ -85,8 +85,12 @@ namespace sas {
 		std::string vertex = "assets/shaders/vertexShader03.glsl";
 		std::string fragment = "assets/shaders/fragmentShader03.glsl";
 		m_Renderer.Init(m_Entities, vertex, fragment);
-		m_MovmentScript.Init(m_Entities);
 		//m_Window->SetVSync(false);
+		//init physic
+		m_Physic = new Physic::Physic();
+		m_Physic->init();
+		m_Physic->createWorldObj(m_Entities);
+		m_MovmentScript.Init(m_Entities, m_Physic);
 	}
 
 	Application::~Application()
@@ -112,6 +116,7 @@ namespace sas {
 			m_LastFrameTime = time;
 			m_Renderer.Process(m_Entities, timestep);
 			m_MovmentScript.Process(m_Entities, timestep);
+			m_Physic->update(timestep);
 			if (Input::IsKeyPressed(KeyCode::S) && Input::IsKeyPressed(KeyCode::LeftControl))
 			{
 				std::cout << "Saving objects" << std::endl;
@@ -125,6 +130,7 @@ namespace sas {
 	bool Application::OnWindowClosed(WindowCloseEvent& e)
 	{
 		m_Running = false;
+		delete m_Physic;
 		return true;
 	}
 
