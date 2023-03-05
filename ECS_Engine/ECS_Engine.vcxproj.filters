@@ -62,4 +62,9 @@
       <UniqueIdentifier>{8346db9e-9079-4dd4-9da2-d2106f9b6a98}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="savedata\entityData.json">
+      <Filter>savedata</Filter>
+    </None>
+  </ItemGroup>
 </Project>

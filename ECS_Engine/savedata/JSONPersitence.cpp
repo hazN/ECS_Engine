@@ -129,7 +129,7 @@ namespace sas {
 						}
 						// Check for MeshRenderer Field
 						if (jGO.contains("MeshRenderer"))
-						{
+						{ 
 							MeshRenderer* meshRenderer = new MeshRenderer();
 							meshRenderer->Enabled = jGO.at("MeshRenderer").at("Enabled");
 							meshRenderer->Mesh = jGO.at("MeshRenderer").at("Mesh");
