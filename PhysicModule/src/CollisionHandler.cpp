@@ -29,7 +29,8 @@ bool CollisionHandler::SphereVsSphere(float dt, RigidBody* body1, iSphereShape* 
 
 	float sphere1_rad = sphere1->getRad();
 	float sphere2_rad = sphere2->getRad();
-	bool bResult = testMovingSphereVsSphere(body1->m_prevPosition, sphere1_rad, body2->m_prevPosition, sphere2_rad, v0, v1, t);
+	bool bResult = testMovingSphereVsSphere(
+		body1->m_prevPosition, sphere1_rad, body2->m_prevPosition, sphere2_rad, v0, v1, t);
 
 	if (!bResult)
 	{
@@ -54,8 +55,13 @@ bool CollisionHandler::SphereVsSphere(float dt, RigidBody* body1, iSphereShape* 
 	Vec3 p2 = body2->m_mass * body2->m_velocity;
 	Vec3 sumP = p1 + p2;
 	float sumMass = body1->m_mass + body2->m_mass;
-	float factorA = body1->m_mass / sumMass;
-	float factorB = body2->m_mass / sumMass;
+
+
+	/// SUS
+	float factorA = body2->m_mass / sumMass;
+	float factorB = body1->m_mass / sumMass;
+	///
+
 	p1 = sumP * factorA;
 	p2 = sumP * factorB;
 
@@ -75,7 +81,7 @@ bool CollisionHandler::SphereVsSphere(float dt, RigidBody* body1, iSphereShape* 
 		}
 		if (!body2->m_bStatic)
 		{
-			body2->m_position -= overlapVec * factorB;
+			body2->m_position += overlapVec * factorB;
 		}
 		//recalculate
 		vec = body2->m_position - body1->m_position;

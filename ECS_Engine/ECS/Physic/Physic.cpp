@@ -92,7 +92,7 @@ iCollision* Physic::Physic::createBox(sas::Entity* box)
 	iShape* boxShape = new iSphereShape(1); //todo -> change to iboxshape
 	iRigidBodyDesc desc;
 	desc.bStatic = false;
-	desc.mass = 1; // todo change mass
+	desc.mass = 20; // todo change mass
 	desc.position = box->transform.Position;
 	desc.velocity = glm::vec3(0.f);
 	iCollision* body = Factory->createRigidBody(desc, boxShape);

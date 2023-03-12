@@ -129,9 +129,7 @@ void RigidBody::verletStep1(float dt)
 	{
 		return;
 	}
-	///   x 0
-	///   000000
-	///// 
+
 	m_prevPosition = m_position;
 	// s = ut + 1/2(at^2)
 	m_position += (m_velocity + (0.5f * m_acceleration * dt)) * dt; 
@@ -139,6 +137,10 @@ void RigidBody::verletStep1(float dt)
 	if (m_position.y < 0.f)
 	{
 		m_position.y = 1.f;
+	}
+	if (m_position.y > 10.f)
+	{
+		m_position.y = 10.f;
 	}
 
 	// theta = omega*t + 1/2(alpha*t^2) angular rotation
