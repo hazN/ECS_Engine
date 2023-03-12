@@ -94,8 +94,13 @@ python compressPNG.py textures</Command>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalDependencies>glfw3.lib;lua5.4.4-static.lib;PhysicInterface.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
+    <PostBuildEvent>
+      <Command>cd assets/textures
+python compressPNG.py textures</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="ECS\components\Agent.cpp" />
     <ClCompile Include="core\Application.cpp" />
     <ClCompile Include="core\OpenGL\OpenGLContext.cpp" />
     <ClCompile Include="core\OpenGL\OpenGLRendererAPI.cpp" />
@@ -107,6 +112,7 @@ python compressPNG.py textures</Command>
     <ClCompile Include="core\Renderer\VertexArray.cpp" />
     <ClCompile Include="core\Windows\WindowsInput.cpp" />
     <ClCompile Include="core\Windows\WindowsWindow.cpp" />
+    <ClCompile Include="ECS\components\AgentController.cpp" />
     <ClCompile Include="ECS\components\MeshRenderer.cpp" />
     <ClCompile Include="ECS\Physic\CollisionListener.cpp" />
     <ClCompile Include="ECS\Physic\Physic.cpp" />
@@ -117,6 +123,7 @@ python compressPNG.py textures</Command>
     <ClCompile Include="savedata\JSONPersitence.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="ECS\components\Agent.h" />
     <ClInclude Include="core\Application.h" />
     <ClInclude Include="core\Core.h" />
     <ClInclude Include="core\Events\ApplicationEvent.h" />
@@ -140,6 +147,7 @@ python compressPNG.py textures</Command>
     <ClInclude Include="core\Windows\WindowsInput.h" />
     <ClInclude Include="core\Windows\WindowsWindow.h" />
     <ClInclude Include="ECS\Component.h" />
+    <ClInclude Include="ECS\components\AgentController.h" />
     <ClInclude Include="ECS\Entity.h" />
     <ClInclude Include="ECS\components\Light.h" />
     <ClInclude Include="ECS\components\MeshRenderer.h" />
@@ -150,6 +158,7 @@ python compressPNG.py textures</Command>
     <ClInclude Include="ECS\systems\Movement.h" />
     <ClInclude Include="ECS\systems\Renderer.h" />
     <ClInclude Include="ECS\Transform.h" />
+    <ClInclude Include="include\glm\quaternion_utils.h" />
     <ClInclude Include="savedata\JSONPersitence.h" />
   </ItemGroup>
   <ItemGroup>
