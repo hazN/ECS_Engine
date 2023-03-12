@@ -17,7 +17,7 @@ namespace sas
 		AgentController() = default;
 		~AgentController() = default;
 
-		std::vector<Agent> agents_;
+		std::vector<Agent*> agents_;
 		Entity* Player;
 		AgentController(Entity* player);
 		void Update(float dt);

@@ -138,10 +138,10 @@ void RigidBody::verletStep1(float dt)
 	{
 		m_position.y = 1.f;
 	}*/
-	/*if (m_position.y > 15.f)
+	if (m_position.y > 35.f)
 	{
-		m_position.y = 15.f;
-	}*/
+		m_position.y = 35.f;
+	}
 
 	// theta = omega*t + 1/2(alpha*t^2) angular rotation
 	Vec3 theta = (m_angularVelocity + (0.5f * m_angularAcceleration * dt)) * dt;

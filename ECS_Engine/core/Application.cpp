@@ -5,6 +5,7 @@
 #include <iostream>
 #include <Events/KeyEvent.h>
 #include "../savedata/JSONPersitence.h"
+#include "../ECS/components/Agent.h"
 namespace sas {
 
 	Application* Application::s_Instance = nullptr;
@@ -96,9 +97,20 @@ namespace sas {
 			if (m_Entities->at(i)->name == "FemaleKnight")
 			{
 				agentController = new AgentController(m_Entities->at(i));
-				i = m_Entities->size();
+				break;
 			}
 		}
+		if(agentController)
+			for (size_t i = 0; i < m_Entities->size(); i++)
+			{
+				if (m_Entities->at(i)->name == "TestCube")
+				{
+					Agent* agent = new Agent(m_Entities->at(i), ZOMBIE);
+					agent->AgentEntity = m_Entities->at(i);
+					m_Entities->at(i)->AddComponent<Agent>(agent);
+					agentController->agents_.push_back(agent);
+				}
+			}
 	}
 
 	Application::~Application()
@@ -124,8 +136,8 @@ namespace sas {
 			m_LastFrameTime = time;
 			m_Renderer.Process(m_Entities, timestep);
 			m_MovmentScript.Process(m_Entities, timestep);
-			m_Physic->update(timestep);
 			agentController->Update(timestep);
+			m_Physic->update(timestep);
 			if (Input::IsKeyPressed(KeyCode::S) && Input::IsKeyPressed(KeyCode::LeftControl))
 			{
 				std::cout << "Saving objects" << std::endl;

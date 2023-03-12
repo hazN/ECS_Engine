@@ -34,7 +34,7 @@ void Physic::Physic::update(float dt)
 		if (rigidBody != nullptr)
 		{
 			body->transform.Position = rigidBody->getPosition();
-			body->transform.Rotation = rigidBody->getRotation();
+			//body->transform.Rotation = rigidBody->getRotation();
 		}
 	}
 }

@@ -2,13 +2,14 @@
 #pragma once
 #include <vector>
 #include "MeshRenderer.h"
+#include "../Component.h"
 #include "../Transform.h"
 #include "../Entity.h"
 namespace sas
 {
 	enum AItype { ZOMBIE, RANGED};
 
-	class Agent
+	class Agent : public Component
 	{
 	public:
 		Agent() = default;
