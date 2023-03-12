@@ -68,10 +68,10 @@ void PhysicWorld::timeStep(float dt)
 	int count = int(m_body.size());
 	int count_rigid = int(m_rigidBody.size());
 
-	for (int i = 0; i < count_rigid; i++)
+	/*for (int i = 0; i < count_rigid; i++)
 	{
 		m_rigidBody[i]->update(dt);
-	}
+	}*/
 
 	//verlet
 	//step 0
