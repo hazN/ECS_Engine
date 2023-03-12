@@ -93,7 +93,7 @@ iCollision* Physic::Physic::createBox(sas::Entity* box)
 	iRigidBodyDesc desc;
 	desc.bStatic = false;
 	desc.mass = 20; // todo change mass
-	desc.position = box->transform.Position;
+	desc.position = box->transform.Position + glm::vec3(0.f, 20.f, 0.f);
 	desc.velocity = glm::vec3(0.f);
 	iCollision* body = Factory->createRigidBody(desc, boxShape);
 	World->addBody(body);
@@ -107,7 +107,7 @@ iCollision* Physic::Physic::createAgent(sas::Entity* agent)
 	iRigidBodyDesc desc;
 	desc.bStatic = false;
 	desc.mass = 40; // todo change mass
-	desc.position = agent->transform.Position;
+	desc.position = agent->transform.Position + glm::vec3(0.f, 20.f, 0.f);
 	desc.velocity = glm::vec3(0.f);
 	iCollision* body = Factory->createRigidBody(desc, boxShape);
 	World->addBody(body);

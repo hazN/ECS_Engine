@@ -153,7 +153,7 @@ bool CollisionHandler::SphereVsPlane(float dt, RigidBody* sphere, iSphereShape* 
 		else
 		{
 			Vec3 F_impact = -impactTangent * sphere->m_mass * plane->m_friction;
-			//sphere->addForceAP(F_impact, relativePT);
+			sphere->addForceAP(F_impact, relativePT);
 		}
 
 		if (glm::dot(sphere->m_velocity, planeShape->getNormal()) == 0.f)
@@ -178,10 +178,10 @@ bool CollisionHandler::SphereVsPlane(float dt, RigidBody* sphere, iSphereShape* 
 			{
 				sphere->m_velocity -= planeShape->getNormal() * VDotNorm;
 			}
-			if (sphere->m_position.y < 0.f)
+			/*if (sphere->m_position.y < 0.f)
 			{
 				sphere->m_position.y = 1.f;
-			}
+			}*/
 		}
 		else
 		{
