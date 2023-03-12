@@ -180,6 +180,14 @@ void RigidBody::addDamping(float dt)
 	m_angularVelocity *= pow((1.f - m_angularDamping), dt);
 
 	//todo
+	if (glm::length(m_velocity) < 0.001f)
+	{
+		m_velocity = glm::vec3(0.f);
+	}
+	if (glm::length(m_angularVelocity) < 0.001f)
+	{
+		m_angularVelocity = glm::vec3(0.f);
+	}
 }
 
 void RigidBody::setRenderPosition(Vec3* pos)
@@ -191,7 +199,7 @@ void RigidBody::update(float step)
 {
 	if (m_renderPosition != nullptr)
 	{
-		m_renderPosition->x += step;
+		//m_renderPosition->x += step;
 	}
 }
 

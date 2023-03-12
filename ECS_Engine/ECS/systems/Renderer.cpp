@@ -17,6 +17,7 @@ namespace sas
 		Renderer::Renderer()
 		{
 			m_VertexArray = VertexArray::Create();
+			//EDITOR_CAMERA->transform.Position = Vec3(0, 10, 0);
 		}
 		Renderer::~Renderer()
 		{
