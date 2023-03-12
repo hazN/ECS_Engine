@@ -3,6 +3,7 @@
 #include <vector>
 #include "MeshRenderer.h"
 #include "../Transform.h"
+#include "../Entity.h"
 namespace sas
 {
 	enum AItype { ZOMBIE, RANGED};
@@ -12,12 +13,12 @@ namespace sas
 	public:
 		Agent() = default;
 		~Agent() = default;
-		Agent(Transform* transform, AItype type);
-		Agent(Transform* transform, AItype type, float speed);
-		Agent(Transform* transform, AItype type, float max, float min);
-		Agent(Transform* transform, AItype type, float max, float min, float speed);
-		Transform* transform;
-		AItype type;
+		Agent(Entity* agent, AItype type);
+		Agent(Entity* agent, AItype type, float speed);
+		Agent(Entity* agent, AItype type, float max, float min);
+		Agent(Entity* agent, AItype type, float max, float min, float speed);
+		Entity* AgentEntity;
+		AItype Type;
 		void Face(glm::vec3 Target);
 		void Seek(glm::vec3 Target);
 		void Flee(glm::vec3 Target);
