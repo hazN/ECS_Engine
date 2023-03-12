@@ -1,8 +1,9 @@
 #include "AgentController.h"
+#include <RigidBody.h>
 
 namespace sas
 {
-	AgentController::AgentController(Transform* player)
+	AgentController::AgentController(Entity* player)
 	{
 		Player = player;
 	}
@@ -11,37 +12,39 @@ namespace sas
 	{
 		for (Agent agent : agents_)
 		{
-			//switch (agent.type)
+			switch (agent.Type)
 			{ // WILL FIX LATER
-			//case AItype::ZOMBIE:
-			//{
-			//	if (glm::length(agent - player->physics_object->position) < 300.f)
-			//	{
-			//		glm::vec3 forwardVector;
-			//		forwardVector.x = 2 * (Player->qRotation.x * Player->qRotation.z + Player->qRotation.w * Player->qRotation.y);
-			//		forwardVector.y = 2 * (Player->qRotation.y * Player->qRotation.z - Player->qRotation.w * Player->qRotation.x);
-			//		forwardVector.z = 1 - 2 * (Player->qRotation.x * Player->qRotation.x + Player->qRotation.y * Player->qRotation.y);
-			//		float dotProduct = glm::dot(glm::normalize(agent.obj->position - Player->position), forwardVector);
-			//		if (dotProduct > 0.2f)
-			//		{
-			//			if (glm::length(agent.obj->position - player->physics_object->position) < 250.f)
-			//				agent.Evade(Player->position, player->physics_object->GetVelocity());
-			//		}
-			//		else if (dotProduct < 0.f)
-			//		{
-			//			if (glm::length(agent.obj->position - player->physics_object->position) < 300.f)
-			//				agent.Pursue(Player->position, player->physics_object->GetVelocity());
-			//		}
-			//		else agent.obj->physics_object->ApplyForce(glm::vec3(0));
-			//	}
-			//}
-			//break;
-			//case AItype::RANGED:
-			//{
-			//	agent.Approach(player->physics_object->position);
-			//}
-			//break;
-			//
+			case AItype::ZOMBIE:
+			{
+				if (glm::length(agent.AgentEntity->transform.Position - Player->transform.Position) < 300.f)
+				{
+					glm::vec3 forwardVector;
+					forwardVector.x = 2 * (Player->transform.Rotation.x * Player->transform.Rotation.z + Player->transform.Rotation.w * Player->transform.Rotation.y);
+					forwardVector.y = 2 * (Player->transform.Rotation.y * Player->transform.Rotation.z - Player->transform.Rotation.w * Player->transform.Rotation.x);
+					forwardVector.z = 1 - 2 * (Player->transform.Rotation.x * Player->transform.Rotation.x + Player->transform.Rotation.y * Player->transform.Rotation.y);
+					float dotProduct = glm::dot(glm::normalize(agent.AgentEntity->transform.Position - Player->transform.Position), forwardVector);
+					if (dotProduct > 0.2f)
+					{
+						if (glm::length(agent.AgentEntity->transform.Position - Player->transform.Position) < 250.f)
+							agent.Seek(Player->transform.Position);
+							//agent.Evade(Player->position, player->physics_object->GetVelocity());
+					}
+					else if (dotProduct < 0.f)
+					{
+						if (glm::length(agent.AgentEntity->transform.Position - Player->transform.Position) < 300.f)
+							agent.Flee(Player->transform.Position);
+							//agent.Pursue(Player->position, player->physics_object->GetVelocity());
+					}
+					else agent.AgentEntity->GetComponentByType<RigidBody>()->addForce(glm::vec3(0.f));
+				}
+			}
+			break;
+		/*	case AItype::RANGED:
+			{
+				agent.Approach(player->physics_object->position);
+			}
+			break;
+			*/
 			}
 		}
 	}

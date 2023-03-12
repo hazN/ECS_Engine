@@ -6,6 +6,7 @@
 #include <glm/gtx/norm.hpp>
 
 #include <glm/quaternion_utils.h>
+#include <RigidBody.h>
 namespace sas
 {
 	Agent::Agent(Entity* agent, AItype type)
@@ -59,6 +60,7 @@ namespace sas
 		AgentEntity->transform.Rotation = q_utils::RotateTowards(AgentEntity->transform.Rotation, targetDir, 3.14f * 0.005f);
 		// NEED TO APPLY FORCE 		
 		//transform->p_physicBody->ApplyForce(glm::normalize(direction) * Speed);
+		AgentEntity->GetComponentByType<RigidBody>()->addForce(glm::normalize(direction) * Speed);
 	}
 
 	void Agent::Flee(glm::vec3 Target)
@@ -68,6 +70,7 @@ namespace sas
 		AgentEntity->transform.Rotation = q_utils::RotateTowards(AgentEntity->transform.Rotation, targetDir, 3.14f * 0.005f);
 		// NEED TO APPLY FORCE 
 		//transform->->ApplyForce(glm::normalize(-direction) * Speed);
+		AgentEntity->GetComponentByType<RigidBody>()->addForce(glm::normalize(-direction) * Speed);
 	}
 
 	void Agent::Pursue(glm::vec3 Target, glm::vec3 Velocity)
@@ -78,6 +81,7 @@ namespace sas
 		AgentEntity->transform.Rotation = q_utils::RotateTowards(AgentEntity->transform.Rotation, targetDir, 3.14f * 0.005f);
 		// NEED TO APPLY FORCE
 		//transform->physics_transformect->ApplyForce(glm::normalize(direction) * Speed);
+		AgentEntity->GetComponentByType<RigidBody>()->addForce(glm::normalize(direction) * Speed);
 	}
 
 	void Agent::Evade(glm::vec3 Target, glm::vec3 Velocity)
@@ -90,6 +94,7 @@ namespace sas
 			AgentEntity->transform.Rotation = q_utils::RotateTowards(AgentEntity->transform.Rotation, targetDir, 3.14f * 0.005f);
 			// NEED TO APPLY FORCE
 			//transform->physics_transformect->ApplyForce(glm::normalize(-direction) * Speed);
+			AgentEntity->GetComponentByType<RigidBody>()->addForce(glm::normalize(-direction) * Speed);
 		}
 	}
 

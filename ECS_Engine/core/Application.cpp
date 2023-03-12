@@ -91,6 +91,14 @@ namespace sas {
 		m_Physic->init();
 		m_Physic->createWorldObj(m_Entities);
 		m_MovmentScript.Init(m_Entities, m_Physic);
+		for (size_t i = 0; i < m_Entities->size(); i++)
+		{
+			if (m_Entities->at(i)->name == "FemaleKnight")
+			{
+				agentController = new AgentController(m_Entities->at(i));
+				i = m_Entities->size();
+			}
+		}
 	}
 
 	Application::~Application()
@@ -117,6 +125,7 @@ namespace sas {
 			m_Renderer.Process(m_Entities, timestep);
 			m_MovmentScript.Process(m_Entities, timestep);
 			m_Physic->update(timestep);
+			agentController->Update(timestep);
 			if (Input::IsKeyPressed(KeyCode::S) && Input::IsKeyPressed(KeyCode::LeftControl))
 			{
 				std::cout << "Saving objects" << std::endl;

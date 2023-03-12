@@ -10,7 +10,7 @@
 #include "../ECS/systems/Renderer.h"
 #include "../ECS/systems/Movement.h"
 #include "../ECS/Physic/Physic.h"
-
+#include "../ECS/components/AgentController.h"
 
 namespace sas {
 
@@ -52,6 +52,7 @@ namespace sas {
 		
 		Physic::Physic* m_Physic;
 
+		AgentController* agentController;
 
 	private:
 		static Application* s_Instance;
