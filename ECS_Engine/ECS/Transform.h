@@ -13,6 +13,5 @@ namespace sas
 		glm::vec3 Position;
 		glm::quat Rotation;
 		glm::vec3 Scale = glm::vec3(1.f);
-		iCollision* p_physicBody;
 	};
 }

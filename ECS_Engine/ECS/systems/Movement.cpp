@@ -1,6 +1,7 @@
 #include "Movement.h"
 #include "../../core/Input.h"
 #include <iostream>
+#include "../components/RigidBodyComp.h"
 
 namespace sas
 {
@@ -19,25 +20,41 @@ namespace sas
 			{
 				return;
 			}
-			float speed = 10.f;
-			if (Input::IsKeyPressed(KeyCode::Up))
+			if (!rigidBody)
+				return;
+			if (Input::IsMouseButtonPressed(MouseButton::Button1))
+				return;
+			float speed = 25.f;
+
+			if (Input::IsKeyPressed(KeyCode::Q))
 			{
-				physic_movement->UserForce(Vec3(0.f, 0.f, 1.f));
+				rigidBody->addForce(Vec3(0.f, -speed * 50.f, 0.f));
+				//physic_movement->UserForce(Vec3(0.f, -speed * 50.f, 0.f));
+			}
+
+			if (Input::IsKeyPressed(KeyCode::E))
+			{
+				rigidBody->addForce(Vec3(0.f, speed * 50.f, 0.f));
+			}
+
+			if (Input::IsKeyPressed(KeyCode::W))
+			{
+				rigidBody->addForce(Vec3(0.f, 0.f, speed));
 				//controlEntity->transform.Position.z += speed * dt;
 			}
-			if (Input::IsKeyPressed(KeyCode::Down))
+			if (Input::IsKeyPressed(KeyCode::S))
 			{
-				physic_movement->UserForce(Vec3(0.f, 0.f, -1.f));
+				rigidBody->addForce(Vec3(0.f, 0.f, -speed));
 				//controlEntity->transform.Position.z -= speed * dt;
 			}
-			if (Input::IsKeyPressed(KeyCode::Left))
+			if (Input::IsKeyPressed(KeyCode::A))
 			{
-				physic_movement->UserForce(Vec3(1.f, 0.f, 0.f));
+				rigidBody->addForce(Vec3(speed, 0.f, 0.f));
 				//controlEntity->transform.Position.x += speed * dt;
 			}
-			if (Input::IsKeyPressed(KeyCode::Right))
+			if (Input::IsKeyPressed(KeyCode::D))
 			{
-				physic_movement->UserForce(Vec3(-1.f, 0.f, 0.f));
+				rigidBody->addForce(Vec3(-speed, 0.f, 0.f));
 				//controlEntity->transform.Position.x -= speed * dt;
 			}
 		}
@@ -48,6 +65,9 @@ namespace sas
 				if (entity->name == "FemaleKnight")
 				{
 					controlEntity = entity;
+
+					rigidBody = (iRigidBody*)entity->GetComponentByType<RigidbodyComp>()->i_CollisionBody;
+
 				}
 			}
 			physic_movement = phy_movement;

@@ -21,6 +21,7 @@ namespace sas
 		private:
 			Entity* controlEntity;
 			Physic::Physic* physic_movement;
+			iRigidBody* rigidBody;
 		};
 	}
 }

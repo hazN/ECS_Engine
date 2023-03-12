@@ -28,29 +28,6 @@ namespace sas
 			// Free roam mouse
 			// Will be moved to it's own class soon
 			{
-				glm::vec3 defFront = cameraFront;
-
-				float cameraSpeed;
-				if (Input::IsKeyPressed(KeyCode::LeftShift))
-					cameraSpeed = 10.5f * dt;
-				else  cameraSpeed = 2.5f * dt;
-				if (Input::IsKeyPressed(KeyCode::W))
-					EDITOR_CAMERA->transform.Position += cameraSpeed * defFront;
-				if (Input::IsKeyPressed(KeyCode::S))
-					EDITOR_CAMERA->transform.Position -= cameraSpeed * defFront;
-				if (Input::IsKeyPressed(KeyCode::A))
-					EDITOR_CAMERA->transform.Position -= cameraRight * cameraSpeed;
-				if (Input::IsKeyPressed(KeyCode::D))
-					EDITOR_CAMERA->transform.Position += cameraRight * cameraSpeed;
-
-				if (Input::IsKeyPressed(KeyCode::Q))     // Down
-				{
-					EDITOR_CAMERA->transform.Position.y -= cameraSpeed;
-				}
-				if (Input::IsKeyPressed(KeyCode::E))      // Up
-				{
-					EDITOR_CAMERA->transform.Position.y += cameraSpeed;
-				}
 				xpos = Input::GetMouseX();
 				ypos = Input::GetMouseY();
 
@@ -66,8 +43,32 @@ namespace sas
 
 				lastX = xpos;
 				lastY = ypos;
+				
 				if (Input::IsMouseButtonPressed(MouseButton::Button1))
 				{
+					glm::vec3 defFront = cameraFront;
+
+					float cameraSpeed;
+					if (Input::IsKeyPressed(KeyCode::LeftShift))
+						cameraSpeed = 10.5f * dt;
+					else  cameraSpeed = 2.5f * dt;
+					if (Input::IsKeyPressed(KeyCode::W))
+						EDITOR_CAMERA->transform.Position += cameraSpeed * defFront;
+					if (Input::IsKeyPressed(KeyCode::S))
+						EDITOR_CAMERA->transform.Position -= cameraSpeed * defFront;
+					if (Input::IsKeyPressed(KeyCode::A))
+						EDITOR_CAMERA->transform.Position -= cameraRight * cameraSpeed;
+					if (Input::IsKeyPressed(KeyCode::D))
+						EDITOR_CAMERA->transform.Position += cameraRight * cameraSpeed;
+
+					if (Input::IsKeyPressed(KeyCode::Q))     // Down
+					{
+						EDITOR_CAMERA->transform.Position.y -= cameraSpeed;
+					}
+					if (Input::IsKeyPressed(KeyCode::E))      // Up
+					{
+						EDITOR_CAMERA->transform.Position.y += cameraSpeed;
+					}
 					ProcessMouseMovement(xoffset, yoffset);
 				}
 			}

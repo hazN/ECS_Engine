@@ -11,7 +11,7 @@ namespace sas
 	{
 		for (Agent agent : agents_)
 		{
-			switch (agent.type)
+			//switch (agent.type)
 			{ // WILL FIX LATER
 			//case AItype::ZOMBIE:
 			//{
@@ -41,7 +41,8 @@ namespace sas
 			//	agent.Approach(player->physics_object->position);
 			//}
 			//break;
-			//}
+			//
+			}
 		}
 	}
 }

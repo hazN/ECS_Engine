@@ -148,6 +148,7 @@ python compressPNG.py textures</Command>
     <ClInclude Include="core\Windows\WindowsWindow.h" />
     <ClInclude Include="ECS\Component.h" />
     <ClInclude Include="ECS\components\AgentController.h" />
+    <ClInclude Include="ECS\components\RigidBodyComp.h" />
     <ClInclude Include="ECS\Entity.h" />
     <ClInclude Include="ECS\components\Light.h" />
     <ClInclude Include="ECS\components\MeshRenderer.h" />

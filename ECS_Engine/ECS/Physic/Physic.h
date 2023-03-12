@@ -26,9 +26,9 @@ namespace Physic
 		//void setActive(int num);
 
 		void createWorldObj(std::vector<sas::Entity*>* entityList);
-		void createPlane(sas::Entity* mGround);
-		void createBox(sas::Entity* box);
-		void createAgent(sas::Entity* agent);
+		iCollision* createPlane(sas::Entity* mGround);
+		iCollision* createBox(sas::Entity* box);
+		iCollision* createAgent(sas::Entity* agent);
 		
 
 		CollisionListener* collisionListener;

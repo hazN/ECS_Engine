@@ -1,4 +1,5 @@
 #include "Physic.h"
+#include "../components/RigidBodyComp.h"
 
 Physic::Physic::Physic()
 {
@@ -29,8 +30,8 @@ void Physic::Physic::update(float dt)
 	for (int i = 0; i < entityList.size(); i++)
 	{
 		sas::Entity* body = entityList[i];
-		iRigidBody* rigidBody = dynamic_cast<iRigidBody*>(body->transform.p_physicBody);
-		if (body->transform.p_physicBody != nullptr)
+		iRigidBody* rigidBody = (iRigidBody*)body->GetComponentByType<sas::RigidbodyComp>()->i_CollisionBody;
+		if (rigidBody != nullptr)
 		{
 			body->transform.Position = rigidBody->getPosition();
 			body->transform.Rotation = rigidBody->getRotation();
@@ -40,18 +41,7 @@ void Physic::Physic::update(float dt)
 
 void Physic::Physic::UserForce(glm::vec3 dir)
 {
-	for (int i =0; i< entityList.size(); i++)
-	{
-		if (entityList[i]->bControl)
-		{
-			sas::Entity* body = entityList[i];
-			iRigidBody* rigidBody = dynamic_cast<iRigidBody*>(body->transform.p_physicBody);
-			if (body->transform.p_physicBody != nullptr)
-			{
-				rigidBody->addForce(dir * 5.f);
-			}
-		}
-	}
+
 }
 
 
@@ -62,20 +52,29 @@ void Physic::Physic::createWorldObj(std::vector<sas::Entity*>* entityList)
 	{
 		if (entity->name == "Ground")
 		{
-			createPlane(entity);
+			iCollision* collisionBody = createPlane(entity);
+			sas::RigidbodyComp* rigidBody = new sas::RigidbodyComp();
+			rigidBody->i_CollisionBody = collisionBody;
+			entity->AddComponent<sas::RigidbodyComp>(rigidBody);
 		}
 		if (entity->name == "TestCube")
 		{
-			createBox(entity);
+			iCollision* collisionBody = createBox(entity);
+			sas::RigidbodyComp* rigidBody = new sas::RigidbodyComp();
+			rigidBody->i_CollisionBody = collisionBody;
+			entity->AddComponent<sas::RigidbodyComp>(rigidBody);
 		}
 		if (entity->name == "FemaleKnight")
 		{
-			createAgent(entity);
+			iCollision* collisionBody = createAgent(entity);
+			sas::RigidbodyComp* rigidBody = new sas::RigidbodyComp();
+			rigidBody->i_CollisionBody = collisionBody;
+			entity->AddComponent<sas::RigidbodyComp>(rigidBody);
 		}
 	}
 }
 
-void Physic::Physic::createPlane(sas::Entity* mGround)
+iCollision* Physic::Physic::createPlane(sas::Entity* mGround)
 {
 	iShape* groundShape = new iPlaneShape(glm::vec3(0.f, 1.f, 0.f), 0.f);
 	iRigidBodyDesc groundDesc;
@@ -83,12 +82,12 @@ void Physic::Physic::createPlane(sas::Entity* mGround)
 	groundDesc.mass = 0;
 	groundDesc.position = mGround->transform.Position;
 	groundDesc.velocity = glm::vec3(0.f);
-	mGround->transform.p_physicBody = Factory->createRigidBody(groundDesc, groundShape);
-	World->addBody(mGround->transform.p_physicBody);
-	mGround->bControl = false;
+	iCollision* body = Factory->createRigidBody(groundDesc, groundShape);
+	World->addBody(body);
+	return body;
 }
 
-void Physic::Physic::createBox(sas::Entity* box)
+iCollision* Physic::Physic::createBox(sas::Entity* box)
 {
 	iShape* boxShape = new iSphereShape(1); //todo -> change to iboxshape
 	iRigidBodyDesc desc;
@@ -96,13 +95,13 @@ void Physic::Physic::createBox(sas::Entity* box)
 	desc.mass = 1; // todo change mass
 	desc.position = box->transform.Position;
 	desc.velocity = glm::vec3(0.f);
-	box->transform.p_physicBody = Factory->createRigidBody(desc, boxShape);
-	World->addBody(box->transform.p_physicBody);
+	iCollision* body = Factory->createRigidBody(desc, boxShape);
+	World->addBody(body);
 	this->entityList.push_back(box);
-	box->bControl = false;
+	return body;
 }
 
-void Physic::Physic::createAgent(sas::Entity* agent)
+iCollision* Physic::Physic::createAgent(sas::Entity* agent)
 {
 	iShape* boxShape = new iSphereShape(1); //todo -> change to iboxshape
 	iRigidBodyDesc desc;
@@ -110,8 +109,8 @@ void Physic::Physic::createAgent(sas::Entity* agent)
 	desc.mass = 40; // todo change mass
 	desc.position = agent->transform.Position;
 	desc.velocity = glm::vec3(0.f);
-	agent->transform.p_physicBody = Factory->createRigidBody(desc, boxShape);
-	World->addBody(agent->transform.p_physicBody);
+	iCollision* body = Factory->createRigidBody(desc, boxShape);
+	World->addBody(body);
 	this->entityList.push_back(agent);
-	agent->bControl = true;
+	return body;
 }

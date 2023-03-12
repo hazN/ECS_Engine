@@ -16,7 +16,6 @@ namespace sas
 		Transform transform;
 		Light light;
 		MeshRenderer mesh;
-		bool bControl;
 
 		inline unsigned int GetID() const { return m_ID; }
 

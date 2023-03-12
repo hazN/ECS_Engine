@@ -65,6 +65,7 @@
     <ClInclude Include="ECS\components\Agent.h" />
     <ClInclude Include="ECS\components\AgentController.h" />
     <ClInclude Include="include\glm\quaternion_utils.h" />
+    <ClInclude Include="ECS\components\RigidBodyComp.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="savedata">
