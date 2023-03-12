@@ -4,7 +4,7 @@ iRigidBodyDesc::iRigidBodyDesc()
 {
 	mass = 1.f;
 	bStatic = false;
-	restitution = 1.f;
+	restitution = 0.6f;
 	friction = 0.2f;
 	position = Vec3(0.f, 0.f, 0.f);
 	velocity = Vec3(0.f, 0.f, 0.f);
