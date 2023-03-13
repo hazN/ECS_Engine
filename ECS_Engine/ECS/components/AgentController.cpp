@@ -4,6 +4,7 @@
 
 namespace sas
 {
+
 	AgentController::AgentController(Entity* player)
 	{
 		Player = player;
