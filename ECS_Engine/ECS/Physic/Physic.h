@@ -13,6 +13,8 @@
 
 namespace Physic
 {
+	//class : Physic
+	//Summary : Physic world object which is connect to Physic module via Physic Interface
 	class Physic
 	{
 	public:

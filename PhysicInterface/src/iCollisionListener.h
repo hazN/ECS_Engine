@@ -1,6 +1,8 @@
 #pragma once
 #include "iCollision.h"
 
+// class : iCollisionListener
+// Summary : interface class for collision listener
 class iCollisionListener
 {
 public:

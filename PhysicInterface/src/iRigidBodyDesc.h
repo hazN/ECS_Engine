@@ -1,6 +1,8 @@
 #pragma once
 #include "iShape.h"
 
+// class : iRigidBody
+// Summary : interface class for rigid body description
 class iRigidBodyDesc
 {
 public:

@@ -1,6 +1,8 @@
 #pragma once
 #include "iShape.h"
 
+// class : iCylinderShape
+// Summary : interface class for cylinder shape
 class iCylinderShape : public iShape
 {
 public:

@@ -9,6 +9,9 @@ Physic::Physic::~Physic()
 {
 }
 
+// Method : init
+// Summary: Initial physic factory and physic world
+// Accepts: none
 void Physic::Physic::init()
 {
 	Factory = new PhysicFactory();
@@ -19,10 +22,16 @@ void Physic::Physic::init()
 	World->addToCollisionListener(collisionListener);
 }
 
+// Method : destroy
+// Summary: Deconstruct physic factory and physic world
+// Accepts: none
 void Physic::Physic::destroy()
 {
 }
 
+// Method : update
+// Summary: update physic world by delta time
+// Accepts: float dt (delta time) 
 void Physic::Physic::update(float dt)
 {
 	World->timeStep(dt);
@@ -39,13 +48,18 @@ void Physic::Physic::update(float dt)
 	}
 }
 
+// Method : UserForce
+// Summary: N/A
+// Accepts: vec3 dir (force direction)
 void Physic::Physic::UserForce(glm::vec3 dir)
 {
 
 }
 
 
-
+// Method : createWorldObj
+// Summary: Create object in physic world by each entity list
+// Accepts: Entity* EntityList
 void Physic::Physic::createWorldObj(std::vector<sas::Entity*>* entityList)
 {
 	for (sas::Entity* entity : *entityList)
@@ -73,7 +87,9 @@ void Physic::Physic::createWorldObj(std::vector<sas::Entity*>* entityList)
 		}
 	}
 }
-
+// Method : createPlane
+// Summary: Create ground (plane object)
+// Accepts: Entity* mGround
 iCollision* Physic::Physic::createPlane(sas::Entity* mGround)
 {
 	iShape* groundShape = new iPlaneShape(glm::vec3(0.f, 1.f, 0.f), 0.f);
@@ -86,7 +102,9 @@ iCollision* Physic::Physic::createPlane(sas::Entity* mGround)
 	World->addBody(body);
 	return body;
 }
-
+// Method : createBox
+// Summary: create box/zombie object
+// Accepts: Entity* box
 iCollision* Physic::Physic::createBox(sas::Entity* box)
 {
 	iShape* boxShape = new iSphereShape(1); //todo -> change to iboxshape
@@ -100,7 +118,9 @@ iCollision* Physic::Physic::createBox(sas::Entity* box)
 	this->entityList.push_back(box);
 	return body;
 }
-
+// Method : createAgent
+// Summary: Create Main Character
+// Accepts: Entity* agent
 iCollision* Physic::Physic::createAgent(sas::Entity* agent)
 {
 	iShape* boxShape = new iSphereShape(1); //todo -> change to iboxshape

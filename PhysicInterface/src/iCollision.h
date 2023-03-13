@@ -1,6 +1,8 @@
 #pragma once
 #include "iBodyType.h"
 
+// class : iCollision
+// Summary : interface class for collision 
 class iCollision
 {
 public:

@@ -1,6 +1,8 @@
 #pragma once
 #include "iShape.h"
 
+// class : iPlaneShape
+// Summary : interface class for plane shape
 class iPlaneShape : public iShape
 {
 public:

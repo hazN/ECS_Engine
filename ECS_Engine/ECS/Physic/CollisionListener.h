@@ -2,6 +2,8 @@
 #include <iCollisionListener.h>
 namespace Physic
 {
+    //class : CollisionListener
+    //Summary : Listen for collision event from physic module
     class CollisionListener :
         public iCollisionListener
     {

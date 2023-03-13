@@ -5,6 +5,8 @@
 typedef glm::vec3 Vec3;
 typedef glm::quat Quat;
 
+//class : shapeType
+//Summary : enum class contain the shape type
 enum class shapeType
 {
 	Box,
@@ -13,6 +15,8 @@ enum class shapeType
 	Sphere,
 };
 
+// class : iShape
+// Summary : interface class for shape
 class iShape
 {
 public:

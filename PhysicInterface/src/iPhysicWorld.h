@@ -2,6 +2,8 @@
 #include "iShape.h"
 #include "iCollisionListener.h"
 
+// class : iPhysicWorld
+// Summary : interface class for Physic world
 class iPhysicWorld
 {
 public:

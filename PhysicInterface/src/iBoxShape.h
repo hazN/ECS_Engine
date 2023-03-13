@@ -1,7 +1,8 @@
 #pragma once
 #include "iShape.h"
 
-
+// class : iBoxShape
+// Summary : interface class for box shape 
 class iBoxShape : public iShape
 {
 public:

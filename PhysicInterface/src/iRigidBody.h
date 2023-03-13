@@ -2,6 +2,8 @@
 #include "iCollision.h"
 #include "iShape.h"
 
+// class : iRigidBody
+// Summary : interface class for rigid body
 class iRigidBody : public iCollision
 {
 public:

@@ -3,6 +3,8 @@
 #include "iRigidBody.h"
 #include "iRigidBodyDesc.h"
 
+// class : iPhysicFactory
+// Summary : interface class for Physic factory
 class iPhysicFactory
 {
 public:
