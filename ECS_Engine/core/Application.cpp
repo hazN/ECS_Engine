@@ -7,6 +7,7 @@
 #include "../savedata/JSONPersitence.h"
 #include "../ECS/components/Agent.h"
 #include "../ECS/components/RigidBodyComp.h"
+#include "../ECS/components/Health.h"
 namespace sas {
 
 	Application* Application::s_Instance = nullptr;
@@ -111,6 +112,8 @@ namespace sas {
 					agent->AgentEntity = m_Entities->at(i);
 					m_Entities->at(i)->AddComponent<Agent>(agent);
 					agentController->agents_.push_back(agent);
+					Health* zombieHP = new Health(100, 100);
+					m_Entities->at(i)->AddComponent<Health>(zombieHP);
 				}
 			}
 	}
@@ -135,24 +138,37 @@ namespace sas {
 		{
 			float time = (float)glfwGetTime();
 			Timestep timestep = time - m_LastFrameTime;
+			lastPress = (std::clock() - deltaTime) / (double)CLOCKS_PER_SEC;
 			m_LastFrameTime = time;
 			m_Renderer.Process(m_Entities, timestep);
 			m_MovmentScript.Process(m_Entities, timestep);
 			agentController->Update(timestep);
 			m_Physic->update(timestep);
-			if (Input::IsMouseButtonPressed(MouseButton::Button0))
+			if (Input::IsMouseButtonPressed(MouseButton::Button0) && lastPress > 0.15f)
 			{
+				deltaTime = std::clock();
 				for (size_t i = 0; i < m_Entities->size(); i++)
 				{
 					if (m_Entities->at(i)->name == "TestCube")
 					{
 						if (glm::length(m_Entities->at(i)->transform.Position - Player->transform.Position) < 5.f)
 						{
-							RigidbodyComp* rigidBodyComp = (RigidbodyComp*)m_Entities->at(i)->GetComponentByType<RigidbodyComp>();
-							iRigidBody* rigidBody = (iRigidBody*)rigidBodyComp->i_CollisionBody;
-							if (rigidBody)
-								rigidBody->setPosition(glm::vec3(1000.f, -1000.f, 1000.f));
+							// Make sure each entity has an id
+							if (m_Entities->at(i)->GetID() == 0)
+								m_Entities->at(i)->SetID(rand() % (100000 - 1 + 1) + 1);
+							// Random DMG between 10-30
+							int dmg = rand() % (30 - 10 + 1) + 10;
+							if (m_Entities->at(i)->GetComponentByType<Health>()->DealDamage(dmg))
+							{
+								std::cout << "Dealt " << dmg << " damage, enemy " << m_Entities->at(i)->GetID() << " is now dead!" << std::endl;
+								RigidbodyComp* rigidBodyComp = (RigidbodyComp*)m_Entities->at(i)->GetComponentByType<RigidbodyComp>();
+								iRigidBody* rigidBody = (iRigidBody*)rigidBodyComp->i_CollisionBody;
+								if (rigidBody)
+									rigidBody->setPosition(glm::vec3(1000.f, -1000.f, 1000.f));
+							}
+							else std::cout << "Dealt " << dmg << " damage, enemy " << m_Entities->at(i)->GetID() <<" has " << m_Entities->at(i)->GetComponentByType<Health>()->GetHP() << " health left!" << std::endl;
 							//m_Entities->at(i)->transform.Position = glm::vec3(1000.f,-1000.f,1000.f);
+							break;
 						}
 					}
 				}

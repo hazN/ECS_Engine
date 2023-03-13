@@ -24,6 +24,7 @@
     <ClCompile Include="ECS\Physic\CollisionListener.cpp" />
     <ClCompile Include="ECS\components\Agent.cpp" />
     <ClCompile Include="ECS\components\AgentController.cpp" />
+    <ClCompile Include="ECS\components\Health.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="core\Application.h" />
@@ -66,6 +67,7 @@
     <ClInclude Include="ECS\components\AgentController.h" />
     <ClInclude Include="include\glm\quaternion_utils.h" />
     <ClInclude Include="ECS\components\RigidBodyComp.h" />
+    <ClInclude Include="ECS\components\Health.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="savedata">

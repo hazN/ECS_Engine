@@ -56,6 +56,9 @@ namespace sas {
 
 		Entity* Player;
 
+		float deltaTime = std::clock();
+		float lastPress = 0.f;
+
 	private:
 		static Application* s_Instance;
 	};
