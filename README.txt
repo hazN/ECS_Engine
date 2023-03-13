@@ -13,6 +13,11 @@ Build and run as normal.
 
 Controls:
 CTRL-S -> Save
+
+Press SPACE to lock camera to Player
+WASD -> Move Player
+Left Click -> Attack Enemy
+____________________________
 WASD + QE -> Camera Movement
 ARROW KEYS -> Entity Movement
 
