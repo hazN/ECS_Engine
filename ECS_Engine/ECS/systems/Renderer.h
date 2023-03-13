@@ -53,6 +53,9 @@ namespace sas
 			float SENSITIVITY = 0.1f;
 			float xpos;
 			float ypos;
+			bool gameplay = false;
+			Entity* player;
+			glm::vec3 offset = glm::vec3(0.f, 2.f, -15.f);
 		};
 	}
 }

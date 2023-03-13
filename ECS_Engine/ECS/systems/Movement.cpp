@@ -24,7 +24,7 @@ namespace sas
 				return;
 			if (Input::IsMouseButtonPressed(MouseButton::Button1))
 				return;
-			float speed = 55.f;
+			float speed = 145.f;
 
 			if (Input::IsKeyPressed(KeyCode::Q))
 			{

@@ -24,6 +24,14 @@ namespace sas
 		}
 		void Renderer::Process(const std::vector<Entity*>* entityList, float dt)
 		{
+			if (Input::IsKeyPressed(KeyCode::Space))
+				gameplay = !gameplay;
+
+			if (Input::IsKeyPressed(KeyCode::Up))
+				offset.y += 0.01f;
+			if (Input::IsKeyPressed(KeyCode::Down))
+				offset.y -= 0.01f;
+
 			// TEMPORARY
 			// Free roam mouse
 			// Will be moved to it's own class soon
@@ -43,7 +51,7 @@ namespace sas
 
 				lastX = xpos;
 				lastY = ypos;
-				
+
 				if (Input::IsMouseButtonPressed(MouseButton::Button1))
 				{
 					glm::vec3 defFront = cameraFront;
@@ -94,6 +102,7 @@ namespace sas
 					glm::mat4x4 matView;
 
 					glm::vec3 upVector = glm::vec3(0.0f, 1.0f, 0.0f);
+
 					matView = glm::lookAt(EDITOR_CAMERA->transform.Position,
 						EDITOR_CAMERA->transform.Position + cameraFront,
 						upVector);
@@ -103,7 +112,21 @@ namespace sas
 						0.1f,
 						10000.0f);
 
-					openGLShader->UploadUniformFloat4("eyeLocation", glm::vec4(EDITOR_CAMERA->transform.Position, 1));
+					glm::vec4 eyeLocation = glm::vec4(EDITOR_CAMERA->transform.Position, 1);
+					if (gameplay)
+					{
+						matView = glm::lookAt(player->transform.Position + offset,
+							player->transform.Position,
+							upVector);
+						matProjection = glm::perspective(
+							0.6f,
+							ratio,
+							0.1f,
+							10000.0f);
+						eyeLocation = { player->transform.Position + offset, 1.f };
+					}
+
+					openGLShader->UploadUniformFloat4("eyeLocation", eyeLocation);
 					openGLShader->UploadUniformMat4("mView", matView);
 					openGLShader->UploadUniformMat4("mProjection", matProjection);
 					glm::mat4 viewProjection = matProjection * matView;
@@ -134,29 +157,28 @@ namespace sas
 
 					RenderCommand::SetPolygonMode(!meshRenderer->material->bWireframe);
 
-					if(meshRenderer->material->bUseRGBA)
+					if (meshRenderer->material->bUseRGBA)
 						openGLShader->UploadUniformFloat("bUseRGBA_Colour", 1);
 					else openGLShader->UploadUniformFloat("bUseRGBA_Colour", 0);
 
 					openGLShader->UploadUniformFloat4("RGBA_Colour", meshRenderer->material->RGBA);
 					openGLShader->UploadUniformFloat4("specularColour", meshRenderer->material->SPEC);
 
-					if(meshRenderer->material->bUseLight)
+					if (meshRenderer->material->bUseLight)
 						openGLShader->UploadUniformFloat("bDoNotLight", 0);
 					else openGLShader->UploadUniformFloat("bDoNotLight", 1);
 
 
 					sModelDrawInfo drawInfo;
 					m_VertexArray->FindDrawInfoByModelName(meshRenderer->Mesh, drawInfo);
-					
-					
+
+
 					// Draw the vertices
 					RenderCommand::DrawIndexed(drawInfo);
 
 					// Unbind everything later
 				}
 			}
-
 		}
 		void Renderer::CompileShaders(std::string& vertexSourceFile, std::string& fragmentSourcFile)
 		{
@@ -196,6 +218,8 @@ namespace sas
 				it++)
 			{
 				Entity* entity = *it;
+				if (entity->name == "FemaleKnight")
+					player = entity;
 				if(entity->HasComponent<MeshRenderer>())
 				{
 					MeshRenderer* meshRenderer = entity->GetComponentByType<MeshRenderer>();
