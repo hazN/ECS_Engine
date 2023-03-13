@@ -54,6 +54,8 @@ namespace sas {
 
 		AgentController* agentController;
 
+		Entity* Player;
+
 	private:
 		static Application* s_Instance;
 	};

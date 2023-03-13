@@ -6,6 +6,7 @@
 #include <Events/KeyEvent.h>
 #include "../savedata/JSONPersitence.h"
 #include "../ECS/components/Agent.h"
+#include "../ECS/components/RigidBodyComp.h"
 namespace sas {
 
 	Application* Application::s_Instance = nullptr;
@@ -96,6 +97,7 @@ namespace sas {
 		{
 			if (m_Entities->at(i)->name == "FemaleKnight")
 			{
+				Player = m_Entities->at(i);
 				agentController = new AgentController(m_Entities->at(i));
 				break;
 			}
@@ -138,6 +140,23 @@ namespace sas {
 			m_MovmentScript.Process(m_Entities, timestep);
 			agentController->Update(timestep);
 			m_Physic->update(timestep);
+			if (Input::IsMouseButtonPressed(MouseButton::Button0))
+			{
+				for (size_t i = 0; i < m_Entities->size(); i++)
+				{
+					if (m_Entities->at(i)->name == "TestCube")
+					{
+						if (glm::length(m_Entities->at(i)->transform.Position - Player->transform.Position) < 5.f)
+						{
+							RigidbodyComp* rigidBodyComp = (RigidbodyComp*)m_Entities->at(i)->GetComponentByType<RigidbodyComp>();
+							iRigidBody* rigidBody = (iRigidBody*)rigidBodyComp->i_CollisionBody;
+							if (rigidBody)
+								rigidBody->setPosition(glm::vec3(1000.f, -1000.f, 1000.f));
+							//m_Entities->at(i)->transform.Position = glm::vec3(1000.f,-1000.f,1000.f);
+						}
+					}
+				}
+			}
 			if (Input::IsKeyPressed(KeyCode::S) && Input::IsKeyPressed(KeyCode::LeftControl))
 			{
 				std::cout << "Saving objects" << std::endl;
