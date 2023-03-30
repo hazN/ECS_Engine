@@ -68,7 +68,7 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>glfw3.lib;lua5.4.4-static.lib;PhysicInterface.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>glfw3.lib;lua5.4.4-static.lib;PhysicInterface.lib;fmod_vc.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
       <Command>cd assets/textures
@@ -92,7 +92,7 @@ python compressPNG.py textures</Command>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>glfw3.lib;lua5.4.4-static.lib;PhysicInterface.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>glfw3.lib;lua5.4.4-static.lib;PhysicInterface.lib;fmod_vc.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
       <Command>cd assets/textures
@@ -100,6 +100,7 @@ python compressPNG.py textures</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="core\FMODManager.cpp" />
     <ClCompile Include="ECS\components\Agent.cpp" />
     <ClCompile Include="core\Application.cpp" />
     <ClCompile Include="core\OpenGL\OpenGLContext.cpp" />
@@ -128,6 +129,7 @@ python compressPNG.py textures</Command>
     <ClCompile Include="savedata\SQLiteDBHelper.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="core\FMODManager.h" />
     <ClInclude Include="ECS\components\Agent.h" />
     <ClInclude Include="core\Application.h" />
     <ClInclude Include="core\Core.h" />
