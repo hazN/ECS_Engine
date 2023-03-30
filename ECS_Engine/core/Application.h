@@ -11,6 +11,7 @@
 #include "../ECS/systems/Movement.h"
 #include "../ECS/Physic/Physic.h"
 #include "../ECS/components/AgentController.h"
+#include "../core/FMODManager.h"
 
 namespace sas {
 
@@ -58,6 +59,9 @@ namespace sas {
 
 		float deltaTime = std::clock();
 		float lastPress = 0.f;
+
+		//FMOD
+		FModManager* m_FMODManager;
 
 	private:
 		static Application* s_Instance;

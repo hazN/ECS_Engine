@@ -4,6 +4,12 @@ FModManager::FModManager()
 {
 	last_result_ = FMOD_OK;
 	system_ = nullptr;
+
+	Fmod_init(MAX_CHANNEL, FMOD_INIT_NORMAL);
+	create_channel(MASTER_CH);
+	create_channel(FX1_CH);
+	set_channel_parent(FX1_CH, MASTER_CH);
+
 }
 
 FModManager::~FModManager()

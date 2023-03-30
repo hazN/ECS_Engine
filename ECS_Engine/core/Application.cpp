@@ -10,6 +10,10 @@
 #include "../ECS/components/Health.h"
 #include "../savedata/iLeaderboardDAO.h"
 #include "../savedata/LeaderboardDAO.h"
+
+#define FX1_PATH "assets/sound/impact.mp3";
+#define FX2_PATH "assets/sound/bounce.wav";
+
 namespace sas {
 
 	Application* Application::s_Instance = nullptr;
@@ -128,6 +132,14 @@ namespace sas {
 		std::cout << "Player #2 High Score: " << _db->getHighScore(2) << std::endl;
 		std::cout << "Player #3 High Score: " << _db->getHighScore(3) << std::endl;
 		std::cout << "Player #4 High Score: " << _db->getHighScore(4) << std::endl;
+
+		//FMOD
+		m_FMODManager = new FModManager();
+		m_FMODManager->set_channel_vol(MASTER_CH, 0.5f);
+		std::string fx1_filePath = FX1_PATH;
+		std::string fx2_filePath = FX2_PATH;
+		m_FMODManager->create_sound("fx1", fx1_filePath, FMOD_DEFAULT, true);
+		m_FMODManager->create_sound("fx2", fx2_filePath, FMOD_DEFAULT, true);
 	}
 
 	Application::~Application()
@@ -191,12 +203,15 @@ namespace sas {
 				sas::persistence::SaveEntities(*m_Entities);
 			}
 
+			//m_FMODManager->stop_sound(FX1_CH);
+			//m_FMODManager->play_sound("fx1", FX1_CH);
 			m_Window->OnUpdate();
 		}
 	}
 
 	bool Application::OnWindowClosed(WindowCloseEvent& e)
 	{
+		m_FMODManager->shutdown();
 		m_Running = false;
 		delete m_Physic;
 		return true;
