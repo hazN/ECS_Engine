@@ -25,6 +25,10 @@
     <ClCompile Include="ECS\components\Agent.cpp" />
     <ClCompile Include="ECS\components\AgentController.cpp" />
     <ClCompile Include="ECS\components\Health.cpp" />
+    <ClCompile Include="savedata\SQLiteDBHelper.cpp" />
+    <ClCompile Include="include\SQLite\shell.c" />
+    <ClCompile Include="include\SQLite\sqlite3.c" />
+    <ClCompile Include="savedata\LeaderboardDAO.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="core\Application.h" />
@@ -68,6 +72,9 @@
     <ClInclude Include="include\glm\quaternion_utils.h" />
     <ClInclude Include="ECS\components\RigidBodyComp.h" />
     <ClInclude Include="ECS\components\Health.h" />
+    <ClInclude Include="savedata\iLeaderboardDAO.h" />
+    <ClInclude Include="savedata\SQLiteDBHelper.h" />
+    <ClInclude Include="savedata\LeaderboardDAO.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="savedata">

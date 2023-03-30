@@ -8,6 +8,8 @@
 #include "../ECS/components/Agent.h"
 #include "../ECS/components/RigidBodyComp.h"
 #include "../ECS/components/Health.h"
+#include "../savedata/iLeaderboardDAO.h"
+#include "../savedata/LeaderboardDAO.h"
 namespace sas {
 
 	Application* Application::s_Instance = nullptr;
@@ -116,6 +118,16 @@ namespace sas {
 					m_Entities->at(i)->AddComponent<Health>(zombieHP);
 				}
 			}
+
+		iLeaderboardDAO* _db = new LeaderboardDAO();
+		_db->setHighScore(1, );
+		_db->setHighScore(2, 6);
+		_db->setHighScore(3, 4);
+		_db->setHighScore(4, 6);
+		std::cout << "Player #1 High Score: " << _db->getHighScore(1) << std::endl;
+		std::cout << "Player #2 High Score: " << _db->getHighScore(2) << std::endl;
+		std::cout << "Player #3 High Score: " << _db->getHighScore(3) << std::endl;
+		std::cout << "Player #4 High Score: " << _db->getHighScore(4) << std::endl;
 	}
 
 	Application::~Application()
