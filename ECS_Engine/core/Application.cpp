@@ -8,10 +8,8 @@
 #include "../ECS/components/Agent.h"
 #include "../ECS/components/RigidBodyComp.h"
 #include "../ECS/components/Health.h"
-#include "../savedata/iLeaderboardDAO.h"
-#include "../savedata/LeaderboardDAO.h"
-namespace sas {
 
+namespace sas {
 	Application* Application::s_Instance = nullptr;
 
 	Application::Application()
@@ -119,15 +117,18 @@ namespace sas {
 				}
 			}
 
-		iLeaderboardDAO* _db = new LeaderboardDAO();
-		_db->setHighScore(1, );
-		_db->setHighScore(2, 6);
-		_db->setHighScore(3, 4);
-		_db->setHighScore(4, 6);
-		std::cout << "Player #1 High Score: " << _db->getHighScore(1) << std::endl;
-		std::cout << "Player #2 High Score: " << _db->getHighScore(2) << std::endl;
-		std::cout << "Player #3 High Score: " << _db->getHighScore(3) << std::endl;
-		std::cout << "Player #4 High Score: " << _db->getHighScore(4) << std::endl;
+		Player->SetID(1);
+		_db = new LeaderboardDAO();
+		_db->setHighScore(1, 0);
+		//_db->setHighScore(2, 3);
+		//_db->setHighScore(3, 5);
+		//_db->setHighScore(4, 21);
+		//_db->setHighScore(5, 15);
+		//std::cout << "Player #1 High Score: " << _db->getHighScore(1) << std::endl;
+		//std::cout << "Player #2 High Score: " << _db->getHighScore(2) << std::endl;
+		//std::cout << "Player #3 High Score: " << _db->getHighScore(3) << std::endl;
+		//std::cout << "Player #4 High Score: " << _db->getHighScore(4) << std::endl;
+		//std::cout << "Player #5 High Score: " << _db->getHighScore(5) << std::endl;
 	}
 
 	Application::~Application()
@@ -177,6 +178,12 @@ namespace sas {
 								iRigidBody* rigidBody = (iRigidBody*)rigidBodyComp->i_CollisionBody;
 								if (rigidBody)
 									rigidBody->setPosition(glm::vec3(1000.f, -1000.f, 1000.f));
+								score++;
+								if (score > _db->getHighScore(Player->GetID()))
+								{
+									_db->setHighScore(Player->GetID(), score);
+									std::cout << "Player " << Player->GetID() << " has hit a new highscore of " << score << std::endl;
+								}
 							}
 							else std::cout << "Dealt " << dmg << " damage, enemy " << m_Entities->at(i)->GetID() <<" has " << m_Entities->at(i)->GetComponentByType<Health>()->GetHP() << " health left!" << std::endl;
 							//m_Entities->at(i)->transform.Position = glm::vec3(1000.f,-1000.f,1000.f);

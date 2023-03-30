@@ -11,7 +11,8 @@
 #include "../ECS/systems/Movement.h"
 #include "../ECS/Physic/Physic.h"
 #include "../ECS/components/AgentController.h"
-
+#include "../savedata/iLeaderboardDAO.h"
+#include "../savedata/LeaderboardDAO.h"
 namespace sas {
 
 	// Main Application
@@ -58,7 +59,8 @@ namespace sas {
 
 		float deltaTime = std::clock();
 		float lastPress = 0.f;
-
+		int score = 0;
+		iLeaderboardDAO* _db;
 	private:
 		static Application* s_Instance;
 	};
