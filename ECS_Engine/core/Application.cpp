@@ -120,7 +120,7 @@ namespace sas {
 			}
 
 		iLeaderboardDAO* _db = new LeaderboardDAO();
-		_db->setHighScore(1, );
+		_db->setHighScore(1, 10);
 		_db->setHighScore(2, 6);
 		_db->setHighScore(3, 4);
 		_db->setHighScore(4, 6);
