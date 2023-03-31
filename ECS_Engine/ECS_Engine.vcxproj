@@ -131,7 +131,7 @@ python compressPNG.py textures</Command>
     <ClCompile Include="savedata\JSONPersitence.cpp" />
     <ClCompile Include="savedata\LeaderboardDAO.cpp" />
     <ClCompile Include="savedata\SQLiteDBHelper.cpp" />
-    <ClCompile Include="thrift_src\LeaderboardClient.cpp" />
+    <ClCompile Include="thrift_src\LeaderboardClientCall.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="core\FMODManager.h" />
@@ -181,7 +181,7 @@ python compressPNG.py textures</Command>
     <ClInclude Include="savedata\JSONPersitence.h" />
     <ClInclude Include="savedata\LeaderboardDAO.h" />
     <ClInclude Include="savedata\SQLiteDBHelper.h" />
-    <ClInclude Include="thrift_src\LeaderboardClient.h" />
+    <ClInclude Include="thrift_src\LeaderboardClientCall.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="savedata\entityData.json" />

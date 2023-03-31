@@ -203,6 +203,7 @@ namespace sas {
 								if (score > _db->getHighScore(Player->GetID()))
 								{
 									_db->setHighScore(Player->GetID(), score);
+									leaderboardClientcalls.SetHighScore(Player->GetID(), score);
 									std::cout << "Player " << Player->GetID() << " has hit a new highscore of " << score << std::endl;
 								}
 							}
@@ -217,6 +218,10 @@ namespace sas {
 			{
 				std::cout << "Saving objects" << std::endl;
 				sas::persistence::SaveEntities(*m_Entities);
+			}
+			if (Input::IsKeyPressed(KeyCode::Tab))
+			{
+				leaderboardClientcalls.GetTop20();
 			}
 
 			//m_FMODManager->stop_sound(FX1_CH);

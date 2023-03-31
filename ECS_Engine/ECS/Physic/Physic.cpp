@@ -42,6 +42,8 @@ void Physic::Physic::update(float dt)
 		iRigidBody* rigidBody = (iRigidBody*)body->GetComponentByType<sas::RigidbodyComp>()->i_CollisionBody;
 		if (rigidBody != nullptr)
 		{
+			if (rigidBody->getPosition().y < -40.f)
+				rigidBody->setPosition(Vec3(rigidBody->getPosition().x, 10.f, rigidBody->getPosition().z));
 			body->transform.Position = rigidBody->getPosition();
 			//body->transform.Rotation = rigidBody->getRotation();
 		}

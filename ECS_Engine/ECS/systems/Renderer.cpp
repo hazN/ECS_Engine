@@ -86,7 +86,6 @@ namespace sas
 			RenderCommand::SetViewport(0, 0, width, height);
 			RenderCommand::SetClearColor(glm::vec4(0.2f, 0.2f, 0.2f, 1.f));
 			RenderCommand::Clear();
-
 			for (std::vector<Entity*>::const_iterator it = entityList->begin();
 				it != entityList->end();
 				it++)

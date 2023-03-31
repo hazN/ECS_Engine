@@ -1,5 +1,5 @@
-print('hello world\n')
-print('Lua from event:', param)
+--print('hello world\n')
+--print('Lua from event:', param)
 
 if param == 'collision' then
 	playsound('fx1')

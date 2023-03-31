@@ -15,6 +15,7 @@
 #include "../savedata/LeaderboardDAO.h"
 #include "../core/FMODManager.h"
 #include "../core/LuaBrain.h"
+#include "../thrift_src/LeaderboardClientCall.h"
 
 namespace sas {
 
@@ -69,6 +70,7 @@ namespace sas {
 		//FModManager* m_FMODManager;
 
 		LuaBrain* m_lua;
+		LeaderboardClientCall leaderboardClientcalls;
 
 	private:
 		static Application* s_Instance;

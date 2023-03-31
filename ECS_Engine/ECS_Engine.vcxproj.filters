@@ -32,7 +32,7 @@
     <ClCompile Include="gen-cpp\Leaderboard.cpp" />
     <ClCompile Include="gen-cpp\leaderboard_constants.cpp" />
     <ClCompile Include="gen-cpp\leaderboard_types.cpp" />
-    <ClCompile Include="thrift_src\LeaderboardClient.cpp" />
+    <ClCompile Include="thrift_src\LeaderboardClientCall.cpp" />
     <ClCompile Include="core\FMODManager.cpp" />
     <ClCompile Include="core\LuaBrain.cpp" />
   </ItemGroup>
@@ -84,7 +84,7 @@
     <ClInclude Include="gen-cpp\Leaderboard.h" />
     <ClInclude Include="gen-cpp\leaderboard_constants.h" />
     <ClInclude Include="gen-cpp\leaderboard_types.h" />
-    <ClInclude Include="thrift_src\LeaderboardClient.h" />
+    <ClInclude Include="thrift_src\LeaderboardClientCall.h" />
     <ClInclude Include="core\FMODManager.h" />
     <ClInclude Include="core\LuaBrain.h" />
   </ItemGroup>
