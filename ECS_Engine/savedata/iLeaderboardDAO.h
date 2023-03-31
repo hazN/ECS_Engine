@@ -1,11 +1,13 @@
 #pragma once
-
-class iLeaderboardDAO
+namespace sas
 {
-public:
-	iLeaderboardDAO() {}
-	virtual ~iLeaderboardDAO() {}
+	class iLeaderboardDAO
+	{
+	public:
+		iLeaderboardDAO() {}
+		virtual ~iLeaderboardDAO() {}
 
-	virtual void setHighScore(int playerId, int score) = 0;
-	virtual int getHighScore(int playerId) = 0;
-};
+		virtual void setHighScore(int playerId, int score) = 0;
+		virtual int getHighScore(int playerId) = 0;
+	};
+}

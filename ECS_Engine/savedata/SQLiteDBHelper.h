@@ -1,17 +1,19 @@
 #pragma once
 
 #include <SQLite/sqlite3.h>
-
-class SQLiteDBHelper
+namespace sas
 {
-public:
-	SQLiteDBHelper();
-	~SQLiteDBHelper();
+	class SQLiteDBHelper
+	{
+	public:
+		SQLiteDBHelper();
+		~SQLiteDBHelper();
 
-	void ConnectToDB(const char* dbName);
+		void ConnectToDB(const char* dbName);
 
-	void ExecuteQuery(const char* sql, int* res);
-private:
-	sqlite3* m_DB;
-	bool m_IsConnected;
-};
+		void ExecuteQuery(const char* sql, int* res);
+	private:
+		sqlite3* m_DB;
+		bool m_IsConnected;
+	};
+}
