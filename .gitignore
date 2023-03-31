@@ -17,8 +17,6 @@
 mono_crash.*
 
 Boost/
-Thrift/
-OpenSSL/
 
 # Build results
 [Dd]ebug/
