@@ -27,12 +27,10 @@ namespace sas
 	}
 	float WindowsInput::GetMouseXImpl()
 	{
-		auto [x, y] = GetMousePositionImpl();
-		return x;
+		return GetMousePositionImpl().first;
 	}
 	float WindowsInput::GetMouseYImpl()
 	{
-		auto [x, y] = GetMousePositionImpl();
-		return y;
+		return GetMousePositionImpl().second;
 	}
 }

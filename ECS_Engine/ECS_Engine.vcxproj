@@ -46,13 +46,13 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>$(ProjectDir)include;$(ProjectDir)core;$(SolutionDir)PhysicInterface\src;$(SolutionDir)PhysicModule\src;$(IncludePath)</IncludePath>
-    <LibraryPath>$(ProjectDir)lib\$(Configuration)_$(Platform);$(LibraryPath)</LibraryPath>
+    <IncludePath>$(SolutionDir)ECS_Engine\Thrift\thrift-0.9.1\src;$(SolutionDir)ECS_Engine\Boost\boost_1_59_0;$(ProjectDir)include;$(ProjectDir)core;$(SolutionDir)PhysicInterface\src;$(SolutionDir)PhysicModule\src;$(IncludePath)</IncludePath>
+    <LibraryPath>$(SolutionDir)ECS_Engine\Boost\boost_1_59_0\lib64-msvc-14.0;$(SolutionDir)ECS_Engine\Thrift\thrift-0.9.1\lib\$(IntDir);$(ProjectDir)lib\$(Configuration)_$(Platform);$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
-    <IncludePath>$(ProjectDir)include;$(ProjectDir)core;$(SolutionDir)PhysicInterface\src;$(SolutionDir)PhysicModule\src;$(IncludePath)</IncludePath>
-    <LibraryPath>$(ProjectDir)lib\$(Configuration)_$(Platform);$(LibraryPath)</LibraryPath>
+    <IncludePath>$(SolutionDir)ECS_Engine\Thrift\thrift-0.9.1\src;$(SolutionDir)ECS_Engine\Boost\boost_1_59_0;$(ProjectDir)include;$(ProjectDir)core;$(SolutionDir)PhysicInterface\src;$(SolutionDir)PhysicModule\src;$(IncludePath)</IncludePath>
+    <LibraryPath>$(SolutionDir)ECS_Engine\Boost\boost_1_59_0\lib64-msvc-14.0;$(SolutionDir)ECS_Engine\Thrift\thrift-0.9.1\lib\$(IntDir);$(ProjectDir)lib\$(Configuration)_$(Platform);$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -63,12 +63,12 @@
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile>
       </PrecompiledHeaderFile>
-      <LanguageStandard>stdcpp17</LanguageStandard>
+      <LanguageStandard>Default</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>glfw3.lib;lua5.4.4-static.lib;PhysicInterface.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>libthrift.lib;libboost_thread-vc140-mt-gd-1_59.lib;glfw3.lib;lua5.4.4-static.lib;PhysicInterface.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
       <Command>cd assets/textures
@@ -92,7 +92,7 @@ python compressPNG.py textures</Command>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>glfw3.lib;lua5.4.4-static.lib;PhysicInterface.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>libthrift.lib;libboost_thread-vc140-mt-1_59.lib;glfw3.lib;lua5.4.4-static.lib;PhysicInterface.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
       <Command>cd assets/textures
@@ -119,6 +119,9 @@ python compressPNG.py textures</Command>
     <ClCompile Include="ECS\Physic\Physic.cpp" />
     <ClCompile Include="ECS\systems\Movement.cpp" />
     <ClCompile Include="ECS\systems\Renderer.cpp" />
+    <ClCompile Include="gen-cpp\Leaderboard.cpp" />
+    <ClCompile Include="gen-cpp\leaderboard_constants.cpp" />
+    <ClCompile Include="gen-cpp\leaderboard_types.cpp" />
     <ClCompile Include="glad.c" />
     <ClCompile Include="include\SQLite\shell.c" />
     <ClCompile Include="include\SQLite\sqlite3.c" />
@@ -126,6 +129,7 @@ python compressPNG.py textures</Command>
     <ClCompile Include="savedata\JSONPersitence.cpp" />
     <ClCompile Include="savedata\LeaderboardDAO.cpp" />
     <ClCompile Include="savedata\SQLiteDBHelper.cpp" />
+    <ClCompile Include="thrift_src\LeaderboardClient.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ECS\components\Agent.h" />
@@ -165,11 +169,15 @@ python compressPNG.py textures</Command>
     <ClInclude Include="ECS\systems\Movement.h" />
     <ClInclude Include="ECS\systems\Renderer.h" />
     <ClInclude Include="ECS\Transform.h" />
+    <ClInclude Include="gen-cpp\Leaderboard.h" />
+    <ClInclude Include="gen-cpp\leaderboard_constants.h" />
+    <ClInclude Include="gen-cpp\leaderboard_types.h" />
     <ClInclude Include="include\glm\quaternion_utils.h" />
     <ClInclude Include="savedata\iLeaderboardDAO.h" />
     <ClInclude Include="savedata\JSONPersitence.h" />
     <ClInclude Include="savedata\LeaderboardDAO.h" />
     <ClInclude Include="savedata\SQLiteDBHelper.h" />
+    <ClInclude Include="thrift_src\LeaderboardClient.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="savedata\entityData.json" />

@@ -33,6 +33,7 @@
 * 
 */
 
+#include "thrift_src/LeaderboardClient.h"
 #include <Application.h>
 
 int main(int argc, char* argv[])
@@ -40,6 +41,7 @@ int main(int argc, char* argv[])
 	// Create our application
 	sas::Application* app = new sas::Application();
 
+	LeaderboardClientCall();
 	// Start the game loop
 	app->Run();
 	return 0;

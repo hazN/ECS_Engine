@@ -29,6 +29,10 @@
     <ClCompile Include="include\SQLite\shell.c" />
     <ClCompile Include="include\SQLite\sqlite3.c" />
     <ClCompile Include="savedata\LeaderboardDAO.cpp" />
+    <ClCompile Include="gen-cpp\Leaderboard.cpp" />
+    <ClCompile Include="gen-cpp\leaderboard_constants.cpp" />
+    <ClCompile Include="gen-cpp\leaderboard_types.cpp" />
+    <ClCompile Include="thrift_src\LeaderboardClient.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="core\Application.h" />
@@ -75,6 +79,10 @@
     <ClInclude Include="savedata\iLeaderboardDAO.h" />
     <ClInclude Include="savedata\SQLiteDBHelper.h" />
     <ClInclude Include="savedata\LeaderboardDAO.h" />
+    <ClInclude Include="gen-cpp\Leaderboard.h" />
+    <ClInclude Include="gen-cpp\leaderboard_constants.h" />
+    <ClInclude Include="gen-cpp\leaderboard_types.h" />
+    <ClInclude Include="thrift_src\LeaderboardClient.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="savedata">
