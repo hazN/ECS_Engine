@@ -18,6 +18,7 @@ namespace sas
 
 			// Get the object
 			void Init(std::vector<Entity*>* entities, Physic::Physic* phy_movement);
+			glm::vec3* GameplayCameraPostion;
 		private:
 			Entity* controlEntity;
 			Physic::Physic* physic_movement;

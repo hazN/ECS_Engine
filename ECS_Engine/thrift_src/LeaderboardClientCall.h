@@ -13,13 +13,17 @@ using boost::shared_ptr;
 
 namespace sas
 {
+	// Client calls to server
 	class LeaderboardClientCall
 	{
 	public:
 		LeaderboardClientCall();
 		~LeaderboardClientCall();
 
+		// Set high score through server
 		void SetHighScore(int id, int highscore);
+
+		// Get Top 20 players by high score
 		void GetTop20();
 
 	private:

@@ -99,6 +99,7 @@ namespace sas {
 		m_Physic->init();
 		m_Physic->createWorldObj(m_Entities);
 		m_MovmentScript.Init(m_Entities, m_Physic);
+		m_MovmentScript.GameplayCameraPostion = &m_Renderer.GameplatCamOutputPosition;
 		for (size_t i = 0; i < m_Entities->size(); i++)
 		{
 			if (m_Entities->at(i)->name == "FemaleKnight")

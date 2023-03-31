@@ -23,6 +23,9 @@ namespace sas
 
 			// Create Vertex Array IDs for all the entity with mesh renderer
 			void Init(std::vector<Entity*>* entityList, std::string& vertexSourceFile, std::string& fragmentSourcFile);
+
+			glm::vec3 GameplatCamOutputPosition;
+
 		private:
 			// Compile the given shader
 			void CompileShaders(std::string& vertexSourceFile, std::string& fragmentSourcFile);
@@ -31,6 +34,7 @@ namespace sas
 
 			// Temporary
 
+			glm::vec3 GameplayCameraPosition;
 			static Entity* EDITOR_CAMERA;
 			bool mouseHoldDown = false;
 			bool mouseClicked = false; 

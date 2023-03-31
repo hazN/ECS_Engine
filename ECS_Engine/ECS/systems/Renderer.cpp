@@ -28,10 +28,33 @@ namespace sas
 				gameplay = !gameplay;
 
 			if (Input::IsKeyPressed(KeyCode::Up))
-				offset.y += 0.01f;
+				GameplayCameraPosition.y += 0.1f;
 			if (Input::IsKeyPressed(KeyCode::Down))
-				offset.y -= 0.01f;
+				GameplayCameraPosition.y -= 0.1f;
 
+			if (sas::Input::IsKeyPressed(KeyCode::Left))
+			{
+				glm::mat4 rotationMat = glm::mat4(1.f);
+				rotationMat = glm::rotate(rotationMat, -0.01f, glm::vec3(0.0, 1.0, 0.0));
+				glm::vec3 rotated = glm::vec3(rotationMat * glm::vec4(GameplayCameraPosition, 1.0));
+				//glm::vec3 temp = player->transform.Position;
+				//temp.y = 0.f;
+				GameplayCameraPosition = rotated;
+			}
+			if (sas::Input::IsKeyPressed(KeyCode::Right))
+			{
+				glm::mat4 rotationMat(1);
+				rotationMat = glm::rotate(rotationMat, 0.01f, glm::vec3(0.0, 1.0, 0.0));
+				glm::vec3 rotated = glm::vec3(rotationMat * glm::vec4(GameplayCameraPosition, 1.0));
+
+				GameplayCameraPosition = rotated;
+			}
+
+			glm::mat4x4 matModel = glm::mat4x4(1.0f);
+			glm::mat4x4 matProjection;
+			glm::mat4x4 matView;
+
+			glm::vec3 upVector = glm::vec3(0.0f, 1.0f, 0.0f);
 			// TEMPORARY
 			// Free roam mouse
 			// Will be moved to it's own class soon
@@ -96,12 +119,8 @@ namespace sas
 					std::shared_ptr<OpenGLShader> openGLShader = std::dynamic_pointer_cast<OpenGLShader>(m_Shader);
 					MeshRenderer* meshRenderer = entity->GetComponentByType<MeshRenderer>();
 					m_Shader->Bind();
-					glm::mat4x4 matModel = glm::mat4x4(1.0f); ;
-					glm::mat4x4 matProjection;
-					glm::mat4x4 matView;
-
-					glm::vec3 upVector = glm::vec3(0.0f, 1.0f, 0.0f);
-
+					
+					matModel = glm::mat4x4(1.0f);
 					matView = glm::lookAt(EDITOR_CAMERA->transform.Position,
 						EDITOR_CAMERA->transform.Position + cameraFront,
 						upVector);
@@ -114,7 +133,8 @@ namespace sas
 					glm::vec4 eyeLocation = glm::vec4(EDITOR_CAMERA->transform.Position, 1);
 					if (gameplay)
 					{
-						matView = glm::lookAt(player->transform.Position + offset,
+						GameplatCamOutputPosition = GameplayCameraPosition + player->transform.Position;
+						matView = glm::lookAt(GameplatCamOutputPosition,
 							player->transform.Position,
 							upVector);
 						matProjection = glm::perspective(
@@ -122,7 +142,13 @@ namespace sas
 							ratio,
 							0.1f,
 							10000.0f);
-						eyeLocation = { player->transform.Position + offset, 1.f };
+						eyeLocation = { GameplayCameraPosition, 1.f };
+						matProjection = glm::perspective(
+							0.6f,
+							ratio,
+							0.1f,
+							10000.0f);
+						eyeLocation = { GameplayCameraPosition, 1.f };
 					}
 
 					openGLShader->UploadUniformFloat4("eyeLocation", eyeLocation);
@@ -218,7 +244,10 @@ namespace sas
 			{
 				Entity* entity = *it;
 				if (entity->name == "FemaleKnight")
+				{
 					player = entity;
+					GameplayCameraPosition = player->transform.Position + offset;
+				}
 				if(entity->HasComponent<MeshRenderer>())
 				{
 					MeshRenderer* meshRenderer = entity->GetComponentByType<MeshRenderer>();
