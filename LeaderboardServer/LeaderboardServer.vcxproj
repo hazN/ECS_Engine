@@ -140,12 +140,21 @@
     <ClCompile Include="..\ECS_Engine\gen-cpp\Leaderboard.cpp" />
     <ClCompile Include="..\ECS_Engine\gen-cpp\leaderboard_constants.cpp" />
     <ClCompile Include="..\ECS_Engine\gen-cpp\leaderboard_types.cpp" />
+    <ClCompile Include="LeaderboardDAO.cpp" />
     <ClCompile Include="Leaderboard_server.skeleton.cpp" />
+    <ClCompile Include="serverSQLite\shell.c" />
+    <ClCompile Include="serverSQLite\sqlite3.c" />
+    <ClCompile Include="SQLiteDBHelper.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\ECS_Engine\gen-cpp\Leaderboard.h" />
     <ClInclude Include="..\ECS_Engine\gen-cpp\leaderboard_constants.h" />
     <ClInclude Include="..\ECS_Engine\gen-cpp\leaderboard_types.h" />
+    <ClInclude Include="iLeaderboardDAO.h" />
+    <ClInclude Include="LeaderboardDAO.h" />
+    <ClInclude Include="serverSQLite\sqlite3.h" />
+    <ClInclude Include="serverSQLite\sqlite3ext.h" />
+    <ClInclude Include="SQLiteDBHelper.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

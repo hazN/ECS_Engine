@@ -9,14 +9,15 @@
 
 #include <thrift/TDispatchProcessor.h>
 #include "leaderboard_types.h"
-
-
+#include "../../LeaderboardServer/iLeaderboardDAO.h"
+#include "../../LeaderboardServer/LeaderboardDAO.h"
 
 class LeaderboardIf {
  public:
   virtual ~LeaderboardIf() {}
   virtual void setHighScore(const int32_t playerId, const int32_t highScore) = 0;
   virtual void getTop20(std::map<int32_t, int32_t> & _return) = 0;
+  iLeaderboardDAO* _db;
 };
 
 class LeaderboardIfFactory {

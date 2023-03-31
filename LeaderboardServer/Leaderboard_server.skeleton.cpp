@@ -6,7 +6,6 @@
 #include <thrift/server/TSimpleServer.h>
 #include <thrift/transport/TServerSocket.h>
 #include <thrift/transport/TBufferTransports.h>
-
 using namespace ::apache::thrift;
 using namespace ::apache::thrift::protocol;
 using namespace ::apache::thrift::transport;
@@ -19,16 +18,19 @@ class LeaderboardHandler : virtual public LeaderboardIf {
   LeaderboardHandler() {
     // Your initialization goes here
 	  this->highScoreByPlayer = new std::map<int32_t, int32_t>();
+	  _db = new LeaderboardDAO();
   }
 
   void setHighScore(const int32_t playerId, const int32_t highScore) {
-	  this->highScoreByPlayer->insert(std::pair<int32_t, int32_t>(playerId, highScore));
+	  _db->setHighScore(playerId, highScore);
+	//this->highScoreByPlayer->insert(std::pair<int32_t, int32_t>(playerId, highScore));
     // Your implementation goes here
     printf("setHighScore\n");
   }
 
   void getTop20(std::map<int32_t, int32_t> & _return) {
-	  _return.insert(this->highScoreByPlayer->begin(), this->highScoreByPlayer->end());
+	  _return = _db->getTop20HighScores();
+	 // _return.insert(this->highScoreByPlayer->begin(), this->highScoreByPlayer->end());
     // Your implementation goes here	
     printf("getTop20\n");
   }
