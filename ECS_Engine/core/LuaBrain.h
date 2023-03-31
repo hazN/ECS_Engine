@@ -18,7 +18,9 @@ static int playsound(lua_State* L)
 	const char* soundName = lua_tostring(L, 1);
 	printf("playing sound: %s\n", soundName);
 
-	g_FMODManager->stop_sound(FX1_CH);
+	//g_FMODManager->stop_sound(FX1_CH);
+	//g_FMODManager->stop_sound(FX2_CH);
+	
 	g_FMODManager->play_sound(soundName, FX1_CH);
 
 	return 0;

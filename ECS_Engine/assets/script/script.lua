@@ -2,7 +2,7 @@ print('hello world\n')
 print('Lua from event:', param)
 
 if param == 'collision' then
-	playsound('FX1')
+	playsound('fx1')
 elseif param == 'attack' then
-	playsound('FX2')
+	playsound('fx2')
 end

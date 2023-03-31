@@ -11,8 +11,8 @@
 #include "../savedata/iLeaderboardDAO.h"
 #include "../savedata/LeaderboardDAO.h"
 
-#define FX1_PATH "assets/sound/impact.mp3";
-#define FX2_PATH "assets/sound/bounce.wav";
+#define FX1_PATH "assets/sound/bounce.wav";
+#define FX2_PATH "assets/sound/explode.wav";
 FModManager* g_FMODManager;
 namespace sas {
 
@@ -187,7 +187,7 @@ namespace sas {
 								m_Entities->at(i)->SetID(rand() % (100000 - 1 + 1) + 1);
 							// Random DMG between 10-30
 							int dmg = rand() % (30 - 10 + 1) + 10;
-							//todo lua call fx
+							// lua call fx
 							m_lua->LoadScript("attack");
 
 							if (m_Entities->at(i)->GetComponentByType<Health>()->DealDamage(dmg))
