@@ -125,16 +125,6 @@ namespace sas {
 
 		Player->SetID(1);
 		_db = new LeaderboardDAO();
-		_db->setHighScore(1, 0);
-		//_db->setHighScore(2, 3);
-		//_db->setHighScore(3, 5);
-		//_db->setHighScore(4, 21);
-		//_db->setHighScore(5, 15);
-		//std::cout << "Player #1 High Score: " << _db->getHighScore(1) << std::endl;
-		//std::cout << "Player #2 High Score: " << _db->getHighScore(2) << std::endl;
-		//std::cout << "Player #3 High Score: " << _db->getHighScore(3) << std::endl;
-		//std::cout << "Player #4 High Score: " << _db->getHighScore(4) << std::endl;
-		//std::cout << "Player #5 High Score: " << _db->getHighScore(5) << std::endl;
 
 		//FMOD
 		bool error;

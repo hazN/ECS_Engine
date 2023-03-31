@@ -29,8 +29,6 @@ namespace sas
 			float force = 0.3f;
 			glm::vec3 direction(0.f);
 
-			std::cout << "Gameplay camera: " << GameplayCameraPostion->x << " " << GameplayCameraPostion->y << " " << GameplayCameraPostion->z << std::endl;
-
 			if (Input::IsKeyPressed(KeyCode::Q))
 			{
 				direction = Vec3(0.f, -speed * 50.f, 0.f);
