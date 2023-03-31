@@ -5,6 +5,7 @@
 #include <thrift/transport/TBufferTransports.h>
 #include <thrift/protocol/TBinaryProtocol.h>
 #include <iostream>
+#include "LeaderboardClient.h"
 
 using namespace ::apache::thrift;
 using namespace ::apache::thrift::protocol;
