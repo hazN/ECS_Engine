@@ -30,6 +30,7 @@
     <ClCompile Include="include\SQLite\sqlite3.c" />
     <ClCompile Include="savedata\LeaderboardDAO.cpp" />
     <ClCompile Include="core\FMODManager.cpp" />
+    <ClCompile Include="core\LuaBrain.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="core\Application.h" />
@@ -77,6 +78,7 @@
     <ClInclude Include="savedata\SQLiteDBHelper.h" />
     <ClInclude Include="savedata\LeaderboardDAO.h" />
     <ClInclude Include="core\FMODManager.h" />
+    <ClInclude Include="core\LuaBrain.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="savedata">

@@ -13,7 +13,7 @@
 
 #define FX1_PATH "assets/sound/impact.mp3";
 #define FX2_PATH "assets/sound/bounce.wav";
-
+FModManager* g_FMODManager;
 namespace sas {
 
 	Application* Application::s_Instance = nullptr;
@@ -134,12 +134,17 @@ namespace sas {
 		std::cout << "Player #4 High Score: " << _db->getHighScore(4) << std::endl;
 
 		//FMOD
-		m_FMODManager = new FModManager();
-		m_FMODManager->set_channel_vol(MASTER_CH, 0.5f);
+		bool error;
+		g_FMODManager = new FModManager();
+		g_FMODManager->set_channel_vol(MASTER_CH, 0.5f);
 		std::string fx1_filePath = FX1_PATH;
 		std::string fx2_filePath = FX2_PATH;
-		m_FMODManager->create_sound("fx1", fx1_filePath, FMOD_DEFAULT, true);
-		m_FMODManager->create_sound("fx2", fx2_filePath, FMOD_DEFAULT, true);
+		error = g_FMODManager->create_sound("fx1", fx1_filePath, FMOD_DEFAULT, true);
+		error = g_FMODManager->create_sound("fx2", fx2_filePath, FMOD_DEFAULT, true);
+
+		m_lua = new LuaBrain();
+		m_Physic->collisionListener->Lua = m_lua;
+	
 	}
 
 	Application::~Application()
@@ -182,6 +187,9 @@ namespace sas {
 								m_Entities->at(i)->SetID(rand() % (100000 - 1 + 1) + 1);
 							// Random DMG between 10-30
 							int dmg = rand() % (30 - 10 + 1) + 10;
+							//todo lua call fx
+							m_lua->LoadScript("attack");
+
 							if (m_Entities->at(i)->GetComponentByType<Health>()->DealDamage(dmg))
 							{
 								std::cout << "Dealt " << dmg << " damage, enemy " << m_Entities->at(i)->GetID() << " is now dead!" << std::endl;
@@ -211,7 +219,7 @@ namespace sas {
 
 	bool Application::OnWindowClosed(WindowCloseEvent& e)
 	{
-		m_FMODManager->shutdown();
+		g_FMODManager->shutdown();
 		m_Running = false;
 		delete m_Physic;
 		return true;

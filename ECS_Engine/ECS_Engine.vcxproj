@@ -101,6 +101,7 @@ python compressPNG.py textures</Command>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="core\FMODManager.cpp" />
+    <ClCompile Include="core\LuaBrain.cpp" />
     <ClCompile Include="ECS\components\Agent.cpp" />
     <ClCompile Include="core\Application.cpp" />
     <ClCompile Include="core\OpenGL\OpenGLContext.cpp" />
@@ -130,6 +131,7 @@ python compressPNG.py textures</Command>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="core\FMODManager.h" />
+    <ClInclude Include="core\LuaBrain.h" />
     <ClInclude Include="ECS\components\Agent.h" />
     <ClInclude Include="core\Application.h" />
     <ClInclude Include="core\Core.h" />

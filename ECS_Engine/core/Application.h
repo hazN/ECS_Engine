@@ -12,6 +12,7 @@
 #include "../ECS/Physic/Physic.h"
 #include "../ECS/components/AgentController.h"
 #include "../core/FMODManager.h"
+#include "..\core\LuaBrain.h"
 
 namespace sas {
 
@@ -61,7 +62,9 @@ namespace sas {
 		float lastPress = 0.f;
 
 		//FMOD
-		FModManager* m_FMODManager;
+		//FModManager* m_FMODManager;
+
+		LuaBrain* m_lua;
 
 	private:
 		static Application* s_Instance;
