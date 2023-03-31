@@ -28,7 +28,7 @@ namespace sas
 					float dotProduct = glm::dot(glm::normalize(agent->AgentEntity->transform.Position - Player->transform.Position), forwardVector);
 					if (dotProduct > 0.2f)*/
 					{
-						if (glm::length(agent->AgentEntity->transform.Position - Player->transform.Position) < 10.f)
+						if (glm::length(agent->AgentEntity->transform.Position - Player->transform.Position) < 30.f)
 							agent->Seek(Player->transform.Position);// +glm::vec3(5.f, 0.f, 5.f));
 							//agent->Evade(Player->position, player->physics_object->GetVelocity());
 					}

@@ -24,7 +24,7 @@ namespace sas
 		}
 		void Renderer::Process(const std::vector<Entity*>* entityList, float dt)
 		{
-			if (Input::IsKeyPressed(KeyCode::Space))
+			if (Input::IsKeyPressed(KeyCode::P))
 				gameplay = !gameplay;
 
 			if (Input::IsKeyPressed(KeyCode::Up))

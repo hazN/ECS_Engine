@@ -176,7 +176,7 @@ namespace sas {
 			m_MovmentScript.Process(m_Entities, timestep);
 			agentController->Update(timestep);
 			m_Physic->update(timestep);
-			if (Input::IsMouseButtonPressed(MouseButton::Button0) && lastPress > 0.15f)
+			if (Input::IsKeyPressed(KeyCode::Space) && lastPress > 0.15f)
 			{
 				deltaTime = std::clock();
 				for (size_t i = 0; i < m_Entities->size(); i++)
@@ -199,7 +199,7 @@ namespace sas {
 								RigidbodyComp* rigidBodyComp = (RigidbodyComp*)m_Entities->at(i)->GetComponentByType<RigidbodyComp>();
 								iRigidBody* rigidBody = (iRigidBody*)rigidBodyComp->i_CollisionBody;
 								if (rigidBody)
-									rigidBody->setPosition(glm::vec3(1000.f, -1000.f, 1000.f));
+									rigidBody->setPosition(glm::vec3(rand() % (100), 2.f, rand() % (100)));
 								score++;
 								if (score > _db->getHighScore(Player->GetID()))
 								{

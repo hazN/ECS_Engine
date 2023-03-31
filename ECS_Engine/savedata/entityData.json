@@ -185,6 +185,228 @@
     ]
   },
   {
+    "TestCube": [
+      {
+        "ID": 0,
+        "Name": "TestCube"
+      },
+      {
+        "Transform": {
+          "Enabled": false,
+          "Position": [
+            53.0,
+            1.1,
+            -23.0
+          ],
+          "Rotation": [
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "Scale": [
+            1.0,
+            1.0,
+            1.0
+          ]
+        }
+      },
+      {
+        "TestCube": [
+          {
+            "ID": 0,
+            "Name": "TestCube"
+          },
+          {
+            "Transform": {
+              "Enabled": false,
+              "Position": [
+                13.0,
+                1.1,
+                -23.0
+              ],
+              "Rotation": [
+                0.0,
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Scale": [
+                1.0,
+                1.0,
+                1.0
+              ]
+            }
+          },
+          {
+            "MeshRenderer": {
+              "Enabled": false,
+              "MaterialPath": "assets/materials/cubeMaterial.json",
+              "Mesh": "cube",
+              "Path": "assets/models/debug_sphere.ply"
+            }
+          }
+        ]
+      },
+      {
+        "MeshRenderer": {
+          "Enabled": false,
+          "MaterialPath": "assets/materials/cubeMaterial.json",
+          "Mesh": "cube",
+          "Path": "assets/models/debug_sphere.ply"
+        }
+      }
+    ]
+  },
+  {
+    "TestCube": [
+      {
+        "ID": 0,
+        "Name": "TestCube"
+      },
+      {
+        "Transform": {
+          "Enabled": false,
+          "Position": [
+            63.0,
+            1.1,
+            63.0
+          ],
+          "Rotation": [
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "Scale": [
+            1.0,
+            1.0,
+            1.0
+          ]
+        }
+      },
+      {
+        "MeshRenderer": {
+          "Enabled": false,
+          "MaterialPath": "assets/materials/cubeMaterial.json",
+          "Mesh": "cube",
+          "Path": "assets/models/debug_sphere.ply"
+        }
+      }
+    ]
+  },
+  {
+    "TestCube": [
+      {
+        "ID": 0,
+        "Name": "TestCube"
+      },
+      {
+        "Transform": {
+          "Enabled": false,
+          "Position": [
+            -53.0,
+            1.1,
+            -23.0
+          ],
+          "Rotation": [
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "Scale": [
+            1.0,
+            1.0,
+            1.0
+          ]
+        }
+      },
+      {
+        "MeshRenderer": {
+          "Enabled": false,
+          "MaterialPath": "assets/materials/cubeMaterial.json",
+          "Mesh": "cube",
+          "Path": "assets/models/debug_sphere.ply"
+        }
+      }
+    ]
+  },
+  {
+    "TestCube": [
+      {
+        "ID": 0,
+        "Name": "TestCube"
+      },
+      {
+        "Transform": {
+          "Enabled": false,
+          "Position": [
+            83.0,
+            1.1,
+            -23.0
+          ],
+          "Rotation": [
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "Scale": [
+            1.0,
+            1.0,
+            1.0
+          ]
+        }
+      },
+      {
+        "MeshRenderer": {
+          "Enabled": false,
+          "MaterialPath": "assets/materials/cubeMaterial.json",
+          "Mesh": "cube",
+          "Path": "assets/models/debug_sphere.ply"
+        }
+      }
+    ]
+  },
+  {
+    "TestCube": [
+      {
+        "ID": 0,
+        "Name": "TestCube"
+      },
+      {
+        "Transform": {
+          "Enabled": false,
+          "Position": [
+            103.0,
+            1.1,
+            -63.0
+          ],
+          "Rotation": [
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "Scale": [
+            1.0,
+            1.0,
+            1.0
+          ]
+        }
+      },
+      {
+        "MeshRenderer": {
+          "Enabled": false,
+          "MaterialPath": "assets/materials/cubeMaterial.json",
+          "Mesh": "cube",
+          "Path": "assets/models/debug_sphere.ply"
+        }
+      }
+    ]
+  },
+  {
     "FemaleKnight": [
       {
         "ID": 0,
