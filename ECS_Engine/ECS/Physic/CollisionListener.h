@@ -1,5 +1,6 @@
 #pragma once
 #include <iCollisionListener.h>
+#include "..\..\core\LuaBrain.h"
 namespace Physic
 {
     //class : CollisionListener
@@ -12,6 +13,7 @@ namespace Physic
         virtual ~CollisionListener();
 
         virtual void notifyCollision(iCollision* body1, iCollision* body2) override;
+        LuaBrain* Lua;
     };
 }
 

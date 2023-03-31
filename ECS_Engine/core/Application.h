@@ -13,6 +13,9 @@
 #include "../ECS/components/AgentController.h"
 #include "../savedata/iLeaderboardDAO.h"
 #include "../savedata/LeaderboardDAO.h"
+#include "../core/FMODManager.h"
+#include "../core/LuaBrain.h"
+
 namespace sas {
 
 	// Main Application
@@ -61,6 +64,12 @@ namespace sas {
 		float lastPress = 0.f;
 		int score = 0;
 		iLeaderboardDAO* _db;
+
+		//FMOD
+		//FModManager* m_FMODManager;
+
+		LuaBrain* m_lua;
+
 	private:
 		static Application* s_Instance;
 	};
