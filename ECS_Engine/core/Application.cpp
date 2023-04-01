@@ -125,7 +125,9 @@ namespace sas {
 
 		Player->SetID(1);
 		_db = new LeaderboardDAO();
-
+		_db->setHighScore(1, 0);
+		_db->setHighScore(1, 1);
+		std::cout << "High-Score: " << _db->getHighScore(1) << std::endl;
 		//FMOD
 		bool error;
 		g_FMODManager = new FModManager();

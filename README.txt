@@ -9,17 +9,17 @@ Video Demos(YT Playlist): https://www.youtube.com/playlist?list=PLCEEJiUX54tfTwa
 Github Repository: https://github.com/hazN/ECS_Engine
 UML Diagram: Open UMLDiagram.txt for the link as it's too long to make a shortcut for.
 
-Build and run as normal.
+BOOST is required, the same boost folder as provided in FOL 
+needs to be dragged into the project directory, "ECS_Engine/ECS_Engine/Boost"
+
+Server should automatically run before the client but if it doesn't start server project
+first then start the client.
 
 Controls:
-CTRL-S -> Save
+Press 'P' to start
 
-Press SPACE to lock camera to Player
 WASD -> Move Player
-Left Click -> Attack Enemy
-____________________________
-WASD + QE -> Camera Movement
-ARROW KEYS -> Entity Movement
+Spacebar -> Attack Enemy
 
 Entity save data is located at savedata/entityData.json
 Materials are saved at assets/materials/...
